@@ -9,8 +9,8 @@ function insertSidebar(){
         </form>\
         <hr>\
         <ul class="list-unstyled">\
-        <li><a href="">Home</a></li><br>\
-        <li><a href="">About</a></li><br>\
+        <li><a href="homepage.html">Home</a></li><br>\
+        <li><a href="AboutPage.html">About</a></li><br>\
         <li><a href="">Surprise Me</a></li><br>\
         </ul>\
     </div>';
