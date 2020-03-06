@@ -12,7 +12,17 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
+	<script>
+		window.onload = function(){
+			fetch('https://api.github.com/repos/VishruthiR/EE461L_IDB/commits')
+			.then(response => response.json())
+			.then(data => {
+				console.log(data) // Prints result from `response.json()` in getRequest
+			})
+			.catch(error => console.error(error))
+			document.getElementById('Kumo_I').innerText = 42069696933;
+		};
+	</script>
   </head>
   <body>
 
@@ -73,7 +83,7 @@
 								Primary Responsibilities
 							</dt>
 							<dd>
-								Project Lead. PrDeveloping page templates, specifically the About Page
+								Project Lead. Developing page templates, specifically the About Page
 							</dd>
 							<dt>
 								Github Stats
@@ -81,14 +91,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span id="Kumo_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues:  </span><span id="Kumo_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span id="Kumo_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -134,14 +143,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span id="David_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues:  </span><span id="David_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span id="David_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -188,14 +196,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span id="Mattew_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues:  </span><span id="Matthew_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span id="Matthew_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -244,14 +251,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span id="Vish_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues:  </span><span id="Vish_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span id="Vish_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -298,14 +304,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span id="Sid_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues:  </span><span id="Sid_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span id="Sid_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -351,14 +356,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span id="Jaino_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues:  </span><span id="Jaino_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span id="Janio_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -377,26 +381,17 @@
 						<h2>
 							Team Stats
 						</h2>
-						<dl>
-							<dt>
-								Total Commits
-							</dt>
-							<dd>
-								//Insert Commits
-							</dd>
-							<dt>
-								Total Issues
-							</dt>
-							<dd>
-								//Insert Issues
-							</dd>
-							<dt>
-								Total Tests
-							</dt>
-							<dd>
-								//Insert Tests
-							</dd>
-						</dl>
+						<ul>
+							<li class="list-item">
+								<p><span>Total Commits: </span><span id="Team_C"> </span></p>
+							</li>
+							<li class="list-item">
+								<p><span>Total Issues:  </span><span id="Team_I"> </span></p>
+							</li>
+							<li class="list-item">
+								<p><span>Total Unit Tests:  </span><span id="Team_T"> 0</span></p> 
+							</li>
+						</ul>
 					</div>
 					<div class="col-md-4">
 						<h2>
