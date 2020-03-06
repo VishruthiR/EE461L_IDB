@@ -12,7 +12,98 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
+	<script> //script for commits
+		window.onload = function(){
+			var b = 10;
+			if(b ==10){ //to get commits
+				fetch('https://api.github.com/repos/VishruthiR/EE461L_IDB/commits?per_page=500') //should increase pagination size and allow for all commits to show
+				.then(response => response.json())
+				.then(data => {
+					// console.log(data) // Prints result from `response.json()` in getRequest
+					document.getElementById('Team_C').innerHTML = Object.keys(data).length; 
+					// var count =0;
+					// for (var i = 0; i < data.length; i++){
+					//  // look for the entry with a matching `code` value
+					// 	if (data[i].commit.author.name == 'kumosumo'){
+					// 		console.log(data[i].commit.message);
+					// 		count++;
+					// 	}
+					// }
+					// console.log("Commits made by Kumo: " + count);
+					//Kumo
+					var kumo = data.filter(function (e){
+						return e.commit.author.name == 'kumosumo';
+					})
+					document.getElementById('Kumo_C').innerHTML =kumo.length; 
+					//David
+					var david = data.filter(function (e){
+						return e.commit.author.name == 'davidday99';
+					})
+					document.getElementById('David_C').innerHTML =david.length; 
+					//Matthew
+					var matthew = data.filter(function (e){
+						return e.commit.author.name == 'Matthew Jiang';
+					})
+					document.getElementById('Matthew_C').innerHTML =matthew.length; 
+					//Vish
+					var vish = data.filter(function (e){
+						return e.commit.author.name == 'Vishruthi Ramaswamy';
+					})
+					document.getElementById('Vish_C').innerHTML =vish.length; 
+					//Sid
+					var sid = data.filter(function (e){
+						return e.commit.author.name == 'sshetkar3858';
+					})
+					document.getElementById('Sid_C').innerHTML =sid.length; 
+					//Jaino
+					var jaino = data.filter(function (e){
+						return e.commit.author.name == 'Jaino Vennatt';
+					})
+					document.getElementById('Jaino_C').innerHTML =jaino.length; 
+				})
+				.catch(error => console.error(error))
+			}
+			if(b==10){ //to get issues 
+				fetch('https://api.github.com/repos/VishruthiR/EE461L_IDB/issues?per_page=100') //should increase pagination size and allow for all commits to show
+				.then(response1 => response1.json())
+				.then(issues => {
+					console.log(issues) // Prints result from `response.json()` in getRequest
+					document.getElementById('Team_I').innerHTML = Object.keys(issues).length; 
+					//Kumo
+					var kumoI = issues.filter(function (e){
+						return e.assignee.login == 'kumosumo';
+					})
+					document.getElementById('Kumo_I').innerHTML =kumoI.length; 
+					//David
+					var davidI = issues.filter(function (e){
+						return e.assignee.login == 'davidday99';
+					})
+					document.getElementById('David_I').innerHTML =davidI.length; 
+					//Matthew
+					var matthewI = issues.filter(function (e){
+						return e.assignee.login == 'myj99';
+					})
+					document.getElementById('Matthew_I').innerHTML =matthewI.length; 
+					//Vish
+					var vishI = issues.filter(function (e){
+						return e.assignee.login == 'VishruthiR';
+					})
+					document.getElementById('Vish_I').innerHTML =vishI.length; 
+					//Sid
+					var sidI = issues.filter(function (e){
+						return e.assignee.login == 'sshetkar3858';
+					})
+					document.getElementById('Sid_I').innerHTML =sidI.length; 
+					//Jaino
+					var jainoI = issues.filter(function (e){
+						return e.assignee.login == 'jainovennatt';
+					})
+					document.getElementById('Jaino_I').innerHTML =jainoI.length; 
+				})
+				.catch(error => console.error(error))
+			}
+		};
+	</script>
   </head>
   <body>
 
@@ -35,7 +126,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h1 class="text-center">
-							About Team KDMSVJ
+							About The Bookish People
 						</h1>
 					</div>
 				</div>
@@ -73,7 +164,7 @@
 								Primary Responsibilities
 							</dt>
 							<dd>
-								Project Lead. PrDeveloping page templates, specifically the About Page
+								Project Lead. Developing page templates, specifically the About Page
 							</dd>
 							<dt>
 								Github Stats
@@ -81,14 +172,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span style="color: yellowgreen;"id="Kumo_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues Assigned:  </span><span style="color: yellowgreen;"id="Kumo_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span style="color: yellowgreen;"id="Kumo_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -134,14 +224,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span style="color: yellowgreen;" id="David_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues Assigned:  </span><span style="color: yellowgreen;" id="David_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span style="color: yellowgreen;" id="David_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -188,14 +277,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span style="color: yellowgreen;" id="Matthew_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues Assigned:  </span><span style="color: yellowgreen;" id="Matthew_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span  style="color: yellowgreen;"id="Matthew_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -244,14 +332,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span style="color: yellowgreen;" id="Vish_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues Assigned:  </span><span  style="color: yellowgreen;" id="Vish_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span style="color: yellowgreen;" id="Vish_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -298,14 +385,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span style="color: yellowgreen;"id="Sid_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues Assigned:  </span><span style="color: yellowgreen;"id="Sid_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span style="color: yellowgreen;"id="Sid_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -351,14 +437,13 @@
 							<dd>
 								<ul>
 									<li class="list-item">
-										Commits: 
+										<p><span>Commits: </span><span style="color: yellowgreen;"id="Jaino_C"> </span></p>
 									</li>
 									<li class="list-item">
-										Issues Posted: 
+										<p><span>Issues Assigned:  </span><span style="color: yellowgreen;"id="Jaino_I"> </span></p>
 									</li>
 									<li class="list-item">
-										Unit Tests: 
-									</li>
+										<p><span>Unit Tests:  </span><span style="color: yellowgreen;"id="Janio_T"> 0</span></p> 
 									</li>
 								</ul>
 							</dd>
@@ -377,26 +462,17 @@
 						<h2>
 							Team Stats
 						</h2>
-						<dl>
-							<dt>
-								Total Commits
-							</dt>
-							<dd>
-								//Insert Commits
-							</dd>
-							<dt>
-								Total Issues
-							</dt>
-							<dd>
-								//Insert Issues
-							</dd>
-							<dt>
-								Total Tests
-							</dt>
-							<dd>
-								//Insert Tests
-							</dd>
-						</dl>
+						<ul>
+							<li class="list-item">
+								<p><span>Total Commits: </span><span style="color: yellowgreen;"id="Team_C"> </span></p>
+							</li>
+							<li class="list-item">
+								<p><span>Total Issues:  </span><span style="color: yellowgreen;"id="Team_I"> </span></p>
+							</li>
+							<li class="list-item">
+								<p><span>Total Unit Tests:  </span><span style="color: yellowgreen;"id="Team_T"> 0</span></p> 
+							</li>
+						</ul>
 					</div>
 					<div class="col-md-4">
 						<h2>
