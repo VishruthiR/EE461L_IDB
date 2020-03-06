@@ -12,7 +12,17 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-	<script>window.onload</script>
+	<script>
+		window.onload = function(){
+			fetch('https://api.github.com/repos/VishruthiR/EE461L_IDB/commits')
+			.then(response => response.json())
+			.then(data => {
+				console.log(data) // Prints result from `response.json()` in getRequest
+			})
+			.catch(error => console.error(error))
+			document.getElementById('Kumo_I').innerText = 42069696933;
+		};
+	</script>
   </head>
   <body>
 
