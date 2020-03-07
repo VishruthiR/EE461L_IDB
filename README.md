@@ -1,21 +1,21 @@
 # Meet the Team:
 1. Kumaran Arulmani
-    * Email: kumaranarulmani@utexas.edu
+    * EID: ka27395
     * Github Username: @kumosumo
 2. Vishruthi Ramaswamy
-    * Email: vishruthi.ramaswamy@utexas.edu
+    * EID: vsr359
     * Github Username: @vishruthir
 3. Jaino Vennatt
-    * Email: vennatt.jaino@gmail.com
+    * EID: jjv838
     * Github Username: @jainovennatt
 4. David Day
-    * Email: david.day@utexas.edu
+    * EID: dld2864
     * Github Username: @davidday99
 5. Matthew Jiang
-    * Email: jiang.matthew22@gmail.com
+    * EID: myj99
     * Github Username: @myj99
 6. Siddhartha Shetkar
-    * Email: sshetkar@gmail.com
+    * EID: sss3858
     * Github Username: @sshetkar3858
 # Find us [here](http://www.booklopedia.appspot.com/homepage.html)
 # Work Time Estimates
