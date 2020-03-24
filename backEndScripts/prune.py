@@ -1,8 +1,21 @@
-#!/usr/bin/env python3
+#!/usr/bin/python
+import sys
+print('File Name:', str(sys.argv[1]))
+originalStringName = sys.argv[1]
+newStringName = 'pruned'
+newStringName = newStringName + originalStringName
+print('New File Name:' , newStringName)
 
-g = input("Enter file name : ") 
+file = open(newStringName,'w')
 
-f=open(g, "r")
-contents=f.readlines()
-for x in contents:
-    print (x)
+with open(originalStringName, "r") as a_file:
+    for line in a_file:
+        newString= ""
+        for character in line:
+            if(character != ',' and character != '('):
+                newString = newString + character
+            else:
+                break
+        file.write(newString)
+        file.write('\n')
+        print(newString)
