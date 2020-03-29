@@ -1,25 +1,21 @@
 import React from "react";
 import Result from "./Result";
-import PaginationBar from "./PaginationBar";
-//import ListGroup from "react-bootstrap/ListGroup";
 //import Reviews from "./Reviews";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import {
-  BrowserRouter,
-  Route,
-  Link as RouterLink,
-  Switch
-} from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
-import Book from "./Book";
-import InnerResults from "./InnerResults";
+import List from "@material-ui/core/List";
+import PaginationBar from "./PaginationBar";
+import ListItem from "@material-ui/core/ListItem";
+
+/*
+we want to migrate all the routing code here into the HomePage component and then everything can just link back
+*/
 
 class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      resultsQuery: this.props.query
+      resultsQuery: this.props.match.params.query
     };
   }
 
@@ -43,23 +39,19 @@ class Results extends React.Component {
   }
 
   render() {
+    console.log(this.state.resultsQuery);
     let results = this.getDummyResults();
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route
-            path="/book"
-            component={Book}
-            render={props => <Book {...props} ISBN={1234} />}
-          />
-          <Route path="/author" component={Book} />
-          <Route path="/genre" component={Book} />
-          <Route
-            path="/"
-            render={props => <InnerResults {...props} results={results} />}
-          />
-        </Switch>
-      </BrowserRouter>
+      <React.Fragment>
+        <List variant="flush">
+          {results.map((result, index) => (
+            <Link underline="none" component={RouterLink} to={"/book/1234"}>
+              <ListItem>{result}</ListItem>
+            </Link>
+          ))}
+        </List>
+        <PaginationBar currentPage={7} numPages={20} />
+      </React.Fragment>
     );
   }
 }

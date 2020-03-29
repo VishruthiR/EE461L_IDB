@@ -1,14 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import BookInfo from "./components/BookInfo";
-import Summary from "./components/Summary";
-import Rating from "./components/Rating";
-import Reviews from "./components/Reviews";
-import Recommendations from "./components/Recommendations";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Book from "./components2/Book";
+import Author from "./components2/Author";
+import Genre from "./components2/Genre";
 import Results from "./components2/Results";
-import Description from "./components2/Description";
-
+import Homepage from "./components2/Homepage";
 /*
 class App extends React.Component {
   render() {
@@ -38,7 +35,19 @@ class App extends React.Component {
 
 class App extends React.Component {
   render() {
-    return <Results />;
+    return (
+      <React.Fragment>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" exact component={Homepage} />
+            <Route path="/book/:ISBN" component={Book} />
+            <Route path="/author/" component={Author} />
+            <Route path="/genre/:name" component={Genre} />
+            <Route path="/results/:query" component={Results} />
+          </Switch>
+        </BrowserRouter>
+      </React.Fragment>
+    );
   }
 }
 
