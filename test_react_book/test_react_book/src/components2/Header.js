@@ -3,9 +3,6 @@ import Grid from '@material-ui/core/Grid';
 
 
 class Header extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	render() {
 		return <Grid container>
 			<Grid item sm>
