@@ -6,8 +6,6 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
 */
-import Image from "react-bootstrap/Image";
-import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import Carousel from "react-material-ui-carousel";

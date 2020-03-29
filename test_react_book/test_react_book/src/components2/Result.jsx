@@ -29,9 +29,11 @@ class Result extends React.Component {
         <CardActionArea>
           <CardContent>
             <Typography variant="h3">{this.props.title}</Typography>
-            <Typography variant="h5" gutterBottom>
-              {this.props.author}
-            </Typography>
+            {typeof this.props.author !== "undefined" && (
+              <Typography variant="h5" gutterBottom>
+                {this.props.author}
+              </Typography>
+            )}
             <Typography variant="h6">
               {this.props.description.substring(0, descriptionLength)}
             </Typography>
