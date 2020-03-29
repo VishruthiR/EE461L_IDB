@@ -17,7 +17,7 @@ class App extends React.Component {
             <Route path="/book/:ISBN" component={Book} />
             <Route path="/author/:authorName" component={Author} />
             <Route path="/genre/:name" component={Genre} />
-            <Route path="/results/:query" component={Results} />
+            <Route path="/results/:type/:query/:pageNum" component={Results} />
           </Switch>
         </BrowserRouter>
       </React.Fragment>

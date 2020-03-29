@@ -15,12 +15,20 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      resultsQuery: this.props.match.params.query
+      typeOfSearch: this.props.match.params.type,
+      resultsQuery: this.props.match.params.query,
+      pageNum: this.props.match.params.pageNum
     };
   }
 
-  componentDidMount() {
+  static getDerivedStateFromProps(props) {
     // make AJAX call based on query
+    console.log("results ajax call");
+    return {
+      typeOfSearch: props.match.params.type,
+      resultsQuery: props.match.params.query,
+      pageNum: props.match.params.pageNum
+    };
   }
 
   getDummyResults() {
@@ -39,6 +47,9 @@ class Results extends React.Component {
   }
 
   render() {
+    console.log("in results");
+    console.log(this.state.typeOfSearch);
+    console.log(this.state.resultsQuery);
     let results = this.getDummyResults();
     return (
       <React.Fragment>
@@ -61,7 +72,7 @@ class Results extends React.Component {
             </Link>
           ))}
         </List>
-        <PaginationBar currentPage={7} numPages={20} />
+        <PaginationBar currentPage={this.state.pageNum} numPages={20} />
       </React.Fragment>
     );
   }
