@@ -1,6 +1,7 @@
 import React from "react";
 import Recommendations from "./Recommendations";
 import Description from "./Description";
+import Header from "./Header";
 /*
 props passed in should describe what book this Book is
 maybe all we need to be passed into is ISBN number and we get all the other info based on this
@@ -60,7 +61,7 @@ class Book extends React.Component {
     console.log(this.state.bookISBN);
     return (
       <React.Fragment>
-        {/*<Header />*/}
+        <Header image={this.state.bookCover} title={this.state.bookTitle} />
         <Description description={this.state.bookSummary} />
         <Recommendations recommendations={this.state.bookRecommendations} />
         {/*<Reviews />*/}

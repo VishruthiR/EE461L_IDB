@@ -1,6 +1,7 @@
 import React from "react";
 import Recommendations from "./Recommendations";
 import Description from "./Description";
+import Header from "./Header";
 /*
 props passed in should describe what author this Author is
 not sure how to uniquely identify this
@@ -57,7 +58,10 @@ class Author extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {/*<Header />*/}
+        <Header
+          image={this.state.authorPicture}
+          title={this.state.authorName}
+        />
         <Description description={this.state.authorBio} />
         <Recommendations recommendations={this.state.bookRecommendations} />
       </React.Fragment>
