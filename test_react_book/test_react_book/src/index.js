@@ -6,32 +6,6 @@ import Author from "./components2/Author";
 import Genre from "./components2/Genre";
 import Results from "./components2/Results";
 import Homepage from "./components2/Homepage";
-/*
-class App extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <BookInfo />
-        <hr></hr>
-        <Summary />
-        <hr></hr>
-        <Recommendations />
-        <hr></hr>
-        <Rating />
-        <hr></hr>
-        <Reviews />
-      </React.Fragment>
-    );
-  }
-}
-*/
-/*
-class App extends React.Component {
-  render() {
-    return <Book />;
-  }
-}
-*/
 
 class App extends React.Component {
   render() {

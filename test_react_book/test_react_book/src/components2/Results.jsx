@@ -26,14 +26,14 @@ class Results extends React.Component {
   getDummyResults() {
     let results = [];
     for (let i = 0; i < 5; i++) {
-      results.push(
-        <Result
-          type="book"
-          title="And Then There Were None"
-          author="Agatha Christie"
-          description="Sed metus dui, dictum quis eleifend non, malesuada ut lorem. In finibus nulla quis efficitur rutrum. Aenean feugiat mauris magna, sollicitudin rhoncus mi sagittis vel. Quisque a sodales urna, eu volutpat metus. Phasellus vitae quam non enim auctor ornare vel et odio. Pellentesque tempus erat porttitor ex laoreet, eget iaculis leo ornare. Maecenas eu sapien ornare dolor suscipit facilisis. Nullam scelerisque, purus quis feugiat efficitur, lacus enim faucibus urna, eu ullamcorper metus odio et risus. Duis ac sem mauris. Praesent et porttitor mi, ut luctus metus. Mauris imperdiet condimentum purus, vitae mattis ligula feugiat at. Sed ut tellus ac arcu pharetra venenatis sed id risus. "
-        />
-      );
+      results.push({
+        id: i,
+        type: "book",
+        title: "And Then There Were None",
+        author: "Agatha Christie",
+        description:
+          "Sed metus dui, dictum quis eleifend non, malesuada ut lorem. In finibus nulla quis efficitur rutrum. Aenean feugiat mauris magna, sollicitudin rhoncus mi sagittis vel. Quisque a sodales urna, eu volutpat metus. Phasellus vitae quam non enim auctor ornare vel et odio. Pellentesque tempus erat porttitor ex laoreet, eget iaculis leo ornare. Maecenas eu sapien ornare dolor suscipit facilisis. Nullam scelerisque, purus quis feugiat efficitur, lacus enim faucibus urna, eu ullamcorper metus odio et risus. Duis ac sem mauris. Praesent et porttitor mi, ut luctus metus. Mauris imperdiet condimentum purus, vitae mattis ligula feugiat at. Sed ut tellus ac arcu pharetra venenatis sed id risus. "
+      });
     }
     return results;
   }
@@ -45,8 +45,20 @@ class Results extends React.Component {
       <React.Fragment>
         <List variant="flush">
           {results.map((result, index) => (
-            <Link underline="none" component={RouterLink} to={"/book/1234"}>
-              <ListItem>{result}</ListItem>
+            <Link
+              underline="none"
+              component={RouterLink}
+              to={"/book/1234"}
+              key={result.id}
+            >
+              <ListItem>
+                <Result
+                  type={result.type}
+                  title={result.title}
+                  author={result.author}
+                  description={result.description}
+                />
+              </ListItem>
             </Link>
           ))}
         </List>
