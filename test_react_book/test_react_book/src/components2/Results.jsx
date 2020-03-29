@@ -39,7 +39,6 @@ class Results extends React.Component {
   }
 
   render() {
-    console.log(this.state.resultsQuery);
     let results = this.getDummyResults();
     return (
       <React.Fragment>

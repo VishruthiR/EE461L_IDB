@@ -22,7 +22,7 @@ class Recommendations extends React.Component {
     for (i = 0; i < arr.length; i += sizeOfRow) {
       let rowMatrix = [];
       for (j = 0; j < sizeOfRow && i + j < arr.length; j++) {
-        rowMatrix.push(arr[i]);
+        rowMatrix.push(arr[i + j]);
       }
       matrix.push(rowMatrix);
     }
@@ -35,7 +35,8 @@ class Recommendations extends React.Component {
       this.props.recommendations,
       numImgsPerCarousel
     );
-
+    console.log("in recommendations");
+    console.log(formattedRecommendations);
     return (
       <Carousel animation="slide" autoPlay={false}>
         {formattedRecommendations.map((recommendationRow, indexRow) => (

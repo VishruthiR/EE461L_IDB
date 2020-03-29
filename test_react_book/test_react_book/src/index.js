@@ -15,7 +15,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={Homepage} />
             <Route path="/book/:ISBN" component={Book} />
-            <Route path="/author/" component={Author} />
+            <Route path="/author/:authorName" component={Author} />
             <Route path="/genre/:name" component={Genre} />
             <Route path="/results/:query" component={Results} />
           </Switch>
