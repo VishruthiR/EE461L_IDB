@@ -123,12 +123,13 @@ class Results extends React.Component {
       pageNum: newPageNum
     });
     let newUrl =
-      "results/" +
+      "/results/" +
       this.state.typeOfSearch +
       "/" +
       this.state.resultsQuery +
       "/" +
       newPageNum;
+	window.location.replace(newUrl);
     return <Redirect to={newUrl} />;
   };
 

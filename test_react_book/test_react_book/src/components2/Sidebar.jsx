@@ -9,23 +9,33 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import {Link, NavLink} from 'react-router-dom';
 
+import SearchBar from './SearchBar'
+
+
+
 
 class Sidebar extends React.Component {
+	
+	
 	render() {
+		
+	
 		return(
+			
 			<Drawer
 				variant="permanent"
-				anchor="left"
+				classes={{
+					paper: {
+						width: "240px"
+					}
+				}}
 			>
 				<Link to="/index.html"><img src={this.props.logoSmall}/></Link>
 				<Divider />
-				<FormControl>
-					<InputLabel htmlFor="search-bar">Search...</InputLabel>
-					<Input id="search-bar" />
-				</FormControl>
+				<SearchBar />
 				<Divider />
 				<List>
-					<ListItem button component={NavLink} to="/index.html" activeStyle={{
+					<ListItem button component={NavLink} to="/" activeStyle={{
 						fontWeight: "bold"
 					}}>
 						<ListItemText primary="Home">
@@ -33,19 +43,19 @@ class Sidebar extends React.Component {
 					</ListItem>
 					<ListItem button component={NavLink} to="/books" activeStyle={{
 						fontWeight: "bold"
-					}}>>
+					}}>
 						<ListItemText primary="Books">
 						</ListItemText>
 					</ListItem>
 					<ListItem button component={NavLink} to="/authors" activeStyle={{
 						fontWeight: "bold"
-					}}>>
+					}}>
 						<ListItemText primary="Authors">
 						</ListItemText>
 					</ListItem>
 					<ListItem button component={NavLink} to="/genres" activeStyle={{
 						fontWeight: "bold"
-					}}>>
+					}}>
 						<ListItemText primary="Genres">
 						</ListItemText>
 					</ListItem>
