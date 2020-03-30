@@ -136,18 +136,26 @@ class About extends React.Component {
   }
   render() {
     return (
-      <Grid container spacing={3}>
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12} sm={5} md={12}>
+          <CardMedia
+          component="img"
+          height="260"
+          alt="Header"
+          image={require('./images/Header.jpg')}
+          />
+        </Grid>
         <Grid item xs={12} sm={5} md={12}>
           <Card>
             <CardContent>
               <h1>About Booklopedia</h1>
-              <h3>
+              <Typography variant="body2" color="textSecondary" component="p">
                 Booklopedia is an Internet Database that curates information
                 about Modern Books written in English. We offer flexible and
                 robust search options such as Author, Title. Genre, Ratings, and
                 More. We provide one central location to house all relevant
                 information for books, authors and genres.
-              </h3>
+              </Typography>
             </CardContent>
           </Card>
         </Grid>
