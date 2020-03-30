@@ -13,15 +13,15 @@ class Homepage extends React.Component {
   render() {
     return (
       <Grid container spacing={3}>
-        <GridItem xs={12} sm={5} md={12}>
+        <Grid item xs={12} sm={5} md={12}>
           <CardMedia
           component="img"
           height="260"
           alt="Header"
           image={require('./images/Header.jpg')}
           />
-        </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+        </Grid>
+        <Grid item xs={12} sm={6} md={6}>
           <Card>
             <CardActionArea>
               <CardMedia
@@ -41,8 +41,8 @@ class Homepage extends React.Component {
               </CardContent>
             </CardActionArea>
           </Card>
-        </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+        </Grid>
+        <Grid item xs={12} sm={6} md={6}>
           <Card>
             <CardActionArea>
               <CardMedia
@@ -62,8 +62,8 @@ class Homepage extends React.Component {
               </CardContent>
             </CardActionArea>
           </Card>
-        </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+        </Grid>
+        <Grid item xs={12} sm={6} md={6}>
           <Card>
             <CardActionArea>
               <CardMedia
@@ -83,8 +83,8 @@ class Homepage extends React.Component {
               </CardContent>
             </CardActionArea>
           </Card>
-        </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+        </Grid>
+        <Grid item xs={12} sm={6} md={6}>
           <Card>
             <CardActionArea>
               <CardMedia
@@ -104,7 +104,7 @@ class Homepage extends React.Component {
               </CardContent>
             </CardActionArea>
           </Card>
-        </GridItem>
+        </Grid>
       </Grid>
     );
   }
