@@ -53,16 +53,17 @@ class Author extends React.Component {
 
   componentDidMount() {
     // make call to server to get information and modify state using setState
+    console.log("author ajax call");
   }
 
   render() {
     return (
       <React.Fragment>
-        <Header
+        <Header title={this.state.authorName} />
+        <Description
+          description={this.state.authorBio}
           image={this.state.authorPicture}
-          title={this.state.authorName}
         />
-        <Description description={this.state.authorBio} />
         <Recommendations recommendations={this.state.bookRecommendations} />
       </React.Fragment>
     );

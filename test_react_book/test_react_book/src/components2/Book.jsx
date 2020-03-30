@@ -21,7 +21,7 @@ class Book extends React.Component {
       bookRecommendations: [
         {
           picture:
-            "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
+            "https://books.google.com/books/content?id=dLo_GyEykjQC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
           ISBN: 1
         },
         {
@@ -55,14 +55,23 @@ class Book extends React.Component {
 
   componentDidMount() {
     // make call to server to get information and modify state using setState
+    console.log("book ajax call");
+  }
+
+  componentDidUpdate() {
+    console.log("book ajax call update");
   }
 
   render() {
+    console.log("in books");
     console.log(this.state.bookISBN);
     return (
       <React.Fragment>
-        <Header image={this.state.bookCover} title={this.state.bookTitle} />
-        <Description description={this.state.bookSummary} />
+        <Header title={this.state.bookTitle} author={this.state.authorName} />
+        <Description
+          description={this.state.bookSummary}
+          image={this.state.bookCover}
+        />
         <Recommendations recommendations={this.state.bookRecommendations} />
         {/*<Reviews />*/}
       </React.Fragment>

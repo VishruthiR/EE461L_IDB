@@ -1,18 +1,19 @@
-import React from 'react'
-import Grid from '@material-ui/core/Grid';
-
+import React from "react";
+import Paper from "@material-ui/core/Paper";
 
 class Header extends React.Component {
-	render() {
-		return <Grid container>
-			<Grid item sm>
-				<img src={this.props.image} />
-			</Grid>
-			<Grid item sm>
-				<h1>{this.props.title}</h1>
-			</Grid>
-		</Grid>
-	}
+  render() {
+    return (
+      <Paper style={{ padding: 20, fontSize: 36 }}>
+        <div style={{ padding: 10 }}>
+          <h1>{this.props.title}</h1>
+          {typeof this.props.author !== "undefined" && (
+            <h3 style={{ lineHeight: 0 }}>{this.props.author}</h3>
+          )}
+        </div>
+      </Paper>
+    );
+  }
 }
 
 export default Header;
