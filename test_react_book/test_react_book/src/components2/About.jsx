@@ -5,6 +5,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
 
 class About extends React.Component {
   constructor(props) {
@@ -139,10 +140,10 @@ class About extends React.Component {
       <Grid container spacing={3} alignItems="stretch">
         <Grid item xs={12} sm={5} md={12}>
           <CardMedia
-          component="img"
-          height="260"
-          alt="Header"
-          image={require('./images/Header.jpg')}
+            component="img"
+            height="260"
+            alt="Header"
+            image={require("./images/Header.jpg")}
           />
         </Grid>
         <Grid item xs={12} sm={5} md={12}>
@@ -158,6 +159,11 @@ class About extends React.Component {
               </Typography>
             </CardContent>
           </Card>
+        </Grid>
+        <Grid container direction="column" alignItems="center">
+          <Grid item>
+            <h1>About The Bookish People</h1>
+          </Grid>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
           <Card>
@@ -547,30 +553,124 @@ class About extends React.Component {
             </Grid>
           </Card>
         </Grid>
+        <Grid container direction="column" alignItems="center">
+          <Grid item>
+            <h1>Additional Info</h1>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <Card>
+            <CardHeader title="Team Stats" />
+            <CardContent>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Total Commits: {this.state.totalC}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Total Issues: {this.state.totalI}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Total Unit Tests: {0}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <Card>
+            <CardHeader title="Data Sources" />
+            <CardContent>
+              <Typography variant="h5" component="h2">
+                <a href="https://developers.google.com/books">
+                  Google Books API
+                </a>
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used to grab basic information of books
+              </Typography>
+              <Typography variant="h5" component="h2">
+                <a href="https://www.goodreads.com/api">Goodreads</a>
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used to grab additonal information regarding books as well as
+                rating information
+              </Typography>
+              <Typography variant="h5" component="h2">
+                <a href="https://isbndb.com/apidocs"> ISBN DB</a>
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used to grab ISBN information for books
+              </Typography>
+              <Typography variant="h5" component="h2">
+                <a href="https://developer.github.com/v3/">Github API</a>
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used to grab team members information and stats
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <Card>
+            <CardHeader title="Tools Used" />
+            <CardContent>
+              <Typography variant="h5" component="h2">
+                React
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used to create web pages and handle layout
+              </Typography>
+              <Typography variant="h5" component="h2">
+                Material-UI
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used for base React component and styling
+              </Typography>
+              <Typography variant="h5" component="h2">
+                React-Router
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used for linking react components together to allow for multiple
+                webpages
+              </Typography>
+              <Typography variant="h5" component="h2">
+                Selenium
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used for testing GUI components to ensure expected behavior
+                occurs
+              </Typography>
+              <Typography variant="h5" component="h2">
+                NodeJS
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used to create backend API so the webpages can query the
+                database
+              </Typography>
+              <Typography variant="h5" component="h2">
+                Express
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                NodeJS framework used to connect to the database
+              </Typography>
+              <Typography variant="h5" component="h2">
+                MongoDB
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Used as a database to store all information about the
+                books/authors/genres
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid container direction="column" alignItems="center">
+          <Grid item>
+            <h1>
+              Check out our{" "}
+              <a href="https://github.com/VishruthiR/EE461L_IDB">Github!</a>{" "}
+            </h1>
+          </Grid>
+        </Grid>
       </Grid>
     );
   }
 }
 export default About;
-/*
-<div>
-        <h1>
-          Kumo {this.state.kumoC} {this.state.kumoI}
-        </h1>
-        <h1>
-          David {this.state.davidC} {this.state.davidI}
-        </h1>
-        <h1>
-          Matthew {this.state.matthewC} {this.state.matthewI}
-        </h1>
-        <h1>
-          Vish {this.state.vishC} {this.state.vishI}
-        </h1>
-        <h1>
-          Sid {this.state.sidC} {this.state.sidI}
-        </h1>
-        <h1>
-          Jaino {this.state.jainoC} {this.state.jainoI}
-        </h1>
-      </div>
-*/
