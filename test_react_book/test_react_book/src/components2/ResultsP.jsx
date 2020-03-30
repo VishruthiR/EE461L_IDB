@@ -78,7 +78,7 @@ const Results = props => {
 export default Results;
 */
 
-class Results extends React.Component {
+class ResultsP extends React.Component {
   getDummyResults() {
     let results = [];
     for (let i = 0; i < 5; i++) {
@@ -94,10 +94,11 @@ class Results extends React.Component {
 
   constructor(props) {
     super(props);
+	const queryString = new URLSearchParams(window.location.search);
     this.state = {
-      typeOfSearch: this.props.match.params.type,
-      resultsQuery: this.props.match.params.query,
-      pageNum: this.props.match.params.pageNum,
+      typeOfSearch: queryString.get("type"),
+      resultsQuery: queryString.get("query"),
+      pageNum: queryString.get("page"),
       numPages: 100,
       reloadResults: false
     };
@@ -122,15 +123,10 @@ class Results extends React.Component {
     this.setState({
       pageNum: newPageNum
     });
-    let newUrl =
-      "/results/" +
-      this.state.typeOfSearch +
-      "/" +
-      this.state.resultsQuery +
-      "/" +
-      newPageNum;
-	window.location.replace(newUrl);
-    return <Redirect to={newUrl} />;
+    let newUrl = new URLSearchParams(window.location.search);
+	newUrl.set("pageNum", newPageNum);
+	window.location.replace("/results"+newUrl);
+    return;
   };
 
   render() {
@@ -171,4 +167,4 @@ class Results extends React.Component {
   }
 }
 
-export default Results;
+export default ResultsP;
