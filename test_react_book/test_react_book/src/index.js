@@ -31,7 +31,6 @@ class App extends React.Component {
                   path="/results/:type/:query/:pageNum"
                   component={Results}
                 />
-                //Parameter Style
                 <Route path="/results" component={ResultsP} />
               </Switch>
             </div>
