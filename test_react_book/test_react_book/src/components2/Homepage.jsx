@@ -6,13 +6,17 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import GridItem from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
-
+import Link from "@material-ui/core/Link";
+import { Link as RouterLink } from "react-router-dom";
 
 
 class Homepage extends React.Component {
   render() {
     return (
-      <Grid container spacing={3}>
+      <Grid container spacing={4}
+      direction="row"
+      justify="space-evenly"
+      alignItems="center">
         <GridItem xs={12} sm={5} md={12}>
           <CardMedia
           component="img"
@@ -21,9 +25,23 @@ class Homepage extends React.Component {
           image={require('./images/Header.jpg')}
           />
         </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+
+        {/* -----------------------SPACE BETWEEN HEADER & CARDS--------------------- */}
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        {/* ------------------------------------------------------------------------ */}
+
+        <GridItem xs={6} md={5}>
           <Card>
             <CardActionArea>
+            <Link
+                  underline="none"
+                  component={RouterLink}
+                  to={"/results/:query"}
+                >
               <CardMedia
                 component="img"
                 height="420"
@@ -31,6 +49,7 @@ class Homepage extends React.Component {
                 image="https://cdn.shoplightspeed.com/shops/621012/files/15915280/books.jpg"
                 title="Books"
               />
+              </Link>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Books
@@ -42,9 +61,14 @@ class Homepage extends React.Component {
             </CardActionArea>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+        <GridItem xs={6} md={5}>
           <Card>
             <CardActionArea>
+              <Link
+                  underline="none"
+                  component={RouterLink}
+                  to={"/results/:query"}
+                >
               <CardMedia
                 component="img"
                 height="420"
@@ -52,6 +76,7 @@ class Homepage extends React.Component {
                 image="https://hccontent.s3.amazonaws.com/1/Blog/author-bios.jpg"
                 title="Authors"
               />
+              </Link>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Authors
@@ -63,9 +88,22 @@ class Homepage extends React.Component {
             </CardActionArea>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+
+        {/* -----------------------SPACE BETWEEN HEADER & CARDS--------------------- */}
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        {/* ------------------------------------------------------------------------ */}
+
+        <GridItem xs={6} md={5}>
           <Card>
             <CardActionArea>
+              <Link
+                  underline="none"
+                  component={RouterLink}
+                  to={"/results/:query"}
+                >
               <CardMedia
                 component="img"
                 height="420"
@@ -73,6 +111,7 @@ class Homepage extends React.Component {
                 image="https://www.writersandartists.co.uk/assets/users/admin_1/admin_1-asset-502ba7d510930.jpg"
                 title="Genres"
               />
+              </Link>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   Genres
@@ -84,9 +123,14 @@ class Homepage extends React.Component {
             </CardActionArea>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={6}>
+        <GridItem xs={6} md={5}>
           <Card>
             <CardActionArea>
+              <Link
+                  underline="none"
+                  component={RouterLink}
+                  to={"/results/:query"}
+                >
               <CardMedia
                 component="img"
                 height="420"
@@ -94,6 +138,7 @@ class Homepage extends React.Component {
                 image="https://cdn.searchenginejournal.com/wp-content/uploads/2019/01/Top-10-Ranking-About-Us-Pages-760x400.png"
                 title="About Us"
               />
+              </Link>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   About Us
@@ -105,6 +150,15 @@ class Homepage extends React.Component {
             </CardActionArea>
           </Card>
         </GridItem>
+
+        {/* -----------------------SPACE BETWEEN HEADER & CARDS--------------------- */}
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        <GridItem xs={12}>  - </GridItem>
+        {/* ------------------------------------------------------------------------ */}
+
       </Grid>
     );
   }
