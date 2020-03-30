@@ -53,12 +53,13 @@ class Book extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(props) {
+  componentDidMount() {
     // make call to server to get information and modify state using setState
     console.log("book ajax call");
-    return {
-      bookISBN: props.match.params.ISBN
-    };
+  }
+
+  componentDidUpdate() {
+    console.log("book ajax call update");
   }
 
   render() {
@@ -66,8 +67,11 @@ class Book extends React.Component {
     console.log(this.state.bookISBN);
     return (
       <React.Fragment>
-        <Header image={this.state.bookCover} title={this.state.bookTitle} />
-        <Description description={this.state.bookSummary} />
+        <Header title={this.state.bookTitle} author={this.state.authorName} />
+        <Description
+          description={this.state.bookSummary}
+          image={this.state.bookCover}
+        />
         <Recommendations recommendations={this.state.bookRecommendations} />
         {/*<Reviews />*/}
       </React.Fragment>

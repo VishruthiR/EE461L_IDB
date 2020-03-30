@@ -53,14 +53,18 @@ class Genre extends React.Component {
 
   componentDidMount() {
     // make call to server to get information and modify state using setState
+    console.log("book ajax call");
   }
 
   render() {
     console.log(this.state.genreName);
     return (
       <React.Fragment>
-        <Header image={this.state.genrePicture} title={this.state.genreName} />
-        <Description description={this.state.genreDescription} />
+        <Header title={this.state.genreName} />
+        <Description
+          description={this.state.genreDescription}
+          image={this.state.genrePicture}
+        />
         <Recommendations recommendations={this.state.bookRecommendations} />
       </React.Fragment>
     );

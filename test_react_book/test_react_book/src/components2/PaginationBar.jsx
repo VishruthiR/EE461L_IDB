@@ -38,14 +38,6 @@ class PaginationBar extends React.Component {
   }
  */
 
-  /*
-  rerenders page but with new pages information
-  this function might need to be passed into from results so we can rerender the page but maybe not
-  */
-  nextPage(event, pageNum) {
-    console.log(pageNum);
-  }
-
   render() {
     /*
     let radius = 6;
@@ -68,7 +60,7 @@ class PaginationBar extends React.Component {
             page={this.props.currentPage}
             siblingCount={radius}
             count={this.props.numPages}
-            onChange={this.nextPage}
+            onChange={this.props.updatePage}
             style={{ justifyContent: "center" }}
           />
         </Grid>
