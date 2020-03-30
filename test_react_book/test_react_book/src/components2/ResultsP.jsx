@@ -5,6 +5,7 @@ import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import PaginationBar from "./PaginationBar";
 import ListItem from "@material-ui/core/ListItem";
+import ScrollToTop from "./ScrollToTop";
 /*
 const Results = props => {
   let res = [];
@@ -83,7 +84,7 @@ class ResultsP extends React.Component {
     let results = [];
     for (let i = 0; i < 5; i++) {
       results.push({
-        title: "And Then There Were None",
+        title: "And Then There Were None pg " + this.state.pageNum,
         author: "Agatha Christie",
         description:
           "Sed metus dui, dictum quis eleifend non, malesuada ut lorem. In finibus nulla quis efficitur rutrum. Aenean feugiat mauris magna, sollicitudin rhoncus mi sagittis vel. Quisque a sodales urna, eu volutpat metus. Phasellus vitae quam non enim auctor ornare vel et odio. Pellentesque tempus erat porttitor ex laoreet, eget iaculis leo ornare. Maecenas eu sapien ornare dolor suscipit facilisis. Nullam scelerisque, purus quis feugiat efficitur, lacus enim faucibus urna, eu ullamcorper metus odio et risus. Duis ac sem mauris. Praesent et porttitor mi, ut luctus metus. Mauris imperdiet condimentum purus, vitae mattis ligula feugiat at. Sed ut tellus ac arcu pharetra venenatis sed id risus. "
@@ -95,10 +96,15 @@ class ResultsP extends React.Component {
   constructor(props) {
     super(props);
 	const queryString = new URLSearchParams(window.location.search);
+	var type = queryString.get("type");
+	var query = queryString.get("query");
+	var page = queryString.get("pageNum");
+	if (query == null) query = "";
+	if (page == null) page = 1;
     this.state = {
-      typeOfSearch: queryString.get("type"),
-      resultsQuery: queryString.get("query"),
-      pageNum: queryString.get("page"),
+      typeOfSearch: type,
+      resultsQuery: query,
+      pageNum: page,
       numPages: 100,
       reloadResults: false
     };
@@ -125,7 +131,9 @@ class ResultsP extends React.Component {
     });
     let newUrl = new URLSearchParams(window.location.search);
 	newUrl.set("pageNum", newPageNum);
-	window.location.replace("/results"+newUrl);
+	newUrl.set("query", this.state.resultsQuery);
+	newUrl.set("type", this.state.typeOfSearch);
+	this.props.history.push("/results?"+newUrl);
     return;
   };
 
@@ -137,6 +145,7 @@ class ResultsP extends React.Component {
     let results = this.getDummyResults();
     return (
       <React.Fragment>
+		<ScrollToTop />
         <List variant="flush">
           {results.map((result, index) => (
             <Link
