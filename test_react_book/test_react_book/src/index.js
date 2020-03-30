@@ -8,7 +8,7 @@ import Results from "./components2/Results";
 import Homepage from "./components2/Homepage";
 import Sidebar from "./components2/Sidebar";
 import Box from '@material-ui/core/Box';
-
+import ResultsP from "./components2/ResultsP";
 
 class App extends React.Component {
   render() {
