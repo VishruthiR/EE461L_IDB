@@ -24,6 +24,12 @@ class Result extends React.Component {
   */
   render() {
     let descriptionLength = 1000;
+    let condDescription;
+    if (typeof this.props.description === "undefined") {
+      condDescription = "Sorry about that! No description is available";
+    } else {
+      condDescription = this.props.description.substring(0, descriptionLength);
+    }
     return (
       <Card>
         <CardActionArea>
@@ -34,6 +40,7 @@ class Result extends React.Component {
                 {this.props.author}
               </Typography>
             )}
+            <Typography variant="h6">{condDescription}</Typography>
           </CardContent>
         </CardActionArea>
       </Card>

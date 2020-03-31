@@ -123,7 +123,7 @@ class ResultsP extends React.Component {
               ? Number(this.state.pager.currentPage)
               : 1
           }
-          numPages={this.state.numPages}
+          numPages={this.state.pager.totalPages}
           updatePage={this.nextPage}
         />
       </React.Fragment>
