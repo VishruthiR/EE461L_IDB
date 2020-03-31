@@ -38,55 +38,35 @@ class Recommendations extends React.Component {
     console.log("in recommendations");
     console.log(formattedRecommendations);
     return (
-      <Carousel animation="slide" autoPlay={false}>
-        {formattedRecommendations.map((recommendationRow, indexRow) => (
-          <Grid container spacing={1}>
-            {recommendationRow.map((recommendationCol, indexCol) => (
-              <Grid item xs={12 / numImgsPerCarousel}>
-                <Link
-                  underline="none"
-                  component={RouterLink}
-                  to={"/book?isbn=" + recommendationCol["ISBN"]}
-                >
-                  <CardMedia
-                    component="img"
-                    height="600"
-                    image={recommendationCol["picture"]}
-                    alt={
-                      img_alt_text +
-                      (indexRow * numImgsPerCarousel + indexCol).toString()
-                    }
-                  ></CardMedia>
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-        ))}
-      </Carousel>
-    );
-    /*
-    return (
-      <Carousel>
-        {formattedRecommendations.map((recommendationRow, indexRow) => (
-          <Carousel.Item>
-            <Row>
+      <React.Fragment>
+        <h1>Recommended Books</h1>
+        <Carousel animation="slide" autoPlay={false}>
+          {formattedRecommendations.map((recommendationRow, indexRow) => (
+            <Grid container spacing={1}>
               {recommendationRow.map((recommendationCol, indexCol) => (
-                <Col>
-                  <Image
-                    src={recommendationCol}
-                    alt={
-                      img_alt_text +
-                      (indexRow * numImgsPerCarousel + indexCol).toString()
-                    }
-                  ></Image>
-                </Col>
+                <Grid item xs={12 / numImgsPerCarousel}>
+                  <Link
+                    underline="none"
+                    component={RouterLink}
+                    to={"/book?isbn=" + recommendationCol["ISBN"]}
+                  >
+                    <CardMedia
+                      component="img"
+                      height="550"
+                      image={recommendationCol["picture"]}
+                      alt={
+                        img_alt_text +
+                        (indexRow * numImgsPerCarousel + indexCol).toString()
+                      }
+                    ></CardMedia>
+                  </Link>
+                </Grid>
               ))}
-            </Row>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+            </Grid>
+          ))}
+        </Carousel>
+      </React.Fragment>
     );
-    */
   }
 }
 

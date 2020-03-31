@@ -109,7 +109,10 @@ class Book extends React.Component {
     return (
       <React.Fragment>
         <Header title={this.state.bookTitle} author={this.state.authorName} />
-        <Description image={this.state.bookCover} />
+        <Description
+          image={this.state.bookCover}
+          description={this.state.bookSummary}
+        />
         <Recommendations recommendations={this.state.bookRecommendations} />
         {/*<Reviews />*/}
       </React.Fragment>
