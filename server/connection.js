@@ -46,7 +46,7 @@ async function main(){
                     break;
                 case "genre":
                     console.log("Genre Request");
-                    cursor= client.db("bookAppData").collection("books").find({"volumeInfo.genre": ree }, {limit: 5},undefined);
+                    cursor= client.db("bookAppData").collection("genre").find({"genre": ree }, null,undefined);
                     break;
                 default:
                     response.status(418).send("Error Code 418\nPlease don't be stupid...or else");
@@ -133,11 +133,11 @@ async function main(){
             var doc;
             var fresult =[];
             console.log(`Looking for genre: ${genre}`);
-            doc= await client.db("bookAppData").collection("authorImages").findOne({"author": genre },null,undefined); 
+            doc= await client.db("bookAppData").collection("genre").findOne({"genre": genre },null,undefined); 
             if(doc){
                 response.json(doc)
                 }else{
-                response.status(418).send("Error Code 418: Bad Author");
+                response.status(418).send("Error Code 418: Bad Genre");
             }
         })
 
@@ -149,12 +149,10 @@ async function main(){
             var fresult =[];
             var list = [];
             console.log(`Looking for books of genre: ${genre}`);
-            cursor= client.db("bookAppData").collection("books").find({"volumeInfo.genre": genre },null,undefined); 
-            await cursor.forEach(doc => {if(doc!=null){count++;fresult.push(doc);}});
-            console.log(`Total count: ${count}`);
+            // cursor= client.db("bookAppData").collection("books").find({"volumeInfo.genre": genre },null,undefined); 
             for(var i =0; i < 9; i++ ){
-                var index = Math.floor(Math.random() * count-1);
-                list.push(fresult[index]);
+                var index = Math.floor(Math.random() * 1000);
+                list.push( await client.db("bookAppData").collection("books").findOne({"volumeInfo.genre": genre },{skip: index},undefined));                
             }
             console.log(list.length);
             response.json(list);
