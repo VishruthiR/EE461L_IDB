@@ -43,26 +43,26 @@ class ResultsP extends React.Component {
     // make AJAX call based on query, needs to figure out number of pages server side, i think?
     console.log(this.state.resultsQuery);
     console.log("results ajax call first time");
-    //this.loadResults();
+    this.loadResults();
   }
 
   componentDidUpdate() {
     // make AJAX call based on query, needs to figure out number of pages server side, i think?
     console.log("results ajax call update");
-    //this.loadResults();
+    this.loadResults();
   }
 
   loadResults() {
+    console.log("in loadResults");
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("pageNum")) || 1;
-    if (page !== this.state.pager.pageNum) {
-      fetch("/search?" + params, { method: "GET" })
-        .then(response => response.json())
-        .then(({ pager, pageOfItems }) => {
-          this.setState({ numPages: pager.totalItems });
-          this.setState({ results: pageOfItems });
-        });
-    }
+
+    fetch("http://34.71.147.72:80/search?" + params, { method: "GET" })
+      .then(response => response.json())
+      .then(data => {
+        console.log("hi");
+        console.log(data);
+      });
   }
 
   //rerenders page but with new pages information
@@ -87,23 +87,29 @@ class ResultsP extends React.Component {
     console.log(this.state.typeOfSearch);
     console.log(this.state.resultsQuery);
     console.log(this.state.pageNum);
-    let results = this.getDummyResults();
+    //let results = this.getDummyResults();
+    console.log(this.state.results);
     return (
       <React.Fragment>
         <ScrollToTop />
         <List variant="flush">
-          {results.map((result, index) => (
+          {this.state.results.map((result, index) => (
             <Link
               underline="none"
               component={RouterLink}
-              to={"/book/1234"}
+              to={
+                "/" +
+                this.state.typeOfSearch +
+                "/" +
+                this.state.results.volumeInfo.industryIdentifiers.identifier
+              }
               key={index}
             >
               <ListItem>
                 <Result
-                  title={result.title}
-                  author={result.author}
-                  description={result.description}
+                  title={result.volumeInfo.title}
+                  author={result.volumeInfo.authors}
+                  description={result.volumeInfo.description}
                 />
               </ListItem>
             </Link>
@@ -139,6 +145,36 @@ export default ResultsP;
                   title={result.volumeInfo.title}
                   author={result.volumeInfo.authors}
                   description={result.volumeInfo.description}
+                />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <PaginationBar
+          currentPage={
+            !isNaN(this.state.pageNum) ? Number(this.state.pageNum) : 1
+          }
+          numPages={this.state.numPages}
+          updatePage={this.nextPage}
+        />
+      </React.Fragment>
+*/
+/*
+<React.Fragment>
+        <ScrollToTop />
+        <List variant="flush">
+          {results.map((result, index) => (
+            <Link
+              underline="none"
+              component={RouterLink}
+              to={"/book/1234"}
+              key={index}
+            >
+              <ListItem>
+                <Result
+                  title={result.title}
+                  author={result.author}
+                  description={result.description}
                 />
               </ListItem>
             </Link>
