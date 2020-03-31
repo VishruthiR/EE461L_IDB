@@ -28,45 +28,44 @@ class About extends React.Component {
       jainoI: 0
     };
   }
-  componentDidMount() {
-    fetch(
-      "https://api.github.com/repos/VishruthiR/EE461L_IDB/commits?per_page=500"
-    )
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.setState({ totalC: data.length });
-        let kumoCommit = data.filter(function(e) {
-          return e.commit.author.name === "kumosumo";
+
+
+
+  async componentDidMount() {
+    var url;
+    var total_commits = 0;
+    let kc=0, dc=0,sc=0,vc=0, mc=0,jc =0;
+    for(var i =1; i<4; i++){
+      url = "https://api.github.com/repos/VishruthiR/EE461L_IDB/commits?page=" + i + "&per_page=100";
+      await fetch(
+          url
+      )
+        .then(response => response.json())
+        .then(data => {
+          console.log(`page: ${i} Size: ${data.length}`);
+          total_commits+= data.length;
+          kc+= data.filter(function(e) {return e.commit.author.name === "kumosumo";}).length;
+          dc+= data.filter(function(e) {return e.commit.author.name === "davidday99";}).length;
+          mc+= data.filter(function(e) {return e.commit.author.name === "Matthew Jiang";}).length;
+          vc+= data.filter(function(e) {return e.commit.author.name === "Vishruthi Ramaswamy";}).length;
+          sc+= data.filter(function(e) {return e.commit.author.name === "sshetkar3858";}).length;
+          jc+= data.filter(function(e) {return e.commit.author.name === "Jaino Vennatt";}).length;
         });
-        this.setState({ kumoC: kumoCommit.length });
-        let davidCommit = data.filter(function(e) {
-          return e.commit.author.name === "davidday99";
-        });
-        this.setState({ davidC: davidCommit.length });
-        let matthewCommit = data.filter(function(e) {
-          return e.commit.author.name === "Matthew Jiang";
-        });
-        this.setState({ matthewC: matthewCommit.length });
-        let vishCommit = data.filter(function(e) {
-          return e.commit.author.name === "Vishruthi Ramaswamy";
-        });
-        this.setState({ vishC: vishCommit.length });
-        let sidCommit = data.filter(function(e) {
-          return e.commit.author.name === "sshetkar3858";
-        });
-        this.setState({ sidC: sidCommit.length });
-        let jainoCommit = data.filter(function(e) {
-          return e.commit.author.name === "Jaino Vennatt";
-        });
-        this.setState({ jainoC: jainoCommit.length });
-      });
+    }
+    console.log(`\n\nKUMOKUMOKUMO\nTotal Commits: ${total_commits}`);
+    this.setState({ totalC: total_commits });
+    this.setState({ kumoC: String(kc) });
+    this.setState({ davidC: dc});
+    this.setState({ matthewC: mc });
+    this.setState({ vishC: vc });
+    this.setState({ sidC: sc });
+    this.setState({ jainoC: jc });
 
     fetch(
-      "https://api.github.com/repos/VishruthiR/EE461L_IDB/issues?per_page=100"
+      "https://api.github.com/repos/VishruthiR/EE461L_IDB/issues?state=all"
     ) //should increase pagination size and allow for all commits to show
       .then(response1 => response1.json())
-      .then(issues => {
+      .then(issues => { us
         console.log(issues);
         this.setState({ totalI: issues.length });
         let kumoIssues = issues.filter(function(e) {
