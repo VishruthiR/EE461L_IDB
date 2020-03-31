@@ -9,6 +9,7 @@ not sure how to uniquely identify this
 class Genre extends React.Component {
   constructor(props) {
     super(props);
+	console.log("Genre Loading...");
     // setup state
     this.state = {
       genreName: this.props.match.params.name,
@@ -77,8 +78,14 @@ class Genre extends React.Component {
 	.then(data => {
 	  console.log("hi");
 	  console.log(data);
-	  
-	  this.setState({  });
+	  var recommendations = [];
+	  for(var i = 0; i < 9; i++){
+		  recommendations.push({
+			  picture: data[i].volumeInfo.imageLinks.thumbnail,
+			  ISBN: data[i].volumeInfo.industryIdentifiers.identifier
+		  })
+	  }
+	  this.setState({bookRecommendations: recommendations});
 	  
 	});
     

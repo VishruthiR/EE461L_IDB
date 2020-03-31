@@ -141,7 +141,7 @@ class ResultsP extends React.Component {
           <Link
             underline="none"
             component={RouterLink}
-            to={"/" + this.state.typeOfSearch + "?genre=" + result.author}
+            to={"/" + this.state.typeOfSearch + "?genre=" + result.genre}
             key={index}
           >
             <ListItem>
