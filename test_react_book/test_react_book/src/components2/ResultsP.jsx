@@ -1,6 +1,6 @@
 import React from "react";
 import Result from "./Result";
-import { Link as RouterLink, Redirect } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import PaginationBar from "./PaginationBar";
@@ -33,7 +33,7 @@ class ResultsP extends React.Component {
       typeOfSearch: type,
       resultsQuery: query,
       pager: {},
-      numPages: 100,
+      numPages: 0,
       reloadResults: false,
       results: []
     };
@@ -41,14 +41,11 @@ class ResultsP extends React.Component {
 
   componentDidMount() {
     // make AJAX call based on query, needs to figure out number of pages server side, i think?
-    console.log(this.state.resultsQuery);
-    console.log("results ajax call first time");
     this.loadResults();
   }
 
   componentDidUpdate() {
     // make AJAX call based on query, needs to figure out number of pages server side, i think?
-    console.log("results ajax call update");
     // this.loadResults();
   }
 
@@ -85,13 +82,17 @@ class ResultsP extends React.Component {
     return;
   };
 
+  fixGenreName(genre) {
+    let newGenre = genre;
+    if (newGenre === "scienceFiction") {
+      newGenre = "Science Fiction";
+    } else if (newGenre === "HistoricalFiction") {
+      newGenre = "Historical Fiction";
+    }
+    return newGenre;
+  }
   render() {
-    console.log("in results");
-    console.log(this.state.typeOfSearch);
-    console.log(this.state.resultsQuery);
-    console.log(this.state.pager.currentPage);
     //let results = this.getDummyResults();
-    console.log(this.state.results);
     let listItems;
     if (this.state.typeOfSearch === "book") {
       listItems = this.state.results.map((result, index) => (
@@ -116,40 +117,44 @@ class ResultsP extends React.Component {
         </Link>
       ));
     } else if (this.state.typeOfSearch === "author") {
-      {
-        listItems = this.state.results.map((result, index) => (
-          <Link
-            underline="none"
-            component={RouterLink}
-            to={
-              "/" +
-              this.state.typeOfSearch +
-              "?name=" +
-              result.author.split(" ").join("+")
-            }
-            key={index}
-          >
-            <ListItem>
-              <Result title={result.author} description={""} />
-            </ListItem>
-          </Link>
-        ));
-      }
+      listItems = this.state.results.map((result, index) => (
+        <Link
+          underline="none"
+          component={RouterLink}
+          to={
+            "/" +
+            this.state.typeOfSearch +
+            "?name=" +
+            result.author.split(" ").join("+")
+          }
+          key={index}
+        >
+          <ListItem>
+            <Result title={result.author} description={""} />
+          </ListItem>
+        </Link>
+      ));
     } else if (this.state.typeOfSearch === "genre") {
-      {
-        listItems = this.state.results.map((result, index) => (
-          <Link
-            underline="none"
-            component={RouterLink}
-            to={"/" + this.state.typeOfSearch + "?genre=" + result.genre}
-            key={index}
-          >
-            <ListItem>
-              <Result title={result.genre} description={result.description} />
-            </ListItem>
-          </Link>
-        ));
-      }
+      listItems = this.state.results.map((result, index) => (
+        <Link
+          underline="none"
+          component={RouterLink}
+          to={
+            "/" +
+            this.state.typeOfSearch +
+            "?genre=" +
+            result.genre.split(" ").join("+")
+          }
+          key={index}
+        >
+          <ListItem>
+            <Result
+              title={this.fixGenreName(result.genre)}
+              description={result.description}
+            />
+          </ListItem>
+        </Link>
+      ));
     }
     return (
       <React.Fragment>
@@ -170,64 +175,3 @@ class ResultsP extends React.Component {
 }
 
 export default ResultsP;
-
-/*
- <React.Fragment>
-        <ScrollToTop />
-        <List variant="flush">
-          {this.state.results.map((result, index) => (
-            <Link
-              underline="none"
-              component={RouterLink}
-              to={"/"+this.state.typeOfSearch+"/"+this.state.results.volumeInfo.industryIdentifiers.identifier}
-              key={index}
-            >
-              <ListItem>
-                <Result
-                  title={result.volumeInfo.title}
-                  author={result.volumeInfo.authors}
-                  description={result.volumeInfo.description}
-                />
-              </ListItem>
-            </Link>
-          ))}
-        </List>
-        <PaginationBar
-          currentPage={
-            !isNaN(this.state.pageNum) ? Number(this.state.pageNum) : 1
-          }
-          numPages={this.state.numPages}
-          updatePage={this.nextPage}
-        />
-      </React.Fragment>
-*/
-/*
-<React.Fragment>
-        <ScrollToTop />
-        <List variant="flush">
-          {results.map((result, index) => (
-            <Link
-              underline="none"
-              component={RouterLink}
-              to={"/book/1234"}
-              key={index}
-            >
-              <ListItem>
-                <Result
-                  title={result.title}
-                  author={result.author}
-                  description={result.description}
-                />
-              </ListItem>
-            </Link>
-          ))}
-        </List>
-        <PaginationBar
-          currentPage={
-            !isNaN(this.state.pageNum) ? Number(this.state.pageNum) : 1
-          }
-          numPages={this.state.numPages}
-          updatePage={this.nextPage}
-        />
-      </React.Fragment>
-*/

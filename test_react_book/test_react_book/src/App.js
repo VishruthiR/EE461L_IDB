@@ -10,6 +10,9 @@ import Sidebar from "./components2/Sidebar";
 import Box from "@material-ui/core/Box";
 import ResultsP from "./components2/ResultsP";
 
+import Grid from "@material-ui/core/Grid";
+import CardMedia from "@material-ui/core/CardMedia";
+
 function App() {
   return (
     <React.Fragment>
@@ -19,6 +22,16 @@ function App() {
             <Sidebar />
           </div>
           <div style={{ flexGrow: 1 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={5} md={12}>
+                <CardMedia
+                  component="img"
+                  height="260"
+                  alt="Header"
+                  image={require("./components2/images/Header.jpg")}
+                />
+              </Grid>
+            </Grid>
             <Switch>
               <Route path="/" exact component={Homepage} />
               <Route path="/about" exact component={About} />

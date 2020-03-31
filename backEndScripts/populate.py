@@ -2,11 +2,22 @@ import sys
 import pymongo
 import requests
 import json
+from pymongo import MongoClient
 
+client = MongoClient()
 url= 'https://www.googleapis.com/books/v1/volumes'
 print('Author List Name:', str(sys.argv[1]))
 fileName = sys.argv[1]
 genre = sys.argv[2]
+ipaddress= sys.argv[3]
+port = sys.argv[4]
+
+client = MongoClient("mongodb+srv://dbUser:jaino@cluster0-y12qq.gcp.mongodb.net/test?retryWrites=true&w=majority")
+
+
+
+db=client['bookAppData']
+books=db.books
 
 with open(fileName, "r") as a_file:
     numberOfBooksAdded=0
@@ -23,12 +34,11 @@ with open(fileName, "r") as a_file:
         request = (requests.get(url=url, params=params))
         jsonData=json.loads(request.text)
         totalNumberOfBooks = jsonData['totalItems']
-        #print(totalNumberOfBooks)
         print('Author Name:' ,authorName)
 
         bookIndex =0
         while(bookIndex < totalNumberOfBooks):
-            if bookIndex==10:
+            if bookIndex==20:
                 break
             params = dict(
                     startIndex = bookIndex,
@@ -47,7 +57,7 @@ with open(fileName, "r") as a_file:
             for y in range(bookIndex, bookIndex+10,1):
                 if(bookIndex == totalNumberOfBooks):
                     break
-                elif(bookIndex == 10):
+                elif(bookIndex == 20):
                     break
                 indexOfCurrentBookInLoop=y-bookIndex
                 book=currentBooks[indexOfCurrentBookInLoop]
@@ -70,7 +80,6 @@ with open(fileName, "r") as a_file:
                     elif(alreadyHadRating==0):
                         (book['volumeInfo'])['numberOfRatings'] = 0.0
 
-                    print(innerbook['averageRating'], 'and quantity:', innerbook['numberOfRatings'])
                     val=(innerbook['industryIdentifiers'])[0]
                     secondvalue =val['type']
 
@@ -82,14 +91,20 @@ with open(fileName, "r") as a_file:
                         elif(secondvalue=='ISBN_13'):
                             innerbook['industryIdentifiers']=(innerbook['industryIdentifiers'])[0]
 
+                        isbnValue =(innerbook['industryIdentifiers'])['identifier']
+
+
+                        querymy= {"volumeInfo.industryIdentifiers.identifier":isbnValue}
+                        bookCounter=0
+                        for book in books.find(querymy):
+                            bookCounter=bookCounter+1
+                        if(bookCounter != 0):
+                            continue
                         (book['volumeInfo'])['genre'] = genre
-
-                        json_formatted_str = json.dumps(book, indent=2)
+                        books.insert_one(book)
+                        json_formatted_str = json.dumps(innerbook, indent=2)
                         numberOfBooksAdded=numberOfBooksAdded+1
-                        print('Current number of Books: ', numberOfBooksAdded)
-                        print(json_formatted_str)
+                        print(numberOfBooksAdded)
                         #print('\n\n')
-            #print('\n')
-
-
             bookIndex=bookIndex+10
+        print('\n')

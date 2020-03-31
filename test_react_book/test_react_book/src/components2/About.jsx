@@ -5,8 +5,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { green, orange } from "@material-ui/core/colors";
 
 class About extends React.Component {
   constructor(props) {
@@ -28,9 +26,7 @@ class About extends React.Component {
       jainoI: 0
     };
   }
-
-
-
+  
   async componentDidMount() {
     var url;
     var total_commits = 0;
@@ -144,24 +140,8 @@ class About extends React.Component {
       color: "yellowgreen"
     };
 
-    const outerTheme = createMuiTheme({
-      palette: {
-        secondary: {
-          main: orange[500]
-        }
-      }
-    });
-
     return (
       <Grid container spacing={3} alignItems="stretch">
-        <Grid item xs={12} sm={5} md={12}>
-          <CardMedia
-            component="img"
-            height="260"
-            alt="Header"
-            image={require("./images/Header.jpg")}
-          />
-        </Grid>
         <Grid item xs={12} sm={5} md={12}>
           <Card>
             <CardContent>
