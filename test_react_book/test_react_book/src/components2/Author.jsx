@@ -9,10 +9,11 @@ not sure how to uniquely identify this
 class Author extends React.Component {
   constructor(props) {
     super(props);
-	const myQuery = new URLSearchParams(window.location.search);
+    const myQuery = new URLSearchParams(window.location.search);
     // setup state
     this.state = {
       authorName: myQuery.get("name"), //"default author name",
+      authorResults: {},
       authorPicture:
         "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
       authorBio:
@@ -55,22 +56,26 @@ class Author extends React.Component {
   componentDidMount() {
     // make call to server to get information and modify state using setState
     console.log("author ajax call");
-	fetch("/author?name=" + this.state.authorName)
-	.then(result => result.json())
-	.then(result => {
-		this.setState({
-			authorPicture: result.image,
-			//authorBio: result["volumeInfo"]["description"],
-			//authorName: result["author"]["authors"]
-		});
-	});
+    const params = new URLSearchParams(window.location.search);
+    console.log(params.get("name"));
+    fetch("http://34.71.147.72:80/author?name=" + this.state.authorName)
+      .then(result => result.json())
+      .then(data => {
+        console.log(data);
+
+        // this.setState({
+        //   authorResults: data
+        // });
+      });
   }
 
   componentDidUpdate() {
-    console.log("author ajax call update");
+    // console.log("author ajax call update");
   }
 
   render() {
+    // console.log("this is authorREsults");
+    // console.log(this.state.authorResults);
     return (
       <React.Fragment>
         <Header title={this.state.authorName} />
