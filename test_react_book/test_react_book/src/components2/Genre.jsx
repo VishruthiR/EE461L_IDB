@@ -104,7 +104,10 @@ class Genre extends React.Component {
           description={this.state.genreDescription}
           image={this.state.genrePicture}
         />
-        <Recommendations recommendations={this.state.bookRecommendations} />
+        <Recommendations
+          recommendations={this.state.bookRecommendations}
+          typeOfRecommendation={"Recommended Books"}
+        />
       </React.Fragment>
     );
   }
