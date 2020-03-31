@@ -22,9 +22,9 @@ function App() {
             <Switch>
               <Route path="/" exact component={Homepage} />
               <Route path="/about" exact component={About} />
-              <Route path="/book/:ISBN" component={Book} />
-              <Route path="/author/:authorName" component={Author} />
-              <Route path="/genre/:name" component={Genre} />
+              <Route path="/book?:ISBN" component={Book} />
+              <Route path="/author?:authorName" component={Author} />
+              <Route path="/genre?:name" component={Genre} />
               <Route
                 path="/results/:type/:query/:pageNum"
                 component={Results}
