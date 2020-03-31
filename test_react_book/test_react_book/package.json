@@ -43,6 +43,8 @@
   },
   "devDependencies": {
     "chromedriver": "^2.41.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16.1": "^1.6.2",
     "react-test-renderer": "^16.13.1",
     "selenium-webdriver": "^4.0.0-alpha.7"
   }
