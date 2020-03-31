@@ -11,7 +11,7 @@ async function main(){
     const app = express();
     // process.env.URI
     const uri = process.env.ATLAS_URI;
-    const port = process.env.PORT || 5000;
+    const port = 80;
     const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
     try {
@@ -24,7 +24,7 @@ async function main(){
         app.use(cors());
         app.use(express.json());
         
-        //--GET--Basic Search                                           Ex: http://localhost:5000/search?type=book&query=Flatland&pageNum=5
+        //--GET--Basic Search                                           Ex:  http://34.71.147.72:80/search?type=book&query=Flatland&pageNum=5
         app.get("/search", async (request, response) => {
             var type = request.query['type'];
             var pageNum = parseInt(request.query['pageNum']) || 1;
@@ -59,7 +59,7 @@ async function main(){
             response.json({pager, pageOfItems});
         });
 
-        //--Get--List an Author's books                                 Ex: http://localhost:5000/authorsBooks?name=Patrick+Rothfuss&pageNum=1
+        //--Get--List an Author's books                                 Ex:  http://34.71.147.72:80/authorsBooks?name=Patrick+Rothfuss&pageNum=1
         app.get("/authorsBooks", async (request, response)=>{
             var name = String(request.query['name']);
             var pageNum = parseInt(request.query['pageNum']) || 1;
@@ -77,7 +77,7 @@ async function main(){
             response.json({pager, pageOfItems});
         })
 
-        //--Get--List a genre's books                                 Ex: http://localhost:5000/genreBooks?genre=scienceFiction&numPage=1
+        //--Get--List a genre's books                                 Ex:  http://34.71.147.72:80/genreBooks?genre=scienceFiction&numPage=1
         app.get("/genreBooks", async (request, response)=>{
             var genre = String(request.query['genre']);
             var count =0;
@@ -97,7 +97,7 @@ async function main(){
 
 
         //--Get--Single Book
-        app.get("/book", async (request, response)=>{                  //Ex: http://localhost:5000/book?isbn=9781602062894
+        app.get("/book", async (request, response)=>{                  //Ex: http://34.71.147.72:80/book?isbn=9781602062894   
             var isbn = String(request.query['isbn']);
             console.log(isbn);
             // var doc;
@@ -113,7 +113,7 @@ async function main(){
         })
 
         //--Get--Single Author
-        app.get("/author", async (request, response)=>{                  //Ex: http://localhost:5000/author?name=Patrick+Rothfus
+        app.get("/author", async (request, response)=>{                  //Ex:  http://34.71.147.72:80/author?name=Patrick+Rothfus
             var name = String(request.query['name']);
             var doc;
             var fresult =[];
@@ -128,7 +128,7 @@ async function main(){
 
 
         //--Get--Single Genre
-        app.get("/genre", async (request, response)=>{                  //Ex: http://localhost:5000/genre?genre=scienceFiction
+        app.get("/genre", async (request, response)=>{                  //Ex:  http://34.71.147.72:80/genre?genre=scienceFiction
             var genre = String(request.query['genre']);
             var doc;
             var fresult =[];
@@ -142,7 +142,7 @@ async function main(){
         })
 
         //--Get--Recommended Books
-        app.get("/recBooks", async (request, response)=>{                  //Ex: http://localhost:5000/recBooks?genre=scienceFiction
+        app.get("/recBooks", async (request, response)=>{                  //Ex:  http://34.71.147.72:80/recBooks?genre=scienceFiction
             var genre = String(request.query['genre']);
             var count =0;
             var cursor;
