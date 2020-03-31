@@ -61,21 +61,29 @@ class Genre extends React.Component {
 
   loadResults() {
     const params = new URLSearchParams(window.location.search);
-
+    console.log(params.get("genre"));
     fetch("http://34.71.147.72:80/genre?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
         console.log("hi");
         console.log(data);
+        let genre = data.genre;
+        if (genre === "scienceFiction") {
+          genre = "Science Fiction";
+        } else if (genre === "HistoricalFiction") {
+          genre = "Historical Fiction";
+        }
         this.setState({
-          genreName: data.genre,
-          genreDescription: data.description
+          genreName: genre,
+          genreDescription: data.description,
+          genrePicture: data.image
         });
       });
 
     fetch("http://34.71.147.72:80/recbooks?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         var recommendations = [];
         for (var i = 0; i < data.length; i++) {
           recommendations.push({

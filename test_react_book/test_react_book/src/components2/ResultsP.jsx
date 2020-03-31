@@ -82,6 +82,15 @@ class ResultsP extends React.Component {
     return;
   };
 
+  fixGenreName(genre) {
+    let newGenre = genre;
+    if (newGenre === "scienceFiction") {
+      newGenre = "Science Fiction";
+    } else if (newGenre === "HistoricalFiction") {
+      newGenre = "Historical Fiction";
+    }
+    return newGenre;
+  }
   render() {
     //let results = this.getDummyResults();
     let listItems;
@@ -130,11 +139,19 @@ class ResultsP extends React.Component {
         <Link
           underline="none"
           component={RouterLink}
-          to={"/" + this.state.typeOfSearch + "?genre=" + result.genre}
+          to={
+            "/" +
+            this.state.typeOfSearch +
+            "?genre=" +
+            result.genre.split(" ").join("+")
+          }
           key={index}
         >
           <ListItem>
-            <Result title={result.genre} description={result.description} />
+            <Result
+              title={this.fixGenreName(result.genre)}
+              description={result.description}
+            />
           </ListItem>
         </Link>
       ));
