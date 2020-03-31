@@ -9,7 +9,6 @@ maybe all we need to be passed into is ISBN number and we get all the other info
 class Book extends React.Component {
   constructor(props) {
     super(props);
-    const myQuery = new URLSearchParams(window.location.search);
     // setup state
     this.state = {
       bookISBN: -1, //this.props.match.params.ISBN,
@@ -57,15 +56,16 @@ class Book extends React.Component {
 
   componentDidMount() {
     // make call to server to get information and modify state using setState
-    console.log("in did mount modifying state");
+    this.loadResults();
+  }
+
+  componentDidUpdate() {
     this.loadResults();
   }
 
   loadResults() {
     const params = new URLSearchParams(window.location.search);
     const isbn = params.get("isbn");
-    console.log(isbn);
-    console.log(this.state.bookISBN);
     if (isbn !== this.state.bookISBN) {
       fetch("http://34.71.147.72:80/book?isbn=" + isbn)
         .then(result => result.json())
@@ -98,17 +98,11 @@ class Book extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    console.log("book ajax call update");
-    this.loadResults();
-  }
-
   render() {
-    console.log("in books");
-    console.log(this.state.bookISBN);
     return (
       <React.Fragment>
         <Header title={this.state.bookTitle} author={this.state.authorName} />
+        <br />
         <Description
           image={this.state.bookCover}
           description={this.state.bookSummary}

@@ -1,6 +1,6 @@
 import React from "react";
 import Result from "./Result";
-import { Link as RouterLink, Redirect } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import PaginationBar from "./PaginationBar";
@@ -116,40 +116,36 @@ class ResultsP extends React.Component {
         </Link>
       ));
     } else if (this.state.typeOfSearch === "author") {
-      {
-        listItems = this.state.results.map((result, index) => (
-          <Link
-            underline="none"
-            component={RouterLink}
-            to={
-              "/" +
-              this.state.typeOfSearch +
-              "?name=" +
-              result.author.split(" ").join("+")
-            }
-            key={index}
-          >
-            <ListItem>
-              <Result title={result.author} description={""} />
-            </ListItem>
-          </Link>
-        ));
-      }
+      listItems = this.state.results.map((result, index) => (
+        <Link
+          underline="none"
+          component={RouterLink}
+          to={
+            "/" +
+            this.state.typeOfSearch +
+            "?name=" +
+            result.author.split(" ").join("+")
+          }
+          key={index}
+        >
+          <ListItem>
+            <Result title={result.author} description={""} />
+          </ListItem>
+        </Link>
+      ));
     } else if (this.state.typeOfSearch === "genre") {
-      {
-        listItems = this.state.results.map((result, index) => (
-          <Link
-            underline="none"
-            component={RouterLink}
-            to={"/" + this.state.typeOfSearch + "?genre=" + result.genre}
-            key={index}
-          >
-            <ListItem>
-              <Result title={result.genre} description={result.description} />
-            </ListItem>
-          </Link>
-        ));
-      }
+      listItems = this.state.results.map((result, index) => (
+        <Link
+          underline="none"
+          component={RouterLink}
+          to={"/" + this.state.typeOfSearch + "?genre=" + result.genre}
+          key={index}
+        >
+          <ListItem>
+            <Result title={result.genre} description={result.description} />
+          </ListItem>
+        </Link>
+      ));
     }
     return (
       <React.Fragment>

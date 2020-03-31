@@ -91,6 +91,7 @@ class Author extends React.Component {
     return (
       <React.Fragment>
         <Header title={this.state.authorName} />
+        <br />
         <Description
           description={this.state.authorBio}
           image={this.state.authorPicture}

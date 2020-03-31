@@ -5,8 +5,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { green, orange } from "@material-ui/core/colors";
 
 class About extends React.Component {
   constructor(props) {
@@ -144,14 +142,6 @@ class About extends React.Component {
     const numTheme = {
       color: "yellowgreen"
     };
-
-    const outerTheme = createMuiTheme({
-      palette: {
-        secondary: {
-          main: orange[500]
-        }
-      }
-    });
 
     return (
       <Grid container spacing={3} alignItems="stretch">

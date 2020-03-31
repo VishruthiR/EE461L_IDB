@@ -9,8 +9,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link, NavLink } from "react-router-dom";
 
-import SearchBar from "./SearchBar";
-
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -42,8 +40,8 @@ class Sidebar extends React.Component {
           }
         }}
       >
-        <Link to="/index.html">
-          <img src={this.props.logoSmall} />
+        <Link to="/">
+          <img alt="small logo" src={this.props.logoSmall} />
         </Link>
         <Divider />
         <List>

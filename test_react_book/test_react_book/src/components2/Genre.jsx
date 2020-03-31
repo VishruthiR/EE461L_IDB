@@ -93,6 +93,7 @@ class Genre extends React.Component {
     return (
       <React.Fragment>
         <Header title={this.state.genreName} />
+        <br />
         <Description
           description={this.state.genreDescription}
           image={this.state.genrePicture}

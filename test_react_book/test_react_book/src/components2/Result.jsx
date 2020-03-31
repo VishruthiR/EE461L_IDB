@@ -40,7 +40,7 @@ class Result extends React.Component {
                 {this.props.author}
               </Typography>
             )}
-            <Typography variant="h6">{condDescription}</Typography>
+            <Typography variant="h6">{condDescription}...</Typography>
           </CardContent>
         </CardActionArea>
       </Card>
