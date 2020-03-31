@@ -9,9 +9,10 @@ not sure how to uniquely identify this
 class Author extends React.Component {
   constructor(props) {
     super(props);
+	const myQuery = new URLSearchParams(window.location.search);
     // setup state
     this.state = {
-      authorName: "default author name",
+      authorName: myQuery.get("name"), //"default author name",
       authorPicture:
         "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
       authorBio:
@@ -54,6 +55,15 @@ class Author extends React.Component {
   componentDidMount() {
     // make call to server to get information and modify state using setState
     console.log("author ajax call");
+	fetch("/author?name=" + this.state.authorName)
+	.then(result => result.json())
+	.then(result => {
+		this.setState({
+			authorPicture: result.image,
+			//authorBio: result["volumeInfo"]["description"],
+			//authorName: result["author"]["authors"]
+		});
+	});
   }
 
   componentDidUpdate() {
