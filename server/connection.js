@@ -46,7 +46,7 @@ async function main(){
                     break;
                 case "genre":
                     console.log("Genre Request");
-                    cursor= client.db("bookAppData").collection("books").find({"volumeInfo.genre": ree }, {limit: 5},undefined);
+                    cursor= client.db("bookAppData").collection("genre").find({"genre": ree }, null,undefined);
                     break;
                 default:
                     response.status(418).send("Error Code 418\nPlease don't be stupid...or else");
@@ -77,7 +77,7 @@ async function main(){
             response.json({pager, pageOfItems});
         })
 
-        //--Get--List a genre's books                                 Ex: http://localhost:5000/genreBooks?genre=scienceFiction
+        //--Get--List a genre's books                                 Ex: http://localhost:5000/genreBooks?genre=scienceFiction&numPage=1
         app.get("/genreBooks", async (request, response)=>{
             var genre = String(request.query['genre']);
             var count =0;
@@ -86,7 +86,7 @@ async function main(){
             var cursor;
             var fresult =[];
             console.log(`Looking for books of genre: ${genre}`);
-            cursor= client.db("bookAppData").collection("books").find({"volumeInfo.authors": name },null,undefined); 
+            cursor= client.db("bookAppData").collection("books").find({"volumeInfo.genre": name },null,undefined); 
             await cursor.forEach(doc => {if(doc!=null){count++;fresult.push(doc);}});
             console.log(`Total count: ${count}`);
             const pager = paginate(count,pageNum, pageSize);
@@ -94,6 +94,70 @@ async function main(){
             console.log(`pageNum: ${pageNum}\npageSize: ${pageSize}\nSI: ${pager.startIndex}\nEI: ${pager.endIndex+1}`);
             response.json({pager, pageOfItems});
         })
+
+
+        //--Get--Single Book
+        app.get("/book", async (request, response)=>{                  //Ex: http://localhost:5000/book?isbn=9781602062894
+            var isbn = String(request.query['isbn']);
+            console.log(isbn);
+            // var doc;
+            var fresult =[];
+            console.log(`Looking for book with ISBN: ${isbn}`);
+            var doc= await client.db("bookAppData").collection("books").findOne({"volumeInfo.industryIdentifiers.identifier": isbn },null,undefined); 
+            console.log(doc);
+            if(doc){
+                response.json(doc)
+             }else{
+                response.status(418).send("Error Code 418: Bad ISBN Number");
+            }
+        })
+
+        //--Get--Single Author
+        app.get("/author", async (request, response)=>{                  //Ex: http://localhost:5000/author?name=Patrick+Rothfus
+            var name = String(request.query['name']);
+            var doc;
+            var fresult =[];
+            console.log(`Looking for Author by the name of: ${name}`);
+            doc= await client.db("bookAppData").collection("authorImages").findOne({"author": name },null,undefined); 
+            if(doc){
+                response.json(doc)
+                }else{
+                response.status(418).send("Error Code 418: Bad Author");
+            }
+        })
+
+
+        //--Get--Single Genre
+        app.get("/genre", async (request, response)=>{                  //Ex: http://localhost:5000/genre?genre=scienceFiction
+            var genre = String(request.query['genre']);
+            var doc;
+            var fresult =[];
+            console.log(`Looking for genre: ${genre}`);
+            doc= await client.db("bookAppData").collection("genre").findOne({"genre": genre },null,undefined); 
+            if(doc){
+                response.json(doc)
+                }else{
+                response.status(418).send("Error Code 418: Bad Genre");
+            }
+        })
+
+        //--Get--Recommended Books
+        app.get("/recBooks", async (request, response)=>{                  //Ex: http://localhost:5000/recBooks?genre=scienceFiction
+            var genre = String(request.query['genre']);
+            var count =0;
+            var cursor;
+            var fresult =[];
+            var list = [];
+            console.log(`Looking for books of genre: ${genre}`);
+            // cursor= client.db("bookAppData").collection("books").find({"volumeInfo.genre": genre },null,undefined); 
+            for(var i =0; i < 9; i++ ){
+                var index = Math.floor(Math.random() * 1000);
+                list.push( await client.db("bookAppData").collection("books").findOne({"volumeInfo.genre": genre },{skip: index},undefined));                
+            }
+            console.log(list.length);
+            response.json(list);
+        })
+
 
         //--Run Server Indefinitely--
         app.listen(port, ()=>{
@@ -109,10 +173,11 @@ async function listDatabases(client){
 };
 
 
-async function findOneElement(client){
-    var result = await client.db("bookAppData").collection("books").findOne({"volumeInfo.industryIdentifiers.identifier": '9781101486405'});
+async function findOneElement(client, isbn){
+    var result = await client.db("bookAppData").collection("books").findOne({"volumeInfo.industryIdentifiers.identifier": 'isbn'});
     if(result){
         console.log(result);
+        return result;
     }else{
         console.log("there is an error");
     }

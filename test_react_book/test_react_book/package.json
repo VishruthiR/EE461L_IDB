@@ -23,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "node src/test/HomePageTest.js",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "chromedriver": "^2.41.0",
+    "react-test-renderer": "^16.13.1",
     "selenium-webdriver": "^4.0.0-alpha.7"
   }
 }
