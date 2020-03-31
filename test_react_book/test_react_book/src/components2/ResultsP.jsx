@@ -101,7 +101,7 @@ class ResultsP extends React.Component {
           to={
             "/" +
             this.state.typeOfSearch +
-            "/" +
+            "?isbn=" +
             result.volumeInfo.industryIdentifiers.identifier
           }
           key={index}
@@ -121,7 +121,7 @@ class ResultsP extends React.Component {
           <Link
             underline="none"
             component={RouterLink}
-            to={"/" + this.state.typeOfSearch + "/" + result.author}
+            to={"/" + this.state.typeOfSearch + "?name=" + result.author}
             key={index}
           >
             <ListItem>
@@ -136,7 +136,7 @@ class ResultsP extends React.Component {
           <Link
             underline="none"
             component={RouterLink}
-            to={"/" + this.state.typeOfSearch + "/" + result.author}
+            to={"/" + this.state.typeOfSearch + "?genre=" + result.author}
             key={index}
           >
             <ListItem>
