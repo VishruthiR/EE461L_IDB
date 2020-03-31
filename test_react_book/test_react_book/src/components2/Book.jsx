@@ -13,6 +13,7 @@ class Book extends React.Component {
     // setup state
     this.state = {
       bookISBN: myQuery.get("isbn"), //this.props.match.params.ISBN,
+      bookGenre: "default genre",
       bookTitle: "default book title",
       bookCover:
         "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
@@ -56,18 +57,39 @@ class Book extends React.Component {
 
   componentDidMount() {
     // make call to server to get information and modify state using setState
-    fetch("/book?isbn=" + this.state.bookISBN)
+    console.log("in did mount modifying state");
+    this.loadResults();
+  }
+
+  loadResults() {
+    const params = new URLSearchParams(window.location.search);
+    fetch("http://34.71.147.72:80/book?isbn=" + this.state.bookISBN)
       .then(result => result.json())
       .then(result => {
         this.setState({
           bookTitle: result.volumeInfo.title,
           bookCover: result.volumeInfo.imageLinks.thumbnail,
           bookSummary: result.volumeInfo.description,
-          authorName: result.volumeInfo.authors
+          authorName: result.volumeInfo.authors,
+          bookGenre: result.volumeInfo.genre
+        });
+        fetch("http://34.71.147.72:80/recBooks?genre=" + result.volumeInfo.genre)
+        .then(response => response.json())
+        .then(data => {
+          console.log("hi");
+          console.log(data);
+          var recommendations = [];
+          for(var i = 0; i < 9; i++){
+            recommendations.push({
+              picture: data[i].volumeInfo.imageLinks.thumbnail,
+              ISBN: data[i].volumeInfo.industryIdentifiers.identifier
+            })
+          }
+          this.setState({bookRecommendations: recommendations});
         });
       });
-    console.log("book ajax call");
   }
+
 
   componentDidUpdate() {
     console.log("book ajax call update");
