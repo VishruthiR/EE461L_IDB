@@ -34,7 +34,8 @@ class ResultsP extends React.Component {
       resultsQuery: query,
       pageNum: page,
       numPages: 100,
-      reloadResults: false
+      reloadResults: false,
+      results: []
     };
   }
 
@@ -42,11 +43,25 @@ class ResultsP extends React.Component {
     // make AJAX call based on query, needs to figure out number of pages server side, i think?
     console.log(this.state.resultsQuery);
     console.log("results ajax call first time");
+    this.loadResults();
   }
 
   componentDidUpdate() {
     // make AJAX call based on query, needs to figure out number of pages server side, i think?
     console.log("results ajax call update");
+    this.loadResults();
+  }
+
+  loadResults() {
+    const params = new URLSearchParams(location.search);
+    if (page !== this.state.pager.pageNum) {
+      fetch("/search?" + params, { method: "GET" })
+        .then(response => response.json())
+        .then(({ pager, pageOfItems }) => {
+          this.setState({ numPages: pager.totalItems });
+          this.setState({ results: pageOfItems });
+        });
+    }
   }
 
   //rerenders page but with new pages information
@@ -106,3 +121,34 @@ class ResultsP extends React.Component {
 }
 
 export default ResultsP;
+
+/*
+ <React.Fragment>
+        <ScrollToTop />
+        <List variant="flush">
+          {this.state.results.map((result, index) => (
+            <Link
+              underline="none"
+              component={RouterLink}
+              to={"/"+this.state.typeOfSearch+"/"+this.state.results.volumeInfo.industryIdentifiers.identifier}
+              key={index}
+            >
+              <ListItem>
+                <Result
+                  title={result.volumeInfo.title}
+                  author={result.volumeInfo.authors}
+                  description={result.volumeInfo.description}
+                />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <PaginationBar
+          currentPage={
+            !isNaN(this.state.pageNum) ? Number(this.state.pageNum) : 1
+          }
+          numPages={this.state.numPages}
+          updatePage={this.nextPage}
+        />
+      </React.Fragment>
+*/
