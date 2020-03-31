@@ -23,7 +23,7 @@ class Homepage extends React.Component {
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <Card>
-            <CardActionArea component={Link} to={"/results?type=books"}>
+            <CardActionArea component={Link} to={"/results?type=book"}>
               <CardMedia
                 component="img"
                 height="420"
@@ -44,7 +44,7 @@ class Homepage extends React.Component {
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <Card>
-            <CardActionArea component={Link} to={"/results?type=authors"}>
+            <CardActionArea component={Link} to={"/results?type=author"}>
               
               <CardMedia
                 component="img"
@@ -67,7 +67,7 @@ class Homepage extends React.Component {
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <Card>
-            <CardActionArea component={Link} to={"/results?type=genres"}>
+            <CardActionArea component={Link} to={"/results?type=genre"}>
               
               <CardMedia
                 component="img"
