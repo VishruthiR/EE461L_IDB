@@ -46,7 +46,7 @@ class Recommendations extends React.Component {
                 <Link
                   underline="none"
                   component={RouterLink}
-                  to={"/book/" + recommendationCol["ISBN"]}
+                  to={"/book?isbn=" + recommendationCol["ISBN"]}
                 >
                   <CardMedia
                     component="img"

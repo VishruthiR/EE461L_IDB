@@ -54,6 +54,33 @@ class Genre extends React.Component {
   componentDidMount() {
     // make call to server to get information and modify state using setState
     console.log("book ajax call");
+	loadResults();
+  }
+  
+  loadResults() {
+    const params = new URLSearchParams(window.location.search);
+    
+  fetch("http://34.71.147.72:80/genre?" + params, { method: "GET" })
+	.then(response => response.json())
+	.then(data => {
+	  console.log("hi");
+	  console.log(data);
+	  this.setState({	
+						genreName: data.genre,
+						genreDescription: data.description
+					});
+	  
+	});
+	
+	fetch("http://34.71.147.72:80/recbooks?" + params, { method: "GET" })
+	.then(response => response.json())
+	.then(data => {
+	  console.log("hi");
+	  console.log(data);
+	  this.setState({ genreName: data.genre });
+	  
+	});
+    
   }
 
   render() {
