@@ -5,7 +5,8 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { green, orange } from "@material-ui/core/colors";
 
 class About extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class About extends React.Component {
     )
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         this.setState({ totalC: data.length });
         let kumoCommit = data.filter(function(e) {
           return e.commit.author.name === "kumosumo";
@@ -136,6 +138,21 @@ class About extends React.Component {
       });
   }
   render() {
+    const section = {
+      height: "100%"
+    };
+    const numTheme = {
+      color: "yellowgreen"
+    };
+
+    const outerTheme = createMuiTheme({
+      palette: {
+        secondary: {
+          main: orange[500]
+        }
+      }
+    });
+
     return (
       <Grid container spacing={3} alignItems="stretch">
         <Grid item xs={12} sm={5} md={12}>
@@ -166,7 +183,7 @@ class About extends React.Component {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Card>
+          <Card style={section}>
             <Grid container>
               <Grid item xs={6} md={6}>
                 <CardHeader title="Kumaran Arulmani" />
@@ -215,24 +232,48 @@ class About extends React.Component {
                   Project Lead. Developing page templates, specifically the
                   About Page.
                 </Typography>
-                <Typography variant="h5" component="h2">
-                  Github Stats
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Commits: {this.state.kumoC}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Issues Assigned: {this.state.kumoI}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Units Tests: 0
-                </Typography>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Commits:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.kumoC}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Issues Assigned:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.kumoI}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Unit Tests:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {0}
+                  </Typography>
+                </Grid>
               </CardContent>
             </Grid>
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Card>
+          <Card style={section}>
             <Grid container>
               <Grid item xs={6} md={6}>
                 <CardHeader title="David Day" />
@@ -282,21 +323,48 @@ class About extends React.Component {
                 <Typography variant="h5" component="h2">
                   Github Stats
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Commits: {this.state.davidC}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Issues Assigned: {this.state.davidI}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Units Tests: 0
-                </Typography>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Commits:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.davidC}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Issues Assigned:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.davidI}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Unit Tests:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {0}
+                  </Typography>
+                </Grid>
               </CardContent>
             </Grid>
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Card>
+          <Card style={section}>
             <Grid container>
               <Grid item xs={6} md={6}>
                 <CardHeader title="Matthew Jiang" />
@@ -347,21 +415,48 @@ class About extends React.Component {
                 <Typography variant="h5" component="h2">
                   Github Stats
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Commits: {this.state.matthewC}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Issues Assigned: {this.state.matthewI}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Units Tests: 0
-                </Typography>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Commits:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.matthewC}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Issues Assigned:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.matthewI}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Unit Tests:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {0}
+                  </Typography>
+                </Grid>
               </CardContent>
             </Grid>
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Card>
+          <Card style={section}>
             <Grid container>
               <Grid item xs={6} md={6}>
                 <CardHeader title="Vishruthi Ramaswamy" />
@@ -408,24 +503,48 @@ class About extends React.Component {
                 >
                   Created web page layouts and templates.
                 </Typography>
-                <Typography variant="h5" component="h2">
-                  Github Stats
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Commits: {this.state.vishC}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Issues Assigned: {this.state.vishI}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Units Tests: 0
-                </Typography>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Commits:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.vishC}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Issues Assigned:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.vishI}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Unit Tests:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {0}
+                  </Typography>
+                </Grid>
               </CardContent>
             </Grid>
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Card>
+          <Card style={section}>
             <Grid container>
               <Grid item xs={6} md={6}>
                 <CardHeader title="Siddhartha Shetkar" />
@@ -475,21 +594,48 @@ class About extends React.Component {
                 <Typography variant="h5" component="h2">
                   Github Stats
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Commits: {this.state.sidC}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Issues Assigned: {this.state.sidI}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Units Tests: 0
-                </Typography>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Commits:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.sidC}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Issues Assigned:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.sidI}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Unit Tests:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {0}
+                  </Typography>
+                </Grid>
               </CardContent>
             </Grid>
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Card>
+          <Card style={section}>
             <Grid container>
               <Grid item xs={6} md={6}>
                 <CardHeader title="Jaino Vennatt" />
@@ -540,15 +686,42 @@ class About extends React.Component {
                 <Typography variant="h5" component="h2">
                   Github Stats
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Commits: {this.state.jainoC}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Issues Assigned: {this.state.jainoI}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Units Tests: 0
-                </Typography>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Commits:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.jainoC}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Issues Assigned:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {this.state.jainoI}
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Unit Tests:&nbsp;
+                  </Typography>
+                  <Typography variant="body2" component="p" style={numTheme}>
+                    {0}
+                  </Typography>
+                </Grid>
               </CardContent>
             </Grid>
           </Card>
@@ -559,23 +732,38 @@ class About extends React.Component {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Card>
+          <Card style={section}>
             <CardHeader title="Team Stats" />
             <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Total Commits: {this.state.totalC}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Total Issues: {this.state.totalI}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Total Unit Tests: {0}
-              </Typography>
+              <Grid container>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Total Commits:&nbsp;
+                </Typography>
+                <Typography variant="body2" component="p" style={numTheme}>
+                  {this.state.totalC}
+                </Typography>
+              </Grid>
+              <Grid container>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Total Issues:&nbsp;
+                </Typography>
+                <Typography variant="body2" component="p" style={numTheme}>
+                  {this.state.totalI}
+                </Typography>
+              </Grid>
+              <Grid container>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Total Unit Tests:&nbsp;
+                </Typography>
+                <Typography variant="body2" component="p" style={numTheme}>
+                  {0}
+                </Typography>
+              </Grid>
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Card>
+          <Card style={section}>
             <CardHeader title="Data Sources" />
             <CardContent>
               <Typography variant="h5" component="h2">
@@ -609,7 +797,7 @@ class About extends React.Component {
           </Card>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Card>
+          <Card style={section}>
             <CardHeader title="Tools Used" />
             <CardContent>
               <Typography variant="h5" component="h2">
