@@ -25,11 +25,9 @@ class Recommendations extends React.Component {
       this.props.recommendations,
       numImgsPerCarousel
     );
-    console.log("in recommendations");
-    console.log(formattedRecommendations);
     return (
       <React.Fragment>
-        <h1>Recommended Books</h1>
+        <h1>{this.props.typeOfRecommendation}</h1>
         <Carousel animation="slide" autoPlay={false}>
           {formattedRecommendations.map((recommendationRow, indexRow) => (
             <Grid container spacing={1}>

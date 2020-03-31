@@ -41,7 +41,7 @@ class Sidebar extends React.Component {
         }}
       >
         <Link to="/">
-          <img alt="small logo" src={this.props.logoSmall} />
+          <img alt = "small logo" src={require("./images/SidebarLogo.jpg")} height="160"/>
         </Link>
         <Divider />
         <List>

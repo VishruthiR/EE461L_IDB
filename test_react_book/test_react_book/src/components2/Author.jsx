@@ -88,7 +88,10 @@ class Author extends React.Component {
           description={this.state.authorBio}
           image={this.state.authorPicture}
         />
-        <Recommendations recommendations={this.state.bookRecommendations} />
+        <Recommendations
+          recommendations={this.state.bookRecommendations}
+          typeOfRecommendation={"Books by this author"}
+        />
       </React.Fragment>
     );
   }

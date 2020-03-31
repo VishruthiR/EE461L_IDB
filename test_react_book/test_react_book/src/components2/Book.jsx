@@ -107,7 +107,10 @@ class Book extends React.Component {
           image={this.state.bookCover}
           description={this.state.bookSummary}
         />
-        <Recommendations recommendations={this.state.bookRecommendations} />
+        <Recommendations
+          recommendations={this.state.bookRecommendations}
+          typeOfRecommendation={"Recommended Books"}
+        />
         {/*<Reviews />*/}
       </React.Fragment>
     );
