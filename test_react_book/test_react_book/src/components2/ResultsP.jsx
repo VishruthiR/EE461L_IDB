@@ -49,7 +49,7 @@ class ResultsP extends React.Component {
   componentDidUpdate() {
     // make AJAX call based on query, needs to figure out number of pages server side, i think?
     console.log("results ajax call update");
-    this.loadResults();
+    // this.loadResults();
   }
 
   loadResults() {
@@ -81,6 +81,7 @@ class ResultsP extends React.Component {
     newUrl.set("query", this.state.resultsQuery);
     newUrl.set("type", this.state.typeOfSearch);
     this.props.history.push("/results?" + newUrl);
+    this.loadResults();
     return;
   };
 
