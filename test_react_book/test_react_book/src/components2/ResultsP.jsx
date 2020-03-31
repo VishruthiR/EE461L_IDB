@@ -92,32 +92,64 @@ class ResultsP extends React.Component {
     console.log(this.state.pager.currentPage);
     //let results = this.getDummyResults();
     console.log(this.state.results);
+    let listItems;
+    if (this.state.typeOfSearch === "book") {
+      listItems = this.state.results.map((result, index) => (
+        <Link
+          underline="none"
+          component={RouterLink}
+          to={
+            "/" +
+            this.state.typeOfSearch +
+            "/" +
+            result.volumeInfo.industryIdentifiers.identifier
+          }
+          key={index}
+        >
+          <ListItem>
+            <Result
+              title={result.volumeInfo.title}
+              author={result.volumeInfo.authors}
+              description={result.volumeInfo.description}
+            />
+          </ListItem>
+        </Link>
+      ));
+    } else if (this.state.typeOfSearch === "author") {
+      {
+        listItems = this.state.results.map((result, index) => (
+          <Link
+            underline="none"
+            component={RouterLink}
+            to={"/" + this.state.typeOfSearch + "/" + result.author}
+            key={index}
+          >
+            <ListItem>
+              <Result title={result.author} description={""} />
+            </ListItem>
+          </Link>
+        ));
+      }
+    } else if (this.state.typeOfSearch === "genre") {
+      {
+        listItems = this.state.results.map((result, index) => (
+          <Link
+            underline="none"
+            component={RouterLink}
+            to={"/" + this.state.typeOfSearch + "/" + result.author}
+            key={index}
+          >
+            <ListItem>
+              <Result title={result.genre} description={result.description} />
+            </ListItem>
+          </Link>
+        ));
+      }
+    }
     return (
       <React.Fragment>
         <ScrollToTop />
-        <List variant="flush">
-          {this.state.results.map((result, index) => (
-            <Link
-              underline="none"
-              component={RouterLink}
-              to={
-                "/" +
-                this.state.typeOfSearch +
-                "/" +
-                result.volumeInfo.industryIdentifiers.identifier
-              }
-              key={index}
-            >
-              <ListItem>
-                <Result
-                  title={result.volumeInfo.title}
-                  author={result.volumeInfo.authors}
-                  description={result.volumeInfo.description}
-                />
-              </ListItem>
-            </Link>
-          ))}
-        </List>
+        <List variant="flush">{listItems}</List>
         <PaginationBar
           currentPage={
             !isNaN(this.state.pager.currentPage)
