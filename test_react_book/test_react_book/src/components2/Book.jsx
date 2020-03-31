@@ -12,7 +12,7 @@ class Book extends React.Component {
     const myQuery = new URLSearchParams(window.location.search);
     // setup state
     this.state = {
-      bookISBN: myQuery.get("isbn"), //this.props.match.params.ISBN,
+      bookISBN: -1, //this.props.match.params.ISBN,
       bookGenre: "default genre",
       bookTitle: "default book title",
       bookCover:
@@ -63,36 +63,44 @@ class Book extends React.Component {
 
   loadResults() {
     const params = new URLSearchParams(window.location.search);
-    fetch("http://34.71.147.72:80/book?isbn=" + this.state.bookISBN)
-      .then(result => result.json())
-      .then(result => {
-        this.setState({
-          bookTitle: result.volumeInfo.title,
-          bookCover: result.volumeInfo.imageLinks.thumbnail,
-          bookSummary: result.volumeInfo.description,
-          authorName: result.volumeInfo.authors,
-          bookGenre: result.volumeInfo.genre
+    const isbn = params.get("isbn");
+    console.log(isbn);
+    console.log(this.state.bookISBN);
+    if (isbn !== this.state.bookISBN) {
+      fetch("http://34.71.147.72:80/book?isbn=" + isbn)
+        .then(result => result.json())
+        .then(result => {
+          this.setState({
+            bookTitle: result.volumeInfo.title,
+            bookCover: result.volumeInfo.imageLinks.thumbnail,
+            bookSummary: result.volumeInfo.description,
+            authorName: result.volumeInfo.authors,
+            bookGenre: result.volumeInfo.genre,
+            bookISBN: result.volumeInfo.industryIdentifiers.identifier
+          });
+          fetch(
+            "http://34.71.147.72:80/recBooks?genre=" + result.volumeInfo.genre
+          )
+            .then(response => response.json())
+            .then(data => {
+              console.log("hi");
+              console.log(data);
+              var recommendations = [];
+              for (var i = 0; i < data.length; i++) {
+                recommendations.push({
+                  picture: data[i].volumeInfo.imageLinks.thumbnail,
+                  ISBN: data[i].volumeInfo.industryIdentifiers.identifier
+                });
+              }
+              this.setState({ bookRecommendations: recommendations });
+            });
         });
-        fetch("http://34.71.147.72:80/recBooks?genre=" + result.volumeInfo.genre)
-        .then(response => response.json())
-        .then(data => {
-          console.log("hi");
-          console.log(data);
-          var recommendations = [];
-          for(var i = 0; i < 9; i++){
-            recommendations.push({
-              picture: data[i].volumeInfo.imageLinks.thumbnail,
-              ISBN: data[i].volumeInfo.industryIdentifiers.identifier
-            })
-          }
-          this.setState({bookRecommendations: recommendations});
-        });
-      });
+    }
   }
-
 
   componentDidUpdate() {
     console.log("book ajax call update");
+    this.loadResults();
   }
 
   render() {
@@ -101,10 +109,7 @@ class Book extends React.Component {
     return (
       <React.Fragment>
         <Header title={this.state.bookTitle} author={this.state.authorName} />
-        <Description
-          description={this.state.bookSummary}
-          image={this.state.bookCover}
-        />
+        <Description image={this.state.bookCover} />
         <Recommendations recommendations={this.state.bookRecommendations} />
         {/*<Reviews />*/}
       </React.Fragment>
