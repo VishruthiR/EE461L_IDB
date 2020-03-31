@@ -8,6 +8,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link, NavLink } from "react-router-dom";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardMedia from "@material-ui/core/CardMedia";
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -40,9 +42,15 @@ class Sidebar extends React.Component {
           }
         }}
       >
-        <Link to="/">
-          <img alt = "small logo" src={require("./images/SidebarLogo.jpg")} height="160"/>
-        </Link>
+        <CardActionArea component={Link} to={"/"}>
+          <CardMedia
+            component="img"
+            height="160"
+            alt="SidebarLogo"
+            image={require("./images/SidebarLogo.jpg")}
+            title="SidebarLogo"
+          />
+        </CardActionArea>
         <Divider />
         <List>
           <ListItem

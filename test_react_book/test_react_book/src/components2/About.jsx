@@ -27,37 +27,51 @@ class About extends React.Component {
     };
   }
   componentDidMount() {
-    fetch(
-      "https://api.github.com/repos/VishruthiR/EE461L_IDB/commits?per_page=500"
-    )
+    let currMasterSha;
+    let prevMasterSha;
+    fetch("https://api.github.com/repos/VishruthiR/EE461L_IDB/branches/master")
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        this.setState({ totalC: data.length });
-        let kumoCommit = data.filter(function(e) {
-          return e.commit.author.name === "kumosumo";
-        });
-        this.setState({ kumoC: kumoCommit.length });
-        let davidCommit = data.filter(function(e) {
-          return e.commit.author.name === "davidday99";
-        });
-        this.setState({ davidC: davidCommit.length });
-        let matthewCommit = data.filter(function(e) {
-          return e.commit.author.name === "Matthew Jiang";
-        });
-        this.setState({ matthewC: matthewCommit.length });
-        let vishCommit = data.filter(function(e) {
-          return e.commit.author.name === "Vishruthi Ramaswamy";
-        });
-        this.setState({ vishC: vishCommit.length });
-        let sidCommit = data.filter(function(e) {
-          return e.commit.author.name === "sshetkar3858";
-        });
-        this.setState({ sidC: sidCommit.length });
-        let jainoCommit = data.filter(function(e) {
-          return e.commit.author.name === "Jaino Vennatt";
-        });
-        this.setState({ jainoC: jainoCommit.length });
+        currMasterSha = data.commit.sha;
+        let count = 0;
+        while (currMasterSha !== prevMasterSha && count < 2) {
+          console.log("going through master commits");
+          fetch(
+            "https://api.github.com/repos/VishruthiR/EE461L_IDB/commits?per_page=100"
+          )
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              this.setState({ totalC: this.state.totalC + data.length });
+              let kumoCommit = data.filter(function(e) {
+                return e.commit.author.name === "kumosumo";
+              });
+              this.setState({ kumoC: kumoCommit.length });
+              let davidCommit = data.filter(function(e) {
+                return e.commit.author.name === "davidday99";
+              });
+              this.setState({ davidC: davidCommit.length });
+              let matthewCommit = data.filter(function(e) {
+                return e.commit.author.name === "Matthew Jiang";
+              });
+              this.setState({ matthewC: matthewCommit.length });
+              let vishCommit = data.filter(function(e) {
+                return e.commit.author.name === "Vishruthi Ramaswamy";
+              });
+              this.setState({ vishC: vishCommit.length });
+              let sidCommit = data.filter(function(e) {
+                return e.commit.author.name === "sshetkar3858";
+              });
+              this.setState({ sidC: sidCommit.length });
+              let jainoCommit = data.filter(function(e) {
+                return e.commit.author.name === "Jaino Vennatt";
+              });
+              this.setState({ jainoC: jainoCommit.length });
+              prevMasterSha = currMasterSha;
+              currMasterSha = data[data.length - 1].sha;
+            });
+          count = count + 1;
+        }
       });
 
     fetch(

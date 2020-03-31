@@ -33,7 +33,7 @@ class ResultsP extends React.Component {
       typeOfSearch: type,
       resultsQuery: query,
       pager: {},
-      numPages: 100,
+      numPages: 0,
       reloadResults: false,
       results: []
     };

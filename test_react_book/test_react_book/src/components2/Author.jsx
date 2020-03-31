@@ -9,45 +9,12 @@ currently we use author name because it is unique within our DB but might need t
 class Author extends React.Component {
   constructor(props) {
     super(props);
-    const myQuery = new URLSearchParams(window.location.search);
     // setup state
     this.state = {
-      authorName: myQuery.get("name"), //"default author name",
-      authorPicture:
-        "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
+      authorName: "",
+      authorPicture: "",
       authorBio: "",
-      bookRecommendations: [
-        {
-          picture:
-            "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
-          ISBN: 1
-        },
-        {
-          picture:
-            "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
-          ISBN: 2
-        },
-        {
-          picture:
-            "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
-          ISBN: 3
-        },
-        {
-          picture:
-            "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
-          ISBN: 4
-        },
-        {
-          picture:
-            "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
-          ISBN: 5
-        },
-        {
-          picture:
-            "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
-          ISBN: 6
-        }
-      ]
+      bookRecommendations: []
     };
   }
 
