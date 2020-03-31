@@ -34,9 +34,6 @@ class Result extends React.Component {
                 {this.props.author}
               </Typography>
             )}
-            <Typography variant="h6">
-              {this.props.description.substring(0, descriptionLength)}
-            </Typography>
           </CardContent>
         </CardActionArea>
       </Card>

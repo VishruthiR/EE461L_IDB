@@ -32,7 +32,7 @@ class ResultsP extends React.Component {
     this.state = {
       typeOfSearch: type,
       resultsQuery: query,
-      pageNum: page,
+      pageNum: -1,
       numPages: 100,
       reloadResults: false,
       results: []
@@ -56,13 +56,18 @@ class ResultsP extends React.Component {
     console.log("in loadResults");
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("pageNum")) || 1;
-
-    fetch("http://34.71.147.72:80/search?" + params, { method: "GET" })
-      .then(response => response.json())
-      .then(data => {
-        console.log("hi");
-        console.log(data);
-      });
+    console.log(page);
+    console.log(this.state.pageNum);
+    if (this.state.pageNum !== page) {
+      fetch("http://34.71.147.72:80/search?" + params, { method: "GET" })
+        .then(response => response.json())
+        .then(data => {
+          console.log("hi");
+          console.log(data);
+          this.setState({ numPages: data.pager.totalPages });
+          this.setState({ results: data.pageOfItems });
+        });
+    }
   }
 
   //rerenders page but with new pages information
@@ -101,7 +106,7 @@ class ResultsP extends React.Component {
                 "/" +
                 this.state.typeOfSearch +
                 "/" +
-                this.state.results.volumeInfo.industryIdentifiers.identifier
+                result.volumeInfo.industryIdentifiers.identifier
               }
               key={index}
             >
