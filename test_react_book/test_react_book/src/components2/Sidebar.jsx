@@ -26,7 +26,7 @@ class Sidebar extends React.Component {
   }
 
   search(type) {
-    let newUrl = new URLSearchParams(window.location.search);
+    let newUrl = new URLSearchParams();
     newUrl.set("type", type);
     newUrl.set("query", this.state.value);
     window.location.assign("/results?" + newUrl);

@@ -54,7 +54,7 @@ class Genre extends React.Component {
   componentDidMount() {
     // make call to server to get information and modify state using setState
     console.log("book ajax call");
-	loadResults();
+	this.loadResults();
   }
   
   loadResults() {
@@ -77,7 +77,8 @@ class Genre extends React.Component {
 	.then(data => {
 	  console.log("hi");
 	  console.log(data);
-	  this.setState({ genreName: data.genre });
+	  
+	  this.setState({  });
 	  
 	});
     
