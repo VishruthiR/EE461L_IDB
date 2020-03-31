@@ -42,15 +42,13 @@ class Sidebar extends React.Component {
           }
         }}
       >
-        <CardActionArea component={Link} to={"/"}>
-          <CardMedia
-            component="img"
+        <Link to="/">
+          <img
+            alt="small logo"
+            src={require("./images/SidebarLogo.jpg")}
             height="160"
-            alt="SidebarLogo"
-            image={require("./images/SidebarLogo.jpg")}
-            title="SidebarLogo"
           />
-        </CardActionArea>
+        </Link>
         <Divider />
         <List>
           <ListItem

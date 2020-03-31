@@ -12,8 +12,8 @@ test("render Book component", () => {
 
   //expect(wrapper.state('bookISBN')).not.toBeNull();  // currently null since bookISBN gets set by window.location.search
   expect(wrapper.state("bookTitle")).not.toBe("");
-  expect(wrapper.state("bookCover")).not.toBeNull("");
-  expect(wrapper.state("authorName")).not.toBeNull("");
-  expect(wrapper.state("bookSummary")).not.toBeNull("");
-  expect(wrapper.state("bookRecommendations")).not.toBeNull([]);
+  expect(wrapper.state("bookCover")).not.toBe("");
+  expect(wrapper.state("authorName")).not.toBe("");
+  expect(wrapper.state("bookSummary")).not.toBe("");
+  expect(wrapper.state("bookRecommendations")).not.toBe([]);
 });
