@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "flatted": "^2.0.2",
     "json-stringify-safe": "^5.0.1",
+    "jw-paginate": "^1.0.4",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
     "nconf": "^0.10.0"

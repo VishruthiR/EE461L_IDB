@@ -2,11 +2,15 @@ const {MongoClient} = require('mongodb');
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios').default;
+const paginate = require('jw-paginate');
+require('dotenv').config();
+
 
 
 async function main(){
     const app = express();
-    const uri = 'mongodb+srv://dbUser:jaino@cluster0-y12qq.gcp.mongodb.net/test?retryWrites=true&w=majority';
+    // process.env.URI
+    const uri = process.env.ATLAS_URI;
     const port = process.env.PORT || 5000;
     const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -23,13 +27,13 @@ async function main(){
         //--GET--Basic Search                                           Ex: http://localhost:5000/search?type=book&query=Flatland&pageNum=5
         app.get("/search", async (request, response) => {
             var type = request.query['type'];
-            var skips = request.query['pageNum']-1;
+            var pageNum = parseInt(request.query['pageNum']) || 1;
+            var pageSize=10;
             var str = String(request.query['query']);
             var fresult =[];
             var cursor;
             var count=0;
             var ree = new RegExp(str, 'i');
-            console.log(str);
             console.log(ree);
             switch (type){
                 case "book":
@@ -48,34 +52,47 @@ async function main(){
                     response.status(418).send("Error Code 418\nPlease don't be stupid...or else");
             }
             await cursor.forEach(doc => {if(doc!=null){count++;fresult.push(doc);}});
-            console.log(`Size: ${count}`);
-            response.json(fresult);
+            console.log(`Total count: ${count}`);
+            const pager = paginate(count,pageNum, pageSize);
+            const pageOfItems = fresult.slice(pager.startIndex, pager.endIndex+1);
+            console.log(`pageNum: ${pageNum}\npageSize: ${pageSize}\nSI: ${pager.startIndex}\nEI: ${pager.endIndex+1}`);
+            response.json({pager, pageOfItems});
         });
 
-        //--Get--List an Author's books                                 Ex: http://localhost:5000/authorsBooks?name=Patrick+Rothfuss
+        //--Get--List an Author's books                                 Ex: http://localhost:5000/authorsBooks?name=Patrick+Rothfuss&pageNum=1
         app.get("/authorsBooks", async (request, response)=>{
             var name = String(request.query['name']);
+            var pageNum = parseInt(request.query['pageNum']) || 1;
+            var pageSize=10;
             var count =0;
             var cursor;
             var fresult =[];
             console.log(`Looking for ${name}'s books`);
             cursor= client.db("bookAppData").collection("books").find({"volumeInfo.authors": name },null,undefined); 
             await cursor.forEach(doc => {if(doc!=null){count++;fresult.push(doc);}});
-            console.log(`Size: ${count}`);
-            response.json(fresult);
+            console.log(`Total count: ${count}`);
+            const pager = paginate(count,pageNum, pageSize);
+            const pageOfItems = fresult.slice(pager.startIndex, pager.endIndex+1);
+            console.log(`pageNum: ${pageNum}\npageSize: ${pageSize}\nSI: ${pager.startIndex}\nEI: ${pager.endIndex+1}`);
+            response.json({pager, pageOfItems});
         })
 
         //--Get--List a genre's books                                 Ex: http://localhost:5000/genreBooks?genre=scienceFiction
         app.get("/genreBooks", async (request, response)=>{
             var genre = String(request.query['genre']);
             var count =0;
+            var pageNum = parseInt(request.query['pageNum']) || 1;
+            var pageSize=10;
             var cursor;
             var fresult =[];
             console.log(`Looking for books of genre: ${genre}`);
             cursor= client.db("bookAppData").collection("books").find({"volumeInfo.authors": name },null,undefined); 
             await cursor.forEach(doc => {if(doc!=null){count++;fresult.push(doc);}});
-            console.log(`Size: ${count}`);
-            response.json(fresult);
+            console.log(`Total count: ${count}`);
+            const pager = paginate(count,pageNum, pageSize);
+            const pageOfItems = fresult.slice(pager.startIndex, pager.endIndex+1);
+            console.log(`pageNum: ${pageNum}\npageSize: ${pageSize}\nSI: ${pager.startIndex}\nEI: ${pager.endIndex+1}`);
+            response.json({pager, pageOfItems});
         })
 
         //--Run Server Indefinitely--
