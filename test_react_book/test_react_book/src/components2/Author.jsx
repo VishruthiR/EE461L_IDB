@@ -4,7 +4,7 @@ import Description from "./Description";
 import Header from "./Header";
 /*
 props passed in should describe what author this Author is
-not sure how to uniquely identify this
+currently we use author name because it is unique within our DB but might need to be changed
 */
 class Author extends React.Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class Author extends React.Component {
     // setup state
     this.state = {
       authorName: myQuery.get("name"), //"default author name",
-      authorResults: {},
       authorPicture:
         "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
       authorBio: "",
@@ -55,7 +54,6 @@ class Author extends React.Component {
   componentDidMount() {
     // make call to server to get information and modify state using setState
     const params = new URLSearchParams(window.location.search);
-    console.log(params);
 
     fetch("http://34.71.147.72:80/author?" + params)
       .then(result => result.json())
@@ -68,8 +66,6 @@ class Author extends React.Component {
     fetch("http://34.71.147.72:80/authorsBooks?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
-        console.log("hi");
-        console.log(data);
         var recommendations = [];
         for (var i = 0; i < data.pageOfItems.length; i++) {
           recommendations.push({
@@ -81,13 +77,9 @@ class Author extends React.Component {
       });
   }
 
-  componentDidUpdate() {
-    // console.log("author ajax call update");
-  }
+  componentDidUpdate() {}
 
   render() {
-    // console.log("this is authorREsults");
-    // console.log(this.state.authorResults);
     return (
       <React.Fragment>
         <Header title={this.state.authorName} />

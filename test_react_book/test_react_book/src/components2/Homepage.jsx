@@ -5,7 +5,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-//import Link from "@material-ui/core/Link";
 import { Link } from "react-router-dom";
 
 class Homepage extends React.Component {

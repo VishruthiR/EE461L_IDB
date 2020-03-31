@@ -9,10 +9,10 @@ not sure how to uniquely identify this
 class Genre extends React.Component {
   constructor(props) {
     super(props);
-    console.log("Genre Loading...");
+    const myQuery = new URLSearchParams(window.location.search);
     // setup state
     this.state = {
-      genreName: this.props.match.params.name,
+      genreName: myQuery.get("genre"),
       genrePicture:
         "https://clipartsworld.com/images/book-of-shadows-clipart-11.jpg",
       genreDescription:
@@ -54,9 +54,10 @@ class Genre extends React.Component {
 
   componentDidMount() {
     // make call to server to get information and modify state using setState
-    console.log("book ajax call");
     this.loadResults();
   }
+
+  componentDidUpdate() {}
 
   loadResults() {
     const params = new URLSearchParams(window.location.search);
@@ -75,8 +76,6 @@ class Genre extends React.Component {
     fetch("http://34.71.147.72:80/recbooks?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
-        console.log("hi");
-        console.log(data);
         var recommendations = [];
         for (var i = 0; i < data.length; i++) {
           recommendations.push({
@@ -89,7 +88,6 @@ class Genre extends React.Component {
   }
 
   render() {
-    console.log(this.state.genreName);
     return (
       <React.Fragment>
         <Header title={this.state.genreName} />

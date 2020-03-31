@@ -1,33 +1,16 @@
 import React from "react";
-//import Card from "react-bootstrap/Card";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 
 class Result extends React.Component {
-  /*
-  render() {
-    let descriptionLength = 1000;
-    return (
-      <Card>
-        <Card.Body>
-          <Card.Title>{this.props.title}</Card.Title>
-          <Card.Subtitle>{this.props.author}</Card.Subtitle>
-          <Card.Text>
-            {this.props.description.substring(0, descriptionLength)}
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    );
-  }
-  */
   render() {
     let descriptionLength = 1000;
     let condDescription;
     if (typeof this.props.description === "undefined") {
       condDescription = "Sorry about that! No description is available";
-    } else {
+    } else if (this.props.description !== "") {
       condDescription = this.props.description.substring(0, descriptionLength);
     }
     return (
@@ -40,7 +23,7 @@ class Result extends React.Component {
                 {this.props.author}
               </Typography>
             )}
-            <Typography variant="h6">{condDescription}...</Typography>
+            <Typography variant="h6">{condDescription}</Typography>
           </CardContent>
         </CardActionArea>
       </Card>

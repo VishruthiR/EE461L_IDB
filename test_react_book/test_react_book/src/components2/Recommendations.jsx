@@ -1,20 +1,10 @@
 import React from "react";
-/*
-import Carousel from "react-bootstrap/Carousel";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Image from "react-bootstrap/Image";
-import Card from "react-bootstrap/Card";
-*/
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import Carousel from "react-material-ui-carousel";
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
 
-/*
-try to find a key for the .map() in this component
- */
 class Recommendations extends React.Component {
   reformatArrayAsMatrix(arr, sizeOfRow) {
     let matrix = [];
