@@ -28,11 +28,11 @@ class ResultsP extends React.Component {
     var query = queryString.get("query");
     var page = queryString.get("pageNum");
     if (query == null) query = "";
-    if (page == null) page = 1;
+    if (page == null) page = -1;
     this.state = {
       typeOfSearch: type,
       resultsQuery: query,
-      pageNum: -1,
+      pager: {},
       numPages: 100,
       reloadResults: false,
       results: []
@@ -53,18 +53,15 @@ class ResultsP extends React.Component {
   }
 
   loadResults() {
-    console.log("in loadResults");
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("pageNum")) || 1;
-    console.log(page);
-    console.log(this.state.pageNum);
-    if (this.state.pageNum !== page) {
+    if (page !== this.state.pager.currentPage) {
       fetch("http://34.71.147.72:80/search?" + params, { method: "GET" })
         .then(response => response.json())
         .then(data => {
           console.log("hi");
           console.log(data);
-          this.setState({ numPages: data.pager.totalPages });
+          this.setState({ pager: data.pager });
           this.setState({ results: data.pageOfItems });
         });
     }
@@ -76,9 +73,9 @@ class ResultsP extends React.Component {
   nextPage = (event, newPageNum) => {
     console.log("updating page!");
     console.log(newPageNum);
-    this.setState({
-      pageNum: newPageNum
-    });
+    // this.setState({
+    //   pager: { currentPage: newPageNum }
+    // });
     let newUrl = new URLSearchParams(window.location.search);
     newUrl.set("pageNum", newPageNum);
     newUrl.set("query", this.state.resultsQuery);
@@ -91,7 +88,7 @@ class ResultsP extends React.Component {
     console.log("in results");
     console.log(this.state.typeOfSearch);
     console.log(this.state.resultsQuery);
-    console.log(this.state.pageNum);
+    console.log(this.state.pager.currentPage);
     //let results = this.getDummyResults();
     console.log(this.state.results);
     return (
@@ -122,7 +119,9 @@ class ResultsP extends React.Component {
         </List>
         <PaginationBar
           currentPage={
-            !isNaN(this.state.pageNum) ? Number(this.state.pageNum) : 1
+            !isNaN(this.state.pager.currentPage)
+              ? Number(this.state.pager.currentPage)
+              : 1
           }
           numPages={this.state.numPages}
           updatePage={this.nextPage}
