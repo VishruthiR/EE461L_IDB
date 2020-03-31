@@ -60,10 +60,10 @@ class Book extends React.Component {
 	.then(result => result.json())
 	.then(result => {
 		this.setState({
-			bookTitle: result["volumeInfo"]["title"],
-			bookCover: result["volumeInfo"]["imageLinks"]["thumbnail"],
-			bookSummary: result["volumeInfo"]["description"],
-			authorName: result["volumeInfo"]["authors"]
+			bookTitle: result.volumeInfo.title.,
+			bookCover: result.volumeInfo.imageLinks.thumbnail,
+			bookSummary: result.volumeInfo.description.,
+			authorName: result.volumeInfo.authors
 		});
 	});
     console.log("book ajax call");
