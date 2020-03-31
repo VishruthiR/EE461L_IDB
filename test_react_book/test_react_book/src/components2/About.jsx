@@ -146,14 +146,6 @@ class About extends React.Component {
     return (
       <Grid container spacing={3} alignItems="stretch">
         <Grid item xs={12} sm={5} md={12}>
-          <CardMedia
-            component="img"
-            height="260"
-            alt="Header"
-            image={require("./images/Header.jpg")}
-          />
-        </Grid>
-        <Grid item xs={12} sm={5} md={12}>
           <Card>
             <CardContent>
               <h1>About Booklopedia</h1>

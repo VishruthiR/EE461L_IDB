@@ -11,14 +11,6 @@ class Homepage extends React.Component {
   render() {
     return (
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={5} md={12}>
-          <CardMedia
-            component="img"
-            height="260"
-            alt="Header"
-            image={require("./images/Header.jpg")}
-          />
-        </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <Card>
             <CardActionArea component={Link} to={"/results?type=book&query="}>
