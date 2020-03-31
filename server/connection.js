@@ -11,7 +11,7 @@ async function main(){
     const app = express();
     // process.env.URI
     const uri = process.env.ATLAS_URI;
-    const port = process.env.PORT || 5000;
+    const port = 80;
     const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
     try {

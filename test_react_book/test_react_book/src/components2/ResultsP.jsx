@@ -43,17 +43,18 @@ class ResultsP extends React.Component {
     // make AJAX call based on query, needs to figure out number of pages server side, i think?
     console.log(this.state.resultsQuery);
     console.log("results ajax call first time");
-    this.loadResults();
+    //this.loadResults();
   }
 
   componentDidUpdate() {
     // make AJAX call based on query, needs to figure out number of pages server side, i think?
     console.log("results ajax call update");
-    this.loadResults();
+    //this.loadResults();
   }
 
   loadResults() {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(window.location.search);
+    const page = parseInt(params.get("pageNum")) || 1;
     if (page !== this.state.pager.pageNum) {
       fetch("/search?" + params, { method: "GET" })
         .then(response => response.json())

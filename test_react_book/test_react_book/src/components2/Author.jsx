@@ -56,6 +56,10 @@ class Author extends React.Component {
     console.log("author ajax call");
   }
 
+  componentDidUpdate() {
+    console.log("author ajax call update");
+  }
+
   render() {
     return (
       <React.Fragment>
