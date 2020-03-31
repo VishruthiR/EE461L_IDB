@@ -6,12 +6,13 @@ import Typography from "@material-ui/core/Typography";
 
 class Result extends React.Component {
   render() {
-    let descriptionLength = 1000;
+    let descriptionLength = 250;
     let condDescription;
     if (typeof this.props.description === "undefined") {
       condDescription = "Sorry about that! No description is available";
     } else if (this.props.description !== "") {
-      condDescription = this.props.description.substring(0, descriptionLength);
+      condDescription =
+        this.props.description.substring(0, descriptionLength) + "...";
     }
     return (
       <Card>
