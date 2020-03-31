@@ -399,7 +399,7 @@ class About extends React.Component {
                   color="textSecondary"
                   component="p"
                 >
-                  Electrical and Computer Engineering/Math: Software Engineering
+                  Electrical and Computer Engineering: Software Engineering
                 </Typography>
                 <Typography variant="h5" component="h2">
                   Primary Responsibilities
@@ -490,7 +490,7 @@ class About extends React.Component {
                   color="textSecondary"
                   component="p"
                 >
-                  Electrical and Computer Engineering/Math: Software Engineering
+                  Electrical and Computer Engineering: Software Engineering
                 </Typography>
                 <Typography variant="h5" component="h2">
                   Primary Responsibilities
@@ -578,7 +578,7 @@ class About extends React.Component {
                   color="textSecondary"
                   component="p"
                 >
-                  Electrical and Computer Engineering/Math: Software Engineering
+                  Electrical and Computer Engineering: Software Engineering
                 </Typography>
                 <Typography variant="h5" component="h2">
                   Primary Responsibilities
@@ -670,7 +670,7 @@ class About extends React.Component {
                   color="textSecondary"
                   component="p"
                 >
-                  Electrical and Computer Engineering/Math: Software Engineering
+                  Electrical and Computer Engineering: Software Engineering
                 </Typography>
                 <Typography variant="h5" component="h2">
                   Primary Responsibilities
