@@ -54,9 +54,8 @@ class ResultsP extends React.Component {
 
   loadResults() {
     const params = new URLSearchParams(location.search);
-    const page = parseInt(params.get("pageNum")) || 1;
     if (page !== this.state.pager.pageNum) {
-      fetch(`/search?page=${page}`, { method: "GET" })
+      fetch("/search?" + params, { method: "GET" })
         .then(response => response.json())
         .then(({ pager, pageOfItems }) => {
           this.setState({ numPages: pager.totalItems });
