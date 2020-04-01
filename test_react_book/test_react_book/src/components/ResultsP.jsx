@@ -56,8 +56,6 @@ class ResultsP extends React.Component {
       fetch("http://34.71.147.72:80/search?" + params, { method: "GET" })
         .then(response => response.json())
         .then(data => {
-          console.log("hi");
-          console.log(data);
           this.setState({ pager: data.pager });
           this.setState({ results: data.pageOfItems });
         });

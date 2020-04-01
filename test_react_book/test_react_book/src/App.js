@@ -1,15 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Book from "./components2/Book";
-import Author from "./components2/Author";
-import Genre from "./components2/Genre";
-import Results from "./components2/Results";
-import Homepage from "./components2/Homepage";
-import About from "./components2/About";
-import Sidebar from "./components2/Sidebar";
+import Book from "./components/Book";
+import Author from "./components/Author";
+import Genre from "./components/Genre";
+import Homepage from "./components/Homepage";
+import About from "./components/About";
+import Sidebar from "./components/Sidebar";
+import ResultsP from "./components/ResultsP";
 import Box from "@material-ui/core/Box";
-import ResultsP from "./components2/ResultsP";
-
 import Grid from "@material-ui/core/Grid";
 import CardMedia from "@material-ui/core/CardMedia";
 
@@ -28,7 +26,7 @@ function App() {
                   component="img"
                   height="260"
                   alt="Header"
-                  image={require("./components2/images/Header.jpg")}
+                  image={require("./components/images/Header.jpg")}
                 />
               </Grid>
             </Grid>
@@ -38,10 +36,6 @@ function App() {
               <Route path="/book" component={Book} />
               <Route path="/author" component={Author} />
               <Route path="/genre" component={Genre} />
-              <Route
-                path="/results/:type/:query/:pageNum"
-                component={Results}
-              />
               <Route path="/results" component={ResultsP} />
             </Switch>
           </div>
