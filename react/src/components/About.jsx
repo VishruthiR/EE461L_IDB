@@ -348,7 +348,7 @@ class About extends React.Component {
                     Unit Tests:&nbsp;
                   </Typography>
                   <Typography variant="body2" component="p" style={numTheme}>
-                    {0}
+                    {12}
                   </Typography>
                 </Grid>
               </CardContent>
@@ -711,7 +711,7 @@ class About extends React.Component {
                     Unit Tests:&nbsp;
                   </Typography>
                   <Typography variant="body2" component="p" style={numTheme}>
-                    {0}
+                    {7}
                   </Typography>
                 </Grid>
               </CardContent>
@@ -812,7 +812,7 @@ class About extends React.Component {
                 webpages
               </Typography>
               <Typography variant="h5" component="h2">
-                Selenium
+                Jest/Enzyme
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 Used for testing GUI components to ensure expected behavior
