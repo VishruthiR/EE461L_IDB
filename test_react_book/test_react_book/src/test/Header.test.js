@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow , mount } from "enzyme";
-import Header from "../components2/Header";
+import Header from "../components/Header";
 
 test("render Header component", () => {
 	const wrapper = shallow(<Header title="title" author="author" />);

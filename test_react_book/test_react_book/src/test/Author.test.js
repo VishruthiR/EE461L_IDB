@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import Author from "../components2/Author";
+import Author from "../components/Author";
 
 test("render Author component", () => {
   const componentDidMountSpy = spyOn(Author.prototype, "componentDidMount");

@@ -1,9 +1,10 @@
 import React from "react";
 import { shallow , mount } from "enzyme";
-import Homepage from "../components2/Homepage";
+import Homepage from "../components/Homepage";
+import Typography from "@material-ui/core/Typography";
+
 
 test("render Homepage component", () => {
 	const wrapper = shallow(<Homepage />);
-	console.log(wrapper.find('CardContent').debug());
-	expect(wrapper.find('CardContent').text()).toContain('Books');
+	expect(wrapper.find('Typography'));
 })
