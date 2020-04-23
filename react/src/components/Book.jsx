@@ -1,7 +1,7 @@
 import React from "react";
 import Recommendations from "./Recommendations";
 import Description from "./Description";
-import Header from "./Header";
+import BookHeader from "./BookHeader";
 /*
 props passed in should describe what book this Book is
 maybe all we need to be passed into is ISBN number and we get all the other info based on this
@@ -17,6 +17,11 @@ class Book extends React.Component {
       bookCover: "",
       authorName: "",
       bookSummary: "",
+      bookPublisher: "",
+      bookNumPages: "",
+      bookRating: 0,
+      numRatings: 0,
+      publishedDate: "",
       bookRecommendations: []
     };
   }
@@ -43,7 +48,10 @@ class Book extends React.Component {
             bookSummary: result.volumeInfo.description,
             authorName: result.volumeInfo.authors,
             bookGenre: result.volumeInfo.genre,
-            bookISBN: result.volumeInfo.industryIdentifiers.identifier
+            bookISBN: result.volumeInfo.industryIdentifiers.identifier,
+            bookRating: result.volumeInfo.averageRating,
+            numRatings: result.volumeInfo.numberOfRatings,
+            publishedDate: result.volumeInfo.publishedDate
           });
           fetch(
             "http://34.71.147.72:80/recBooks?genre=" + result.volumeInfo.genre
@@ -68,7 +76,11 @@ class Book extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header title={this.state.bookTitle} author={this.state.authorName} />
+        <BookHeader title={this.state.bookTitle} author={this.state.authorName} 
+            genre={this.state.bookGenre} publisher={this.state.bookPublisher}
+            numPages={this.state.bookNumPages} rating={this.state.bookRating}
+            numRatings={this.state.numRatings} publishedDate={this.state.publishedDate}
+            />
         <br />
         <Description
           image={this.state.bookCover}

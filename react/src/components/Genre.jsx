@@ -1,7 +1,7 @@
 import React from "react";
 import Recommendations from "./Recommendations";
 import Description from "./Description";
-import Header from "./Header";
+import GenreHeader from "./GenreHeader";
 /*
 props passed in should describe what author this Author is
 not sure how to uniquely identify this
@@ -31,7 +31,6 @@ class Genre extends React.Component {
     fetch("http://34.71.147.72:80/genre?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
-        console.log("hi");
         console.log(data);
         let genre = data.genre;
         if (genre === "scienceFiction") {
@@ -64,7 +63,7 @@ class Genre extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header title={this.state.genreName} />
+        <GenreHeader genre={this.state.genreName} />
         <br />
         <Description
           description={this.state.genreDescription}

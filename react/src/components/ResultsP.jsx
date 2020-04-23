@@ -2,7 +2,7 @@ import React from "react";
 import Result from "./Result";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
-import List from "@material-ui/core/List";
+import Grid from "@material-ui/core/Grid";
 import PaginationBar from "./PaginationBar";
 import ListItem from "@material-ui/core/ListItem";
 import ScrollToTop from "./ScrollToTop";
@@ -56,6 +56,7 @@ class ResultsP extends React.Component {
       fetch("http://34.71.147.72:80/search?" + params, { method: "GET" })
         .then(response => response.json())
         .then(data => {
+          console.log(data);
           this.setState({ pager: data.pager });
           this.setState({ results: data.pageOfItems });
         });
@@ -89,8 +90,115 @@ class ResultsP extends React.Component {
     }
     return newGenre;
   }
+
+  reformatArrayAsMatrix(arr, sizeOfRow) {
+    let matrix = [];
+    let i, j;
+    for (i = 0; i < arr.length; i += sizeOfRow) {
+      let rowMatrix = [];
+      for (j = 0; j < sizeOfRow && i + j < arr.length; j++) {
+        rowMatrix.push(arr[i + j]);
+      }
+      matrix.push(rowMatrix);
+    }
+    return matrix;
+  }
+
   render() {
     //let results = this.getDummyResults();
+    const numSearchResultsPerRow = 3;
+    let formattedSearchResults = this.reformatArrayAsMatrix(
+        this.state.results,
+        numSearchResultsPerRow
+    );
+    let gridSearchResults;
+    if (this.state.typeOfSearch === "book") {
+        gridSearchResults = 
+        <Grid container spacing={1} direction='column'>
+            {formattedSearchResults.map((resultRow, indexRow) => (
+                <Grid container spacing={1}>
+                    {resultRow.map((resultCol, indexCol) => (
+                        <Grid item xs={12/numSearchResultsPerRow}>
+                            <Link
+                                underline="none"
+                                component={RouterLink}
+                                to={
+                                "/" +
+                                this.state.typeOfSearch +
+                                "?isbn=" +
+                                resultCol.volumeInfo.industryIdentifiers.identifier}
+                                key={indexRow*numSearchResultsPerRow + indexCol}
+                            >
+                                <Result
+                                    title={resultCol.volumeInfo.title}
+                                    author={resultCol.volumeInfo.authors}
+                                    description={resultCol.volumeInfo.description}
+                                    image={resultCol.volumeInfo.imageLinks.thumbnail}
+                                />
+                            </Link>
+                        </Grid>
+                    ))}
+                </Grid>
+            ))}
+        </Grid>
+    } else if (this.state.typeOfSearch === "author") {
+      gridSearchResults = 
+        <Grid container spacing={1} direction='column'>
+            {formattedSearchResults.map((resultRow, indexRow) => (
+                <Grid container spacing={1}>
+                    {resultRow.map((resultCol, indexCol) => (
+                        <Grid item xs={12/numSearchResultsPerRow}>
+                            <Link
+                                underline="none"
+                                component={RouterLink}
+                                to={
+                                "/" +
+                                this.state.typeOfSearch +
+                                "?name=" +
+                                resultCol.author.split(" ").join("+")}
+                                key={indexRow*numSearchResultsPerRow + indexCol}
+                            >
+                                <Result
+                                    title={resultCol.author}
+                                    image={resultCol.imageLink}
+                                />
+                            </Link>
+                        </Grid>
+                    ))}
+                </Grid>
+            ))}
+        </Grid>  
+    } else if (this.state.typeOfSearch === "genre") {
+      gridSearchResults = 
+        <Grid container spacing={1} direction='column'>
+            {formattedSearchResults.map((resultRow, indexRow) => (
+                <Grid container spacing={1}>
+                    {resultRow.map((resultCol, indexCol) => (
+                        <Grid item xs={12/numSearchResultsPerRow}>
+                            <Link
+                                underline="none"
+                                component={RouterLink}
+                                to={
+                                "/" +
+                                this.state.typeOfSearch +
+                                "?genre=" +
+                                resultCol.genre.split(" ").join("+")}
+                                key={indexRow*numSearchResultsPerRow + indexCol}
+                            >
+                                <Result
+                                    title={this.fixGenreName(resultCol.genre)}
+                                    image={resultCol.image}
+                                    description={resultCol.description}
+                                />
+                            </Link>
+                        </Grid>
+                    ))}
+                </Grid>
+            ))}
+        </Grid> 
+    }
+   
+    /*
     let listItems;
     if (this.state.typeOfSearch === "book") {
       listItems = this.state.results.map((result, index) => (
@@ -154,6 +262,7 @@ class ResultsP extends React.Component {
         </Link>
       ));
     }
+    
     return (
       <React.Fragment>
         <ScrollToTop />
@@ -169,6 +278,23 @@ class ResultsP extends React.Component {
         />
       </React.Fragment>
     );
+    */
+    return (
+      <React.Fragment>
+        <ScrollToTop />
+        {gridSearchResults}
+        <PaginationBar
+          currentPage={
+            !isNaN(this.state.pager.currentPage)
+              ? Number(this.state.pager.currentPage)
+              : 1
+          }
+          numPages={this.state.pager.totalPages}
+          updatePage={this.nextPage}
+        />
+      </React.Fragment>
+    );
+
   }
 }
 
