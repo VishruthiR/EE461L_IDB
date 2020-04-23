@@ -42,6 +42,7 @@ class Book extends React.Component {
       fetch("http://34.71.147.72:80/book?isbn=" + isbn)
         .then(result => result.json())
         .then(result => {
+          console.log(result);
           this.setState({
             bookTitle: result.volumeInfo.title,
             bookCover: result.volumeInfo.imageLinks.thumbnail,
@@ -51,7 +52,9 @@ class Book extends React.Component {
             bookISBN: result.volumeInfo.industryIdentifiers.identifier,
             bookRating: result.volumeInfo.averageRating,
             numRatings: result.volumeInfo.numberOfRatings,
-            publishedDate: result.volumeInfo.publishedDate
+            publishedDate: result.volumeInfo.publishedDate,
+            bookPublisher: result.volumeInfo.publisher,
+            bookNumPages: result.volumeInfo.pageCount
           });
           fetch(
             "http://34.71.147.72:80/recBooks?genre=" + result.volumeInfo.genre
@@ -76,14 +79,14 @@ class Book extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <BookHeader title={this.state.bookTitle} author={this.state.authorName} 
+        <BookHeader title={this.state.bookTitle} image={this.state.bookCover} author={this.state.authorName} 
             genre={this.state.bookGenre} publisher={this.state.bookPublisher}
             numPages={this.state.bookNumPages} rating={this.state.bookRating}
             numRatings={this.state.numRatings} publishedDate={this.state.publishedDate}
             />
         <br />
         <Description
-          image={this.state.bookCover}
+          typeOfDescription="Book Description"
           description={this.state.bookSummary}
         />
         <Recommendations

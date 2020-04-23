@@ -53,10 +53,6 @@ class Author extends React.Component {
       <React.Fragment>
         <AuthorHeader author={this.state.authorName} />
         <br />
-        <Description
-          description={this.state.authorBio}
-          image={this.state.authorPicture}
-        />
         <Recommendations
           recommendations={this.state.bookRecommendations}
           typeOfRecommendation={"Books by this author"}
