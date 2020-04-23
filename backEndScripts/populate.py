@@ -1,6 +1,7 @@
 import sys
 import pymongo
 import requests
+import ssl
 import json
 from pymongo import MongoClient
 
@@ -12,7 +13,7 @@ genre = sys.argv[2]
 ipaddress= sys.argv[3]
 port = sys.argv[4]
 
-client = MongoClient("mongodb+srv://dbUser:jaino@cluster0-y12qq.gcp.mongodb.net/test?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://dbUser:jaino@cluster0-y12qq.gcp.mongodb.net/test?retryWrites=true&w=majority",ssl=True, ssl_cert_reqs=ssl.CERT_NONE)
 
 
 
@@ -103,8 +104,9 @@ with open(fileName, "r") as a_file:
                         (book['volumeInfo'])['genre'] = genre
                         books.insert_one(book)
                         json_formatted_str = json.dumps(innerbook, indent=2)
+                        print(json_formatted_str)
                         numberOfBooksAdded=numberOfBooksAdded+1
                         print(numberOfBooksAdded)
-                        #print('\n\n')
+                        print('\n\n')
             bookIndex=bookIndex+10
         print('\n')

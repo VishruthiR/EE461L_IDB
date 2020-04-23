@@ -1,5 +1,6 @@
 import sys
 import pymongo
+import ssl
 import requests
 import json
 from pymongo import MongoClient
@@ -10,8 +11,7 @@ import shutil
 
 url= 'https://openlibrary.org/api/books'
 
-client = MongoClient("mongodb+srv://dbUser:jaino@cluster0-y12qq.gcp.mongodb.net/test?retryWrites=true&w=majority")
-
+client = MongoClient("mongodb+srv://dbUser:jaino@cluster0-y12qq.gcp.mongodb.net/test?retryWrites=true&w=majority",ssl=True, ssl_cert_reqs=ssl.CERT_NONE)
 db=client['bookAppData']
 isbnNumber = 9780756404741
 books=db.books
@@ -19,9 +19,11 @@ books=db.books
 authorImages = db.authorImages
 authorsImageFound=[]
 
-
-cursor = books.find(no_cursor_timeout=True)
+currentBookNumber=24000
+cursor = books.find(no_cursor_timeout=True).skip(currentBookNumber)
 for book in cursor:
+    print(currentBookNumber)
+    currentBookNumber=currentBookNumber+1
     currentAuthorName= ((book['volumeInfo'])['authors'])
     if(currentAuthorName in authorsImageFound):
         continue
