@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import Box from '@material-ui/core/Box';
 import CardActionArea from "@material-ui/core/CardActionArea";
+import Typography from "@material-ui/core/Typography";
 
 class ResultsP extends React.Component {
   getDummyResults() {
@@ -242,12 +243,43 @@ class ResultsP extends React.Component {
     return (
       <React.Fragment>
         <ScrollToTop />
-        <Grid container>
-          <Grid item xs={9}>
-            <br/>
-            <Grid container spacing={1} direction='column'>
-              {gridSearchResults}
-            </Grid>
+        <br/>
+        <Paper>
+            <Typography> 
+                Searching through {this.state.typeOfSearch}s for "{this.state.resultsQuery}": 
+                <br/>
+                {this.state.pager.totalItems} results found.
+                <br/>
+            </Typography>
+            <InputLabel htmlFor="sort-select"> Sort by: </InputLabel>
+            <Box component="div" display={(this.state.typeOfSearch === "book")?"inline":"none"}>
+            <Select
+                value = {this.state.sort}
+                onChange={handleSort}
+                inputProps={{
+                id: 'sort-select',        
+			    }}
+            >
+                <option value={"author"}>Author</option>
+                <option value={"date"}>Date</option>
+                <option value={"book"}>Title</option>
+            </Select>
+            </Box>
+            <Select
+            value = {this.state.order}
+            onChange={handleOrder}
+            inputProps={{
+                id: 'order-select',        
+		    }}
+            >
+            <option value={"1"}>Ascending</option>
+            <option value={"-1"}>Descending</option>
+            </Select>
+        </Paper>
+        <br/>
+        <Grid container spacing={1} direction='column'>
+          {gridSearchResults}
+          </Grid>
             <br/>
             <PaginationBar
               currentPage={
@@ -258,37 +290,7 @@ class ResultsP extends React.Component {
               numPages={this.state.pager.totalPages}
               updatePage={this.nextPage}
             />
-          </Grid>
-          <Grid item xs={3}>
-            <Paper>
-              <InputLabel htmlFor="sort-select"> Sort by: </InputLabel>
-              <Box component="div" display={(this.state.typeOfSearch === "book")?"inline":"none"}>
-                <Select
-                  value = {this.state.sort}
-                  onChange={handleSort}
-                  inputProps={{
-                    id: 'sort-select',        
-			      }}
-                >
-                  <option value={"author"}>Author</option>
-                  <option value={"date"}>Date</option>
-                  <option value={"book"}>Title</option>
-                </Select>
-              </Box>
-              <br/>
-              <Select
-                value = {this.state.order}
-                onChange={handleOrder}
-                inputProps={{
-                  id: 'order-select',        
-				}}
-              >
-                <option value={"1"}>Ascending</option>
-                <option value={"-1"}>Descending</option>
-              </Select>
-            </Paper>
-          </Grid>
-        </Grid>
+            
       </React.Fragment>
     );
 
