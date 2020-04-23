@@ -6,6 +6,11 @@ import List from "@material-ui/core/List";
 import PaginationBar from "./PaginationBar";
 import ListItem from "@material-ui/core/ListItem";
 import ScrollToTop from "./ScrollToTop";
+import Select from '@material-ui/core/Select';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import InputLabel from '@material-ui/core/InputLabel';
+import Box from '@material-ui/core/Box';
 
 class ResultsP extends React.Component {
   getDummyResults() {
@@ -27,11 +32,17 @@ class ResultsP extends React.Component {
     var type = queryString.get("type");
     var query = queryString.get("query");
     var page = queryString.get("pageNum");
+    var sort = queryString.get("sort");
+    var ord = queryString.get("ord");
     if (query == null) query = "";
     if (page == null) page = -1;
+    if (sort == null) sort = type;
+    if (ord == null) ord = 1;
     this.state = {
       typeOfSearch: type,
       resultsQuery: query,
+      sort: sort,
+      order: ord,
       pager: {},
       numPages: 0,
       reloadResults: false,
@@ -75,6 +86,8 @@ class ResultsP extends React.Component {
     newUrl.set("pageNum", newPageNum);
     newUrl.set("query", this.state.resultsQuery);
     newUrl.set("type", this.state.typeOfSearch);
+    newUrl.set("sort", this.state.sort);
+    newUrl.set("ord", this.state.order);
     this.props.history.push("/results?" + newUrl);
     this.loadResults();
     return;
@@ -89,6 +102,9 @@ class ResultsP extends React.Component {
     }
     return newGenre;
   }
+
+
+
   render() {
     //let results = this.getDummyResults();
     let listItems;
@@ -154,19 +170,79 @@ class ResultsP extends React.Component {
         </Link>
       ));
     }
+
+    const handleSort = (event) =>{
+      let newUrl = new URLSearchParams(window.location.search);
+      newUrl.set("pageNum", 1);
+      newUrl.set("query", this.state.resultsQuery);
+      newUrl.set("type", this.state.typeOfSearch);
+      newUrl.set("sort", event.target.value);
+      newUrl.set("ord", this.state.order);
+      this.props.history.push("/results?" + newUrl);
+      this.setState({
+        sort: event.target.value,
+	  });
+      this.loadResults();
+    };
+    const handleOrder = (event) =>{
+      let newUrl = new URLSearchParams(window.location.search);
+      newUrl.set("pageNum", 1);
+      newUrl.set("query", this.state.resultsQuery);
+      newUrl.set("type", this.state.typeOfSearch);
+      newUrl.set("sort", this.state.sort);
+      newUrl.set("ord", event.target.value);
+      this.props.history.push("/results?" + newUrl);
+      this.setState({
+        order: event.target.value,
+	  });
+      this.loadResults();
+    };
     return (
       <React.Fragment>
         <ScrollToTop />
-        <List variant="flush">{listItems}</List>
-        <PaginationBar
-          currentPage={
-            !isNaN(this.state.pager.currentPage)
-              ? Number(this.state.pager.currentPage)
-              : 1
-          }
-          numPages={this.state.pager.totalPages}
-          updatePage={this.nextPage}
-        />
+        <Grid container>
+          <Grid item xs={9}>
+            <List variant="flush">{listItems}</List>
+            <PaginationBar
+              currentPage={
+              !isNaN(this.state.pager.currentPage)
+                ? Number(this.state.pager.currentPage)
+                : 1
+              }
+              numPages={this.state.pager.totalPages}
+              updatePage={this.nextPage}
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <Paper>
+              <InputLabel htmlFor="sort-select"> Sort by: </InputLabel>
+              <Box component="div" display={(this.state.typeOfSearch === "book")?"inline":"none"}>
+                <Select
+                  value = {this.state.sort}
+                  onChange={handleSort}
+                  inputProps={{
+                    id: 'sort-select',        
+			      }}
+                >
+                  <option value={"author"}>Author</option>
+                  <option value={"date"}>Date</option>
+                  <option value={"book"}>Title</option>
+                </Select>
+              </Box>
+              <br/>
+              <Select
+                value = {this.state.order}
+                onChange={handleOrder}
+                inputProps={{
+                  id: 'order-select',        
+				}}
+              >
+                <option value={"1"}>Ascending</option>
+                <option value={"-1"}>Descending</option>
+              </Select>
+            </Paper>
+          </Grid>
+        </Grid>
       </React.Fragment>
     );
   }
