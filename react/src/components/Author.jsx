@@ -1,7 +1,7 @@
 import React from "react";
 import Recommendations from "./Recommendations";
 import Description from "./Description";
-import Header from "./Header";
+import AuthorHeader from "./AuthorHeader";
 /*
 props passed in should describe what author this Author is
 currently we use author name because it is unique within our DB but might need to be changed
@@ -14,6 +14,7 @@ class Author extends React.Component {
       authorName: "",
       authorPicture: "",
       authorBio: "",
+      authorGenre: "",
       bookRecommendations: []
     };
   }
@@ -25,6 +26,7 @@ class Author extends React.Component {
     fetch("http://34.71.147.72:80/author?" + params)
       .then(result => result.json())
       .then(data => {
+        console.log(data);
         this.setState({
           authorName: data.author,
           authorPicture: data.imageLink
@@ -49,7 +51,7 @@ class Author extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header title={this.state.authorName} />
+        <AuthorHeader author={this.state.authorName} />
         <br />
         <Description
           description={this.state.authorBio}
