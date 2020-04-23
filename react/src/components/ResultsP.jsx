@@ -12,6 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Box from '@material-ui/core/Box';
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 class ResultsP extends React.Component {
   getDummyResults() {
@@ -47,7 +48,8 @@ class ResultsP extends React.Component {
       pager: {},
       numPages: 0,
       reloadResults: false,
-      results: []
+      results: [],
+      loaded: "false",
     };
   }
 
@@ -62,6 +64,7 @@ class ResultsP extends React.Component {
   }
 
   loadResults() {
+    this.setState({loaded: "false"});
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("pageNum")) || 1;
     if (page !== this.state.pager.currentPage) {
@@ -71,6 +74,7 @@ class ResultsP extends React.Component {
           console.log(data);
           this.setState({ pager: data.pager });
           this.setState({ results: data.pageOfItems });
+          this.setState({loaded: "true"});
         });
     }
   }
@@ -253,17 +257,17 @@ class ResultsP extends React.Component {
             </Typography>
             <InputLabel htmlFor="sort-select"> Sort by: </InputLabel>
             <Box component="div" display={(this.state.typeOfSearch === "book")?"inline":"none"}>
-            <Select
-                value = {this.state.sort}
-                onChange={handleSort}
-                inputProps={{
-                id: 'sort-select',        
-			    }}
-            >
-                <option value={"author"}>Author</option>
-                <option value={"date"}>Date</option>
-                <option value={"book"}>Title</option>
-            </Select>
+                <Select
+                    value = {this.state.sort}
+                    onChange={handleSort}
+                    inputProps={{
+                    id: 'sort-select',        
+			        }}
+                >
+                    <option value={"author"}>Author</option>
+                    <option value={"date"}>Date</option>
+                    <option value={"book"}>Title</option>
+                </Select>
             </Box>
             <Select
             value = {this.state.order}
@@ -277,19 +281,26 @@ class ResultsP extends React.Component {
             </Select>
         </Paper>
         <br/>
-        <Grid container spacing={1} direction='column'>
+        <Box component="div" display={(this.state.loaded == "false")?"inline":"none"} justifyContent="center">
+          <CircularProgress/>
+        </Box>
+        <Box component="div" display={(this.state.loaded == "true")?"inline":"none"}>
+          <Grid container spacing={1} direction='column'>
           {gridSearchResults}
           </Grid>
-            <br/>
-            <PaginationBar
-              currentPage={
-              !isNaN(this.state.pager.currentPage)
-                ? Number(this.state.pager.currentPage)
-                : 1
-              }
-              numPages={this.state.pager.totalPages}
-              updatePage={this.nextPage}
-            />
+          <br/>
+          <PaginationBar
+            currentPage={
+            !isNaN(this.state.pager.currentPage)
+            ? Number(this.state.pager.currentPage)
+            : 1
+            }
+            numPages={this.state.pager.totalPages}
+            updatePage={this.nextPage}
+          />
+        </Box>
+        
+
             
       </React.Fragment>
     );
