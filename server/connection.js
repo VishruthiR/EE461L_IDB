@@ -11,7 +11,7 @@ async function main(){
     const app = express();
     // process.env.URI
     const uri = process.env.ATLAS_URI;
-    const port = 80;
+    const port = 8080;
     const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
     try {
@@ -24,25 +24,49 @@ async function main(){
         app.use(cors());
         app.use(express.json());
         
-        //--GET--Basic Search                                           Ex:  http://34.71.147.72:80/search?type=book&query=Flatland&pageNum=5
+        //--GET--Basic Search                                           Ex:  http://34.71.147.72:80/search?type=book&query=Flatland&pageNum=5 SORTING http://localhost:8080/search?type=book&query=brother&pageNum=3&sort=title&ord=1
         app.get("/search", async (request, response) => {
             var type = request.query['type'];
             var pageNum = parseInt(request.query['pageNum']) || 1;
-            var pageSize=10;
+            var sort_input = request.query['sort'];
+            var order = parseInt(request.query['ord']);
+            console.log(`sort: ${sort_input}\t${order}`);
             var str = String(request.query['query']);
+            var pageSize=10;
             var fresult =[];
             var cursor;
             var count=0;
             var ree = new RegExp(str, 'i');
+            if(order != 1 && order !=-1){
+                order = 1;
+            }
             console.log(ree);
             switch (type){
                 case "book":
+                    var mysort = {"volumeInfo.title": 1};
+                    switch(sort_input){
+                        case "title":
+                            var test = (order ==1 ? mysort = {"volumeInfo.title": 1} : mysort = {"volumeInfo.title": -1});
+                            break;
+                        case "author":
+                            console.log('authors hit');
+                            var test = (order ==1 ? mysort = {"volumeInfo.authors": 1} : mysort = {"volumeInfo.authors": -1});
+                            break;
+                        case "date":
+                            console.log('date hit');
+                            var test = (order ==1 ? mysort = {"volumeInfo.publishedDate": 1} : mysort = {"volumeInfo.publishedDate": -1});
+                            break;          
+                        default:
+                            var mysort = {"volumeInfo.title": 1};
+                    }                    
                     console.log("Book Request");
-                    cursor= client.db("bookAppData").collection("books").find({"volumeInfo.title": ree },null,undefined);
+                    cursor= client.db("bookAppData").collection("books").find({"volumeInfo.title": ree }).sort(mysort);
                     break;
                 case "author":
+                    var mysort = {"author": 1};
+                    var test = (order ==1? mysort = {"author": 1} : mysort = {"author": -1});
                     console.log("Author Request");  
-                    cursor= client.db("bookAppData").collection("authorImages").find({"author": ree}, null,undefined);
+                    cursor= client.db("bookAppData").collection("authorImages").find({"author": ree}, null,undefined).sort(mysort);
                     break;
                 case "genre":
                     console.log("Genre Request");
@@ -151,7 +175,7 @@ async function main(){
             console.log(`Looking for books of genre: ${genre}`);
             // cursor= client.db("bookAppData").collection("books").find({"volumeInfo.genre": genre },null,undefined); 
             for(var i =0; i < 9; i++ ){
-                var index = Math.floor(Math.random() * 1000);
+                var index = Math.floor(Math.random() * 50);
                 list.push( await client.db("bookAppData").collection("books").findOne({"volumeInfo.genre": genre },{skip: index},undefined));                
             }
             console.log(list.length);
