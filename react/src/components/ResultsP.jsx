@@ -2,15 +2,15 @@ import React from "react";
 import Result from "./Result";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
-import List from "@material-ui/core/List";
+import Grid from "@material-ui/core/Grid";
 import PaginationBar from "./PaginationBar";
 import ListItem from "@material-ui/core/ListItem";
 import ScrollToTop from "./ScrollToTop";
 import Select from '@material-ui/core/Select';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import Box from '@material-ui/core/Box';
+import CardActionArea from "@material-ui/core/CardActionArea";
 
 class ResultsP extends React.Component {
   getDummyResults() {
@@ -67,6 +67,7 @@ class ResultsP extends React.Component {
       fetch("http://34.71.147.72:80/search?" + params, { method: "GET" })
         .then(response => response.json())
         .then(data => {
+          console.log(data);
           this.setState({ pager: data.pager });
           this.setState({ results: data.pageOfItems });
         });
@@ -104,71 +105,112 @@ class ResultsP extends React.Component {
   }
 
 
+  reformatArrayAsMatrix(arr, sizeOfRow) {
+    let matrix = [];
+    let i, j;
+    for (i = 0; i < arr.length; i += sizeOfRow) {
+      let rowMatrix = [];
+      for (j = 0; j < sizeOfRow && i + j < arr.length; j++) {
+        rowMatrix.push(arr[i + j]);
+      }
+      matrix.push(rowMatrix);
+    }
+    return matrix;
+  }
+
 
   render() {
     //let results = this.getDummyResults();
-    let listItems;
+    const numSearchResultsPerRow = 3;
+    let formattedSearchResults = this.reformatArrayAsMatrix(
+        this.state.results,
+        numSearchResultsPerRow
+    );
+    let gridSearchResults;
     if (this.state.typeOfSearch === "book") {
-      listItems = this.state.results.map((result, index) => (
-        <Link
-          underline="none"
-          component={RouterLink}
-          to={
-            "/" +
-            this.state.typeOfSearch +
-            "?isbn=" +
-            result.volumeInfo.industryIdentifiers.identifier
-          }
-          key={index}
-        >
-          <ListItem>
-            <Result
-              title={result.volumeInfo.title}
-              author={result.volumeInfo.authors}
-              description={result.volumeInfo.description}
-            />
-          </ListItem>
-        </Link>
-      ));
+        gridSearchResults = 
+            <Grid item>
+                {formattedSearchResults.map((resultRow, indexRow) => (
+                    <Grid container spacing={1}>
+                        {resultRow.map((resultCol, indexCol) => (
+                            <Grid item xs={12/numSearchResultsPerRow}>
+                                <Link
+                                    underline="none"
+                                    component={RouterLink}
+                                    to={
+                                    "/" +
+                                    this.state.typeOfSearch +
+                                    "?isbn=" +
+                                    resultCol.volumeInfo.industryIdentifiers.identifier}
+                                    key={indexRow*numSearchResultsPerRow + indexCol}
+                                >
+                                    <Result
+                                        title={resultCol.volumeInfo.title}
+                                        author={resultCol.volumeInfo.authors}
+                                        description={resultCol.volumeInfo.description}
+                                        image={resultCol.volumeInfo.imageLinks.thumbnail}
+                                    />
+                                </Link>
+                            </Grid>
+                        ))}
+                    </Grid>
+                ))}
+            </Grid>
     } else if (this.state.typeOfSearch === "author") {
-      listItems = this.state.results.map((result, index) => (
-        <Link
-          underline="none"
-          component={RouterLink}
-          to={
-            "/" +
-            this.state.typeOfSearch +
-            "?name=" +
-            result.author.split(" ").join("+")
-          }
-          key={index}
-        >
-          <ListItem>
-            <Result title={result.author} description={""} />
-          </ListItem>
-        </Link>
-      ));
+      gridSearchResults = 
+        <Grid item>
+            {formattedSearchResults.map((resultRow, indexRow) => (
+                <Grid container spacing={1}>
+                    {resultRow.map((resultCol, indexCol) => (
+                        <Grid item xs={12/numSearchResultsPerRow}>
+                            <Link
+                                underline="none"
+                                component={RouterLink}
+                                to={
+                                "/" +
+                                this.state.typeOfSearch +
+                                "?name=" +
+                                resultCol.author.split(" ").join("+")}
+                                key={indexRow*numSearchResultsPerRow + indexCol}
+                            >
+                                <Result
+                                    title={resultCol.author}
+                                    image={resultCol.imageLink}
+                                />
+                            </Link>
+                        </Grid>
+                    ))}
+                </Grid>
+            ))}
+        </Grid>
     } else if (this.state.typeOfSearch === "genre") {
-      listItems = this.state.results.map((result, index) => (
-        <Link
-          underline="none"
-          component={RouterLink}
-          to={
-            "/" +
-            this.state.typeOfSearch +
-            "?genre=" +
-            result.genre.split(" ").join("+")
-          }
-          key={index}
-        >
-          <ListItem>
-            <Result
-              title={this.fixGenreName(result.genre)}
-              description={result.description}
-            />
-          </ListItem>
-        </Link>
-      ));
+      gridSearchResults = 
+        <Grid item>
+            {formattedSearchResults.map((resultRow, indexRow) => (
+                <Grid container spacing={1}>
+                    {resultRow.map((resultCol, indexCol) => (
+                        <Grid item xs={12/numSearchResultsPerRow}>
+                            <Link
+                                underline="none"
+                                component={RouterLink}
+                                to={
+                                "/" +
+                                this.state.typeOfSearch +
+                                "?genre=" +
+                                resultCol.genre.split(" ").join("+")}
+                                key={indexRow*numSearchResultsPerRow + indexCol}
+                            >
+                                <Result
+                                    title={this.fixGenreName(resultCol.genre)}
+                                    image={resultCol.image}
+                                    description={resultCol.description}
+                                />
+                            </Link>
+                        </Grid>
+                    ))}
+                </Grid>
+            ))}
+        </Grid>
     }
 
     const handleSort = (event) =>{
@@ -202,7 +244,11 @@ class ResultsP extends React.Component {
         <ScrollToTop />
         <Grid container>
           <Grid item xs={9}>
-            <List variant="flush">{listItems}</List>
+            <br/>
+            <Grid container spacing={1} direction='column'>
+              {gridSearchResults}
+            </Grid>
+            <br/>
             <PaginationBar
               currentPage={
               !isNaN(this.state.pager.currentPage)
@@ -245,6 +291,7 @@ class ResultsP extends React.Component {
         </Grid>
       </React.Fragment>
     );
+
   }
 }
 
