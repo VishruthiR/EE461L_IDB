@@ -66,8 +66,8 @@ class Genre extends React.Component {
         <GenreHeader genre={this.state.genreName} />
         <br />
         <Description
+          typeOfDescription="Genre Description" 
           description={this.state.genreDescription}
-          image={this.state.genrePicture}
         />
         <Recommendations
           recommendations={this.state.bookRecommendations}
