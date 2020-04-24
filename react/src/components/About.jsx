@@ -348,7 +348,7 @@ class About extends React.Component {
                     Unit Tests:&nbsp;
                   </Typography>
                   <Typography variant="body2" component="p" style={numTheme}>
-                    {12}
+                    {16}
                   </Typography>
                 </Grid>
               </CardContent>
@@ -528,7 +528,7 @@ class About extends React.Component {
                     Unit Tests:&nbsp;
                   </Typography>
                   <Typography variant="body2" component="p" style={numTheme}>
-                    {0}
+                    {4}
                   </Typography>
                 </Grid>
               </CardContent>
@@ -748,7 +748,7 @@ class About extends React.Component {
                   Total Unit Tests:&nbsp;
                 </Typography>
                 <Typography variant="body2" component="p" style={numTheme}>
-                  {0}
+                  {27}
                 </Typography>
               </Grid>
             </CardContent>
