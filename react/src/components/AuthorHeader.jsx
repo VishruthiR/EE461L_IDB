@@ -1,5 +1,4 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
@@ -31,21 +30,14 @@ class AuthorHeader extends React.Component {
 */
      return (
         <Grid container>
-          <Grid item sm={4}>
-            <CardMedia
-              component="img"
-              image={this.props.image}
-              alt={"No picture for this description"}
-            ></CardMedia>
-          </Grid>
-          <Grid item sm={8}>
+         <Grid item sm={8}>
             <Box display="flex" flexDirection="column">
-              <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h1" style={{ padding: 10 }}>
+              <Box display="flex">
+                <Typography variant="h1">
                   {this.props.author}
                 </Typography>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Link
                   underline="none"
                   component={RouterLink}
@@ -54,17 +46,24 @@ class AuthorHeader extends React.Component {
                   <Typography variant="h3">{this.fixGenreName(this.props.genre)}</Typography>
                 </Link>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Typography variant="h5"> 
                   {"Publisher: " + this.props.publisher}
                 </Typography>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Typography variant="h5">
                   {"Number of Books: " + this.props.numBooks}
                 </Typography>
               </Box>
             </Box>
+          </Grid>
+          <Grid item sm={4}>
+            <CardMedia
+              component="img"
+              image={this.props.image}
+              alt={"No picture for this description"}
+            ></CardMedia>
           </Grid>
         </Grid>
       );

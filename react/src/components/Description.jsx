@@ -7,7 +7,7 @@ class Description extends React.Component {
     return (
       <React.Fragment>
         <h1>{this.props.typeOfDescription}</h1>
-        <Typography variant="h6" style={{ padding: 10 }}>
+        <Typography variant="h6"> 
           {this.props.description}
         </Typography>
       </React.Fragment>

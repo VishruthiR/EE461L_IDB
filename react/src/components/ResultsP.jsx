@@ -4,13 +4,11 @@ import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import PaginationBar from "./PaginationBar";
-import ListItem from "@material-ui/core/ListItem";
 import ScrollToTop from "./ScrollToTop";
 import Select from '@material-ui/core/Select';
 import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import Box from '@material-ui/core/Box';
-import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -282,11 +280,11 @@ class ResultsP extends React.Component {
         </Paper>
         <br/>
         <Box display="flex" justifyContent="center">
-          <Box component="div" display={(this.state.loaded == "false")?"inline":"none"} >
+          <Box component="div" display={(this.state.loaded === "false")?"inline":"none"} >
             <CircularProgress/>
           </Box>
         </Box>
-        <Box component="div" display={(this.state.loaded == "true")?"inline":"none"}>
+        <Box component="div" display={(this.state.loaded === "true")?"inline":"none"}>
           <Grid container spacing={1} direction='column'>
           {gridSearchResults}
           </Grid>

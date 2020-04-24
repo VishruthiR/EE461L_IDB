@@ -1,6 +1,5 @@
 import React from "react";
 import Recommendations from "./Recommendations";
-import Description from "./Description";
 import AuthorHeader from "./AuthorHeader";
 /*
 props passed in should describe what author this Author is
@@ -44,7 +43,9 @@ class Author extends React.Component {
         for (var i = 0; i < data.pageOfItems.length; i++) {
           recommendations.push({
             picture: data.pageOfItems[i].volumeInfo.imageLinks.thumbnail,
-            ISBN: data.pageOfItems[i].volumeInfo.industryIdentifiers.identifier
+            ISBN: data.pageOfItems[i].volumeInfo.industryIdentifiers.identifier,
+            author: data.pageOfItems[i].volumeInfo.authors,
+            title: data.pageOfItems[i].volumeInfo.title
           });
         }
         this.setState({ bookRecommendations: recommendations });

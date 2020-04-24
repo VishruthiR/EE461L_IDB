@@ -7,7 +7,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { Link as RouterLink } from "react-router-dom";
 
-class Recommendations extends React.Component {
+class AuthorRecommendations extends React.Component {
   reformatArrayAsMatrix(arr, sizeOfRow) {
     let matrix = [];
     let i, j;
@@ -21,6 +21,16 @@ class Recommendations extends React.Component {
     return matrix;
   }
 
+  fixGenreName(genre) {
+    let newGenre = genre;
+    if (newGenre === "scienceFiction") {
+      newGenre = "Science Fiction";
+    } else if (newGenre === "HistoricalFiction") {
+      newGenre = "Historical Fiction";
+    }
+    return newGenre;
+  }
+  
   render() {
     const img_alt_text = "Default";
     const numImgsPerCarousel = 3; // must divide 12, since that is gridsize number
@@ -41,7 +51,7 @@ class Recommendations extends React.Component {
                       <Link
                         underline="none"
                         component={RouterLink}
-                        to={"/book?isbn=" + recommendationCol["ISBN"]}
+                        to={"/author?name=" + recommendationCol["author"].split(" ").join("+")}
                       >
                         <CardMedia
                           component="img"
@@ -58,10 +68,10 @@ class Recommendations extends React.Component {
                       <Link
                         underline="none"
                         component={RouterLink}
-                        to={"/book?isbn=" + recommendationCol["ISBN"]}
+                        to={"/author?name=" + recommendationCol["author"].split(" ").join("+")}
                       >
                         <Typography variant="h5">
-                          {recommendationCol["title"]}
+                          {recommendationCol["author"]}
                         </Typography>
                       </Link>
                     </Box>
@@ -69,10 +79,10 @@ class Recommendations extends React.Component {
                       <Link
                         underline="none"
                         component={RouterLink}
-                        to={"/author?name=" + recommendationCol["author"].split(" ").join("+")}
+                        to={"/genre?genre=" + recommendationCol["genre"].split(" ").join("+")}
                       >
                         <Typography variant="h5">
-                          {recommendationCol["author"]}
+                          {this.fixGenreName(recommendationCol["genre"])}
                         </Typography>
                       </Link>
                     </Box>
@@ -87,4 +97,4 @@ class Recommendations extends React.Component {
   }
 }
 
-export default Recommendations;
+export default AuthorRecommendations;

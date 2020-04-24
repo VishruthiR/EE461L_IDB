@@ -65,11 +65,12 @@ class Book extends React.Component {
               console.log(data);
               var recommendations = [];
               for (var i = 0; i < data.length; i++) {
+                console.log(data[i]);
                 recommendations.push({
                   picture: data[i].volumeInfo.imageLinks.thumbnail,
                   ISBN: data[i].volumeInfo.industryIdentifiers.identifier,
-                  author: data[i].volumneInfo.authors,
-                  genre: data[i].volumneInfo.genre
+                  author: data[i].volumeInfo.authors,
+                  title: data[i].volumeInfo.title
                 });
               }
               this.setState({ bookRecommendations: recommendations });

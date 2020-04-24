@@ -1,5 +1,4 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
@@ -21,21 +20,14 @@ class BookHeader extends React.Component {
   render() {
       return (
         <Grid container>
-          <Grid item sm={4}>
-            <CardMedia
-              component="img"
-              image={this.props.image}
-              alt={"No picture for this description"}
-            ></CardMedia>
-          </Grid>
-          <Grid item sm={8}>
+         <Grid item sm={8}>
             <Box display="flex" flexDirection="column">
-              <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h1" style={{ padding: 10 }}>
+              <Box display="flex">
+                <Typography variant="h1">
                   {this.props.title}
                 </Typography>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Link
                   underline="none"
                   component={RouterLink}
@@ -44,7 +36,7 @@ class BookHeader extends React.Component {
                   <Typography variant="h3">{this.props.author}</Typography>
                 </Link>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Link
                   underline="none"
                   component={RouterLink}
@@ -53,32 +45,39 @@ class BookHeader extends React.Component {
                   <Typography variant="h3">{this.fixGenreName(this.props.genre)}</Typography>
                 </Link>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Typography variant="h5">
                   {"Publisher: " + this.props.publisher}
                 </Typography>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Typography variant="h5">
                   {"Number of Pages: " + this.props.numPages}
                 </Typography>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Typography variant="h5">
                   {"Average Rating: " + this.props.rating}
                 </Typography>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Typography variant="h5">
                   {"Number of Ratings: " + this.props.numRatings}
                 </Typography>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
+              <Box display="flex">
                 <Typography variant="h5">
                   {"Published Date: " + this.props.publishedDate}
                 </Typography>
               </Box>
             </Box>
+          </Grid>
+          <Grid item sm={4}>
+            <CardMedia
+              component="img"
+              image={this.props.image}
+              alt={"No picture for this description"}
+            ></CardMedia>
           </Grid>
         </Grid>
       );

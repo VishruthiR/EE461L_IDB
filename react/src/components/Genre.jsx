@@ -1,5 +1,6 @@
 import React from "react";
 import Recommendations from "./Recommendations";
+import AuthorRecommendation from "./AuthorRecommendations";
 import Description from "./Description";
 import GenreHeader from "./GenreHeader";
 /*
@@ -56,7 +57,9 @@ class Genre extends React.Component {
         for (var i = 0; i < data.length; i++) {
           recommendations.push({
             picture: data[i].volumeInfo.imageLinks.thumbnail,
-            ISBN: data[i].volumeInfo.industryIdentifiers.identifier
+            ISBN: data[i].volumeInfo.industryIdentifiers.identifier,
+            author: data[i].volumeInfo.authors,
+            title: data[i].volumeInfo.title
           });
         }
         this.setState({ bookRecommendations: recommendations });
@@ -72,11 +75,11 @@ class Genre extends React.Component {
           typeOfDescription="Genre Description" 
           description={this.state.genreDescription}
         />
-        <Recommendations
+        <AuthorRecommendation
           recommendations={this.state.authorRecommendation}
           typeOfRecommendation={"Recommended Authors"}
         />
-        <Recommendations
+       <Recommendations
           recommendations={this.state.bookRecommendations}
           typeOfRecommendation={"Recommended Books"}
         />
