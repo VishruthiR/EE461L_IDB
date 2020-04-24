@@ -32,10 +32,11 @@ async function main(){
             var order = parseInt(request.query['ord']);
             console.log(`sort: ${sort_input}\t${order}`);
             var str = String(request.query['query']);
-            var pageSize=10;
+            var pageSize=12;
             var fresult =[];
             var cursor;
             var count=0;
+            var author = [];
             var ree = new RegExp(str, 'i');
             if(order != 1 && order !=-1){
                 order = 1;
@@ -76,9 +77,24 @@ async function main(){
                     response.status(418).send("Error Code 418\nPlease don't be stupid...or else");
             }
             await cursor.forEach(doc => {if(doc!=null){count++;fresult.push(doc);}});
+
+            // if(type == "author"){
+            //     const msg = await scaryClown();
+            //     const msg2 = await scaryClownie();
+            //     console.log('Message:', msg);
+            //     console.log('Message2:', msg2);
+            // }
+
             console.log(`Total count: ${count}`);
             const pager = paginate(count,pageNum, pageSize);
             const pageOfItems = fresult.slice(pager.startIndex, pager.endIndex+1);
+            if(type == "author"){
+                const val = await getAuthorGenre(client, pageOfItems, author);
+                console.log(author[0]);
+                console.log("val: ",val);
+                response.json({pager, pageOfItems, val});
+                return; 
+            }
             console.log(`pageNum: ${pageNum}\npageSize: ${pageSize}\nSI: ${pager.startIndex}\nEI: ${pager.endIndex+1}`);
             response.json({pager, pageOfItems});
         });
@@ -172,6 +188,7 @@ async function main(){
             var cursor;
             var fresult =[];
             var list = [];
+            getGenreAuthors(client, genre);
             console.log(`Looking for books of genre: ${genre}`);
             // cursor= client.db("bookAppData").collection("books").find({"volumeInfo.genre": genre },null,undefined); 
             for(var i =0; i < 9; i++ ){
@@ -205,6 +222,22 @@ async function findOneElement(client, isbn){
     }else{
         console.log("there is an error");
     }
+};
+
+async function getGenreAuthors(client, genre){
+   //first get nine unqiue authors
+   let set = new Set();
+   var result = await client.db("bookAppData").collection("books").find({"volumeInfo.genre": genre },undefined);
+   console.log("yo", result.length);
+   for(let i =0; i<result.length;i++){
+       set.add(result[i].volumeInfo.authors);
+       if(set.size ==9){break;}
+   }
+   var final = [];
+   for (let item of set.values()){
+       console.log(item);
+   }
+   //get their respective info
 }
 
 async function findFiveBooks(client){
@@ -217,5 +250,34 @@ async function findFiveBooks(client){
     }
     return result;
 }
+
+async function getAuthorGenre(client, pageOfItems, author){
+    var test = [];
+    var result;
+    for(let i =0; i<pageOfItems.length; i++){
+        result =  await client.db("bookAppData").collection("books").findOne({"volumeInfo.authors": pageOfItems[i].author});
+        test.push({"genre": result.volumeInfo.genre});
+    }
+    console.log(`GAG:`, test[0]);
+    return new Promise(resolve=>{
+        resolve(test);
+    }); 
+}
+
+function scaryClown() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('🤡');
+      }, 2000);
+    });
+  }
+
+  function scaryClownie() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('fuck you');
+      }, 2000);
+    });
+  }
 
 main().catch(console.error);
