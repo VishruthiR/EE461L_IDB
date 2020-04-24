@@ -49,20 +49,33 @@ class Genre extends React.Component {
         });
       });
 
-    fetch("http://34.71.147.72:80/recbooks?" + params, { method: "GET" })
+    fetch("http://localhost:8080/recBooks?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
         console.log(data);
         var recommendations = [];
-        for (var i = 0; i < data.length; i++) {
+        var i;
+        for (i = 0; i < data.list.length; i++) {
           recommendations.push({
-            picture: data[i].volumeInfo.imageLinks.thumbnail,
-            ISBN: data[i].volumeInfo.industryIdentifiers.identifier,
-            author: data[i].volumeInfo.authors,
-            title: data[i].volumeInfo.title
+            picture: data.list[i].volumeInfo.imageLinks.thumbnail,
+            ISBN: data.list[i].volumeInfo.industryIdentifiers.identifier,
+            author: data.list[i].volumeInfo.authors,
+            title: data.list[i].volumeInfo.title
           });
         }
+        var authorRecs = [];
+        for (i = 0; i < data.auth.length; i++) {
+          authorRecs.push({
+            picture: data.auth[i].imageLink,
+            author: data.auth[i].author
+          });
+        }
+        console.log("recommendations");
+        console.log(recommendations);
+        console.log("authorRecs");
+        console.log(authorRecs);
         this.setState({ bookRecommendations: recommendations });
+        this.setState({ authorRecommendation: authorRecs });
       });
   }
 

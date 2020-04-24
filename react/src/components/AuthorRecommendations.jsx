@@ -75,18 +75,7 @@ class AuthorRecommendations extends React.Component {
                         </Typography>
                       </Link>
                     </Box>
-                   <Box display="flex" justifyContent="center">
-                      <Link
-                        underline="none"
-                        component={RouterLink}
-                        to={"/genre?genre=" + recommendationCol["genre"].split(" ").join("+")}
-                      >
-                        <Typography variant="h5">
-                          {this.fixGenreName(recommendationCol["genre"])}
-                        </Typography>
-                      </Link>
-                    </Box>
-                 </Box>
+                  </Box>
                 </Grid>
               ))}
             </Grid>

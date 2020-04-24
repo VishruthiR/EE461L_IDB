@@ -33,6 +33,8 @@ class ResultsP extends React.Component {
     var query = queryString.get("query");
     var page = queryString.get("pageNum");
     var sort = queryString.get("sort");
+    console.log("sort");
+    console.log(sort);
     var ord = queryString.get("ord");
     if (query == null) query = "";
     if (page == null) page = -1;
@@ -62,17 +64,34 @@ class ResultsP extends React.Component {
   }
 
   loadResults() {
+    console.log("called loadResults()");
     this.setState({loaded: "false"});
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("pageNum")) || 1;
-    if (page !== this.state.pager.currentPage) {
-      fetch("http://34.71.147.72:80/search?" + params, { method: "GET" })
+    const sort = params.get("sort");
+    const ord = params.get("ord");
+    console.log("params start");
+    console.log(page);
+    console.log(sort);
+    console.log(ord);
+    console.log("params end");
+    if (page !== this.state.pager.currentPage || sort !== this.state.sort || ord !== this.state.order) {
+      fetch("http://localhost:8080/search?" + params, { method: "GET" })
         .then(response => response.json())
         .then(data => {
           console.log(data);
+          if(data.val !== undefined) {
+            let pageOfItems = data.pageOfItems;
+            for(let i = 0; i<pageOfItems.length; i++) {
+              pageOfItems[i].genre = data.val[i].genre;
+            }
+          }
           this.setState({ pager: data.pager });
           this.setState({ results: data.pageOfItems });
           this.setState({loaded: "true"});
+          if(data.val !== undefined) {
+            this.setState({extraAuthorInfo: data.val});
+          }
         });
     }
   }
@@ -179,6 +198,7 @@ class ResultsP extends React.Component {
                                 <Result
                                     title={resultCol.author}
                                     image={resultCol.imageLink}
+                                    author={this.fixGenreName(resultCol.genre)}
                                 />
                             </Link>
                         </Grid>
@@ -264,7 +284,7 @@ class ResultsP extends React.Component {
                 >
                     <option value={"author"}>Author</option>
                     <option value={"date"}>Date</option>
-                    <option value={"book"}>Title</option>
+                    <option value={"book"}>Book</option>
                 </Select>
             </Box>
             <Select
@@ -274,8 +294,8 @@ class ResultsP extends React.Component {
                 id: 'order-select',        
 		    }}
             >
-            <option value={"1"}>Ascending</option>
-            <option value={"-1"}>Descending</option>
+              <option value={"1"}>Ascending</option>
+              <option value={"-1"}>Descending</option>
             </Select>
         </Paper>
         <br/>

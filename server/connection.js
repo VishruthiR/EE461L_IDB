@@ -45,8 +45,10 @@ async function main(){
             switch (type){
                 case "book":
                     var mysort = {"volumeInfo.title": 1};
+                    console.log("this is sort_input");
+                    console.log(sort_input);
                     switch(sort_input){
-                        case "title":
+                        case "book":
                             var test = (order ==1 ? mysort = {"volumeInfo.title": 1} : mysort = {"volumeInfo.title": -1});
                             break;
                         case "author":
@@ -70,8 +72,10 @@ async function main(){
                     cursor= client.db("bookAppData").collection("authorImages").find({"author": ree}, null,undefined).sort(mysort);
                     break;
                 case "genre":
+                    var mysort = {"genre": 1};
+                    var tet = (order ==1? mysort = {"genre": 1} : mysort = {"genre": -1});
                     console.log("Genre Request");
-                    cursor= client.db("bookAppData").collection("genre").find({"genre": ree }, null,undefined);
+                    cursor= client.db("bookAppData").collection("genre").find({"genre": ree }, null,undefined).sort(mysort);
                     break;
                 default:
                     response.status(418).send("Error Code 418\nPlease don't be stupid...or else");
