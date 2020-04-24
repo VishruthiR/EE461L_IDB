@@ -1,0 +1,562 @@
+{
+	"info": {
+		"_postman_id": "cde224cd-8da1-48a0-8691-0b61f1f525e4",
+		"name": "BlogProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "databaseStatus",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.googleapis.com/books/v1/volumes?q=\"\"& startIndex=0&maxResults=40&volumeInfo:publishedDate=\"2020-01-01\"&projection=lite",
+					"protocol": "https",
+					"host": [
+						"www",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"books",
+						"v1",
+						"volumes"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "\"\""
+						},
+						{
+							"key": " startIndex",
+							"value": "0"
+						},
+						{
+							"key": "maxResults",
+							"value": "40"
+						},
+						{
+							"key": "volumeInfo:publishedDate",
+							"value": "\"2020-01-01\""
+						},
+						{
+							"key": "projection",
+							"value": "lite"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GoogleBooksAuthorRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.googleapis.com/books/v1/volumes?langRestrict=en&q=Patrick Rothfuss&fields=totalItems,items(volumeInfo(title,authors,publisher,publishedDate,description,industryIdentifiers,pageCount,categories,averageRating,imageLinks),saleInfo(listPrice(amount)))&startIndex=0&maxResults=40&inAuthor=Patrick Rothfuss&subject=fiction",
+					"protocol": "https",
+					"host": [
+						"www",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"books",
+						"v1",
+						"volumes"
+					],
+					"query": [
+						{
+							"key": "langRestrict",
+							"value": "en"
+						},
+						{
+							"key": "q",
+							"value": "Patrick Rothfuss"
+						},
+						{
+							"key": "fields",
+							"value": "totalItems,items(volumeInfo(title,authors,publisher,publishedDate,description,industryIdentifiers,pageCount,categories,averageRating,imageLinks),saleInfo(listPrice(amount)))"
+						},
+						{
+							"key": "startIndex",
+							"value": "0"
+						},
+						{
+							"key": "maxResults",
+							"value": "40"
+						},
+						{
+							"key": "inAuthor",
+							"value": "Patrick Rothfuss"
+						},
+						{
+							"key": "subject",
+							"value": "fiction"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "openLibraryAuthorRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://openlibrary.org/authors?name=Patrick Rothfuss",
+					"protocol": "https",
+					"host": [
+						"openlibrary",
+						"org"
+					],
+					"path": [
+						"authors"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Patrick Rothfuss"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "openLibraryISBNRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://openlibrary.org/api/books?bibkeys=ISBN:9780385733748&jscmd=data&format=json",
+					"protocol": "https",
+					"host": [
+						"openlibrary",
+						"org"
+					],
+					"path": [
+						"api",
+						"books"
+					],
+					"query": [
+						{
+							"key": "bibkeys",
+							"value": "ISBN:9780385733748"
+						},
+						{
+							"key": "jscmd",
+							"value": "data"
+						},
+						{
+							"key": "format",
+							"value": "json"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "openLibraryAuthorHTMLPageRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://openlibrary.org/authors/OL2830895A/Patrick_Rothfuss",
+					"protocol": "https",
+					"host": [
+						"openlibrary",
+						"org"
+					],
+					"path": [
+						"authors",
+						"OL2830895A",
+						"Patrick_Rothfuss"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book Recomendations for a specific Genre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/recBooks?genre=scienceFiction",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"recBooks"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "scienceFiction"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book Query Regular through Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/search?type=book&query=Flatland&pageNum=5",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "book"
+						},
+						{
+							"key": "query",
+							"value": "Flatland"
+						},
+						{
+							"key": "pageNum",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Author Query Regular through Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/search?type=author&query=Roth&pageNum=5",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "author"
+						},
+						{
+							"key": "query",
+							"value": "Roth"
+						},
+						{
+							"key": "pageNum",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Genre Query Regular through Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/search?type=genre&query=science&pageNum=5",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "genre"
+						},
+						{
+							"key": "query",
+							"value": "science"
+						},
+						{
+							"key": "pageNum",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book Query for written by a Specifc Author",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/authorsBooks?name=Patrick+Rothfuss&pageNum=1",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"authorsBooks"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Patrick+Rothfuss"
+						},
+						{
+							"key": "pageNum",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book Query for a Specifc Genre",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/genreBooks?genre=scienceFiction&numPage=1",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"genreBooks"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "scienceFiction"
+						},
+						{
+							"key": "numPage",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book Query for a Specifc ISBN Number, 1 Unique Result",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/book?isbn=9781602062894",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"book"
+					],
+					"query": [
+						{
+							"key": "isbn",
+							"value": "9781602062894"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query for Author Image for single Author Name",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/author?name=Patrick+Rothfuss",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"author"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Patrick+Rothfuss"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Genre Query for specified Genre",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/genre?genre=scienceFiction",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"genre"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "scienceFiction"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Singular Genre Query",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/genre?genre=scienceFiction",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"genre"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "scienceFiction"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Genre specific Book Recomendations ",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.71.147.72:80/recBooks?genre=scienceFiction",
+					"protocol": "http",
+					"host": [
+						"34",
+						"71",
+						"147",
+						"72"
+					],
+					"port": "80",
+					"path": [
+						"recBooks"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "scienceFiction"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "HT8SQn81i9HydLbE",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "new-user",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}
