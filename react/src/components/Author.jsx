@@ -13,8 +13,9 @@ class Author extends React.Component {
     this.state = {
       authorName: "",
       authorPicture: "",
-      authorBio: "",
       authorGenre: "",
+      authorPublisher: "",
+      authorNumBooks: "",
       bookRecommendations: []
     };
   }
@@ -35,6 +36,10 @@ class Author extends React.Component {
     fetch("http://34.71.147.72:80/authorsBooks?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
+        if(data.pageOfItems.length > 0) {
+          this.setState({ authorGenre: data.pageOfItems[0].volumeInfo.genre});
+          this.setState({ authorPublisher: data.pageOfItems[0].volumeInfo.publisher});
+        }
         var recommendations = [];
         for (var i = 0; i < data.pageOfItems.length; i++) {
           recommendations.push({
@@ -51,7 +56,7 @@ class Author extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <AuthorHeader author={this.state.authorName} />
+        <AuthorHeader image={this.state.authorPicture} author={this.state.authorName} genre={this.state.authorGenre} publisher={this.state.authorPublisher} numBooks={this.state.authorNumBooks}/>
         <br />
         <Recommendations
           recommendations={this.state.bookRecommendations}

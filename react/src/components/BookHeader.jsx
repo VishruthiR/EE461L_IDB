@@ -8,6 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Box from '@material-ui/core/Box';
 
 class BookHeader extends React.Component {
+
   fixGenreName(genre) {
     let newGenre = genre;
     if (newGenre === "scienceFiction") {
@@ -53,27 +54,27 @@ class BookHeader extends React.Component {
                 </Link>
               </Box>
               <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h5" style={{ padding: 10 }}>
+                <Typography variant="h5">
                   {"Publisher: " + this.props.publisher}
                 </Typography>
               </Box>
               <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h5" style={{ padding: 10 }}>
+                <Typography variant="h5">
                   {"Number of Pages: " + this.props.numPages}
                 </Typography>
               </Box>
               <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h5" style={{ padding: 10 }}>
+                <Typography variant="h5">
                   {"Average Rating: " + this.props.rating}
                 </Typography>
               </Box>
               <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h5" style={{ padding: 10 }}>
+                <Typography variant="h5">
                   {"Number of Ratings: " + this.props.numRatings}
                 </Typography>
               </Box>
               <Box display="flex" justifyContent="flex-end">
-                <Typography variant="h5" style={{ padding: 10 }}>
+                <Typography variant="h5">
                   {"Published Date: " + this.props.publishedDate}
                 </Typography>
               </Box>
