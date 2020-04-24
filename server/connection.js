@@ -186,9 +186,8 @@ async function main(){
             var genre = String(request.query['genre']);
             var count =0;
             var cursor;
-            var fresult =[];
             var list = [];
-            getGenreAuthors(client, genre);
+            const auth = await getGenreAuthors(client, genre);
             console.log(`Looking for books of genre: ${genre}`);
             // cursor= client.db("bookAppData").collection("books").find({"volumeInfo.genre": genre },null,undefined); 
             for(var i =0; i < 9; i++ ){
@@ -196,7 +195,7 @@ async function main(){
                 list.push( await client.db("bookAppData").collection("books").findOne({"volumeInfo.genre": genre },{skip: index},undefined));                
             }
             console.log(list.length);
-            response.json(list);
+            response.json({list, auth});
         })
 
 
@@ -226,17 +225,14 @@ async function findOneElement(client, isbn){
 
 async function getGenreAuthors(client, genre){
    //first get nine unqiue authors
-   let set = new Set();
-   var result = await client.db("bookAppData").collection("books").find({"volumeInfo.genre": genre },undefined);
-   console.log("yo", result.length);
-   for(let i =0; i<result.length;i++){
-       set.add(result[i].volumeInfo.authors);
-       if(set.size ==9){break;}
-   }
-   var final = [];
-   for (let item of set.values()){
-       console.log(item);
-   }
+   var res =[];
+   var r;
+    r = await client.db("bookAppData").collection("authorImages").find().limit(9);               
+    await r.forEach(doc=>{res.push(doc)});
+    console.log("res", res);
+    return  new Promise(resolve =>{
+        resolve(res);
+    })
    //get their respective info
 }
 
