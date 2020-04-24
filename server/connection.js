@@ -50,6 +50,7 @@ async function main(){
                     switch(sort_input){
                         case "book":
                             var test = (order ==1 ? mysort = {"volumeInfo.title": 1} : mysort = {"volumeInfo.title": -1});
+                            console.log("yo the order is", order);
                             break;
                         case "author":
                             console.log('authors hit');
@@ -63,7 +64,14 @@ async function main(){
                             var mysort = {"volumeInfo.title": 1};
                     }                    
                     console.log("Book Request");
-                    cursor= client.db("bookAppData").collection("books").find({"volumeInfo.title": ree }).sort(mysort);
+                    if(str==""){
+                        console.log("blank query for books!");
+                        cursor= client.db("bookAppData").collection("books").find({"volumeInfo.title": ree }).sort(mysort).skip(12*(pageNum-1)).limit(12); 
+                    }
+                    else{
+                        cursor= client.db("bookAppData").collection("books").find({"volumeInfo.title": ree }).sort(mysort);
+                    }
+                    //
                     break;
                 case "author":
                     var mysort = {"author": 1};
@@ -81,17 +89,18 @@ async function main(){
                     response.status(418).send("Error Code 418\nPlease don't be stupid...or else");
             }
             await cursor.forEach(doc => {if(doc!=null){count++;fresult.push(doc);}});
-
-            // if(type == "author"){
-            //     const msg = await scaryClown();
-            //     const msg2 = await scaryClownie();
-            //     console.log('Message:', msg);
-            //     console.log('Message2:', msg2);
-            // }
-
             console.log(`Total count: ${count}`);
-            const pager = paginate(count,pageNum, pageSize);
-            const pageOfItems = fresult.slice(pager.startIndex, pager.endIndex+1);
+            var pager;
+            var pageOfItems;
+            if(str==""){
+                pager = paginate(31597, pageNum, pageSize);
+                pageOfItems = fresult;   
+            }
+            else{
+                pager = paginate(count,pageNum, pageSize);
+                pageOfItems = fresult.slice(pager.startIndex, pager.endIndex+1);
+            }
+
             if(type == "author"){
                 const val = await getAuthorGenre(client, pageOfItems, author);
                 console.log(author[0]);
@@ -100,7 +109,7 @@ async function main(){
                 return; 
             }
             console.log(`pageNum: ${pageNum}\npageSize: ${pageSize}\nSI: ${pager.startIndex}\nEI: ${pager.endIndex+1}`);
-            response.json({pager, pageOfItems});
+            response.json({pager, pageOfItems});    
         });
 
         //--Get--List an Author's books                                 Ex:  http://34.71.147.72:80/authorsBooks?name=Patrick+Rothfuss&pageNum=1
