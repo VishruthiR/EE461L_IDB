@@ -39,7 +39,7 @@ class Book extends React.Component {
     const params = new URLSearchParams(window.location.search);
     const isbn = params.get("isbn");
     if (isbn !== this.state.bookISBN) {
-      fetch("http://34.71.147.72:80/book?isbn=" + isbn)
+      fetch("http://35.239.85.230/book?isbn=" + isbn)
         .then(result => result.json())
         .then(result => {
           console.log(result);
@@ -57,7 +57,7 @@ class Book extends React.Component {
             bookNumPages: result.volumeInfo.pageCount
           });
           fetch(
-            "http://34.71.147.72:80/recBooks?genre=" + result.volumeInfo.genre
+            "http://35.239.85.230/recBooks?genre=" + result.volumeInfo.genre
           )
             .then(response => response.json())
             .then(data => {

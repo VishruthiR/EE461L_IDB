@@ -32,7 +32,7 @@ class Genre extends React.Component {
   loadResults() {
     const params = new URLSearchParams(window.location.search);
     console.log(params.get("genre"));
-    fetch("http://34.71.147.72:80/genre?" + params, { method: "GET" })
+    fetch("http://35.239.85.230/genre?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -49,7 +49,7 @@ class Genre extends React.Component {
         });
       });
 
-    fetch("http://34.71.147.72:80/recBooks?" + params, { method: "GET" })
+    fetch("http://35.239.85.230/recBooks?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
         console.log(data);

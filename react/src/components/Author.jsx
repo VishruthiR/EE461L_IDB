@@ -23,7 +23,7 @@ class Author extends React.Component {
     // make call to server to get information and modify state using setState
     const params = new URLSearchParams(window.location.search);
 
-    fetch("http://34.71.147.72:80/author?" + params)
+    fetch("http://35.239.85.230/author?" + params)
       .then(result => result.json())
       .then(data => {
         console.log(data);
@@ -32,7 +32,7 @@ class Author extends React.Component {
           authorPicture: data.imageLink
         });
       });
-    fetch("http://34.71.147.72:80/authorsBooks?" + params, { method: "GET" })
+    fetch("http://35.239.85.230/authorsBooks?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
         if(data.pageOfItems.length > 0) {
