@@ -63,7 +63,8 @@ async function main(){
                             var mysort = {"volumeInfo.title": 1};
                     }                    
                     console.log("Book Request");
-                    cursor= client.db("bookAppData").collection("books").find({"volumeInfo.title": ree }).sort(mysort);
+//                    cursor= client.db("bookAppData").collection("books").find({"volumeInfo.title": ree }).sort(mysort);
+                    cursor= client.db("bookAppData").collection("books").aggregate({"volumeInfo.title": ree }).sort(mysort);
                     break;
                 case "author":
                     var mysort = {"author": 1};
