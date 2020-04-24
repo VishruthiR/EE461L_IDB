@@ -281,8 +281,10 @@ class ResultsP extends React.Component {
             </Select>
         </Paper>
         <br/>
-        <Box component="div" display={(this.state.loaded == "false")?"inline":"none"} justifyContent="center">
-          <CircularProgress/>
+        <Box display="flex" justifyContent="center">
+          <Box component="div" display={(this.state.loaded == "false")?"inline":"none"} >
+            <CircularProgress/>
+          </Box>
         </Box>
         <Box component="div" display={(this.state.loaded == "true")?"inline":"none"}>
           <Grid container spacing={1} direction='column'>
