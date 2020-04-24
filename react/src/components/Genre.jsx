@@ -14,6 +14,9 @@ class Genre extends React.Component {
       genreName: "",
       genrePicture: "",
       genreDescription: "",
+      numBooksGenre: 0,
+      numAuthorsGenre: 0,
+      authorRecommendation: [],
       bookRecommendations: []
     };
   }
@@ -63,11 +66,15 @@ class Genre extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <GenreHeader genre={this.state.genreName} />
+        <GenreHeader genre={this.state.genreName} image={this.state.genrePicture} numBooks={this.state.numBooksGenre} numAuthors={this.state.numAuthorsGenre} />
         <br />
         <Description
           typeOfDescription="Genre Description" 
           description={this.state.genreDescription}
+        />
+        <Recommendations
+          recommendations={this.state.authorRecommendation}
+          typeOfRecommendation={"Recommended Authors"}
         />
         <Recommendations
           recommendations={this.state.bookRecommendations}

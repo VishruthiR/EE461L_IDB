@@ -82,33 +82,6 @@ class BookHeader extends React.Component {
           </Grid>
         </Grid>
       );
-/* 
-    return (
-      <Paper style={{ padding: 20, fontSize: 36 }}>
-        <div style={{ padding: 10 }}>
-          <h1>{this.props.title}</h1>
-          <Link
-            underline="none"
-            component={RouterLink}
-          >
-            <h3 style={{ lineHeight: 0 }}>{this.props.author}</h3>
-          </Link>
-          <Link
-            underline="none"
-            component={RouterLink}
-            to={"/genre?genre=" + this.props.genre.split(" ").join("+")}
-          >
-            <h3 style={{ lineHeight: 0 }}>{this.fixGenreName(this.props.genre)}</h3>
-          </Link>
-          <h5 style={{ lineHeight: 0 }}>{this.props.publisher}</h5> 
-          <h5 style={{ lineHeight: 0 }}>{this.props.numPages}</h5> 
-          <h5 style={{ lineHeight: 0 }}>{this.props.rating}</h5> 
-          <h5 style={{ lineHeight: 0 }}>{this.props.numRatings}</h5> 
-          <h5 style={{ lineHeight: 0 }}>{this.props.publishedDate}</h5> 
-        </div>
-      </Paper>
-    );
-*/
   }
 }
 
