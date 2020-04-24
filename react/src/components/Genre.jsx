@@ -49,7 +49,7 @@ class Genre extends React.Component {
         });
       });
 
-    fetch("http://localhost:8080/recBooks?" + params, { method: "GET" })
+    fetch("http://34.71.147.72:80/recBooks?" + params, { method: "GET" })
       .then(response => response.json())
       .then(data => {
         console.log(data);

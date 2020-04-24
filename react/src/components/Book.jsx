@@ -64,14 +64,14 @@ class Book extends React.Component {
               console.log("hi");
               console.log(data);
               var recommendations = [];
-              for (var i = 0; i < data.length; i++) {
-                console.log(data[i]);
+              for (var i = 0; i < data.list.length; i++) {
+                console.log(data.list[i].volumeInfo.authors);
                 recommendations.push({
-                  picture: data[i].volumeInfo.imageLinks.thumbnail,
-                  ISBN: data[i].volumeInfo.industryIdentifiers.identifier,
-                  author: data[i].volumeInfo.authors,
-                  title: data[i].volumeInfo.title
-                });
+                  picture: data.list[i].volumeInfo.imageLinks.thumbnail,
+                  ISBN: data.list[i].volumeInfo.industryIdentifiers.identifier,
+                  author: data.list[i].volumeInfo.authors,
+                  title: data.list[i].volumeInfo.title
+               });
               }
               this.setState({ bookRecommendations: recommendations });
             });

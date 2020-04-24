@@ -76,7 +76,7 @@ class ResultsP extends React.Component {
     console.log(ord);
     console.log("params end");
     if (page !== this.state.pager.currentPage || sort !== this.state.sort || ord !== this.state.order) {
-      fetch("http://localhost:8080/search?" + params, { method: "GET" })
+      fetch("http://34.71.147.72:80/search?" + params, { method: "GET" })
         .then(response => response.json())
         .then(data => {
           console.log(data);
