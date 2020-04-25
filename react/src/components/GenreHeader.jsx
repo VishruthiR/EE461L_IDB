@@ -15,17 +15,7 @@ class GenreHeader extends React.Component {
                   {this.props.genre}
                 </Typography>
               </Box>
-             <Box display="flex">
-                <Typography variant="h5">
-                  {"Number of Books: " + this.props.numBooks}
-                </Typography>
-              </Box>
-             <Box display="flex">
-                <Typography variant="h5">
-                  {"Number of Authors: " + this.props.numAuthors}
-                </Typography>
-              </Box>
-           </Box>
+            </Box>
           </Grid>
           <Grid item sm={4}>
             <CardMedia
