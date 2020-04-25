@@ -65,7 +65,7 @@ class ResultsP extends React.Component {
 
   loadResults() {
     console.log("called loadResults()");
-    this.setState({loaded: "false"});
+//    this.setState({loaded: "false"});
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("pageNum")) || 1;
     const sort = params.get("sort");
@@ -76,6 +76,7 @@ class ResultsP extends React.Component {
     console.log(ord);
     console.log("params end");
     if (page !== this.state.pager.currentPage || sort !== this.state.sort || ord !== this.state.order) {
+      this.setState({loaded: "false"});
       fetch("http://35.239.85.230/search?" + params, { method: "GET" })
         .then(response => response.json())
         .then(data => {

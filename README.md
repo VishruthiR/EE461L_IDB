@@ -24,20 +24,20 @@
 # Work Time Estimates
 
 1. Kumaran Arulmani
-   - Estimated: 20 hours
-   - Actual: 30 hours
+   - Estimated: 18 hours
+   - Actual: 23 hours
 2. Vishruthi Ramaswamy
-   - Estimated: 20 hours
-   - Actual: 30 hours
+   - Estimated: 18 hours
+   - Actual: 23 hours
 3. Jaino Vennatt
-   - Estimated: 20 hours
-   - Actual: 30 hours
+   - Estimated: 18 hours
+   - Actual: 23 hours
 4. David Day
-   - Estimated: 20 hours
-   - Actual: 30 hours
+   - Estimated: 18 hours
+   - Actual: 23 hours
 5. Matthew Jiang
-   - Estimated: 20 hours
-   - Actual: 30 hours
+   - Estimated: 18 hours
+   - Actual: 23 hours
 6. Siddhartha Shetkar
-   - Estimated: 20 hours
-   - Actual: 30 hours
+   - Estimated: 18 hours
+   - Actual: 23 hours
