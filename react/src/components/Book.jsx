@@ -39,7 +39,7 @@ class Book extends React.Component {
     const params = new URLSearchParams(window.location.search);
     const isbn = params.get("isbn");
     if (isbn !== this.state.bookISBN) {
-      fetch("http://34.71.147.72:80/book?isbn=" + isbn)
+      fetch("http://35.239.85.230/book?isbn=" + isbn)
         .then(result => result.json())
         .then(result => {
           console.log(result);
@@ -57,21 +57,21 @@ class Book extends React.Component {
             bookNumPages: result.volumeInfo.pageCount
           });
           fetch(
-            "http://34.71.147.72:80/recBooks?genre=" + result.volumeInfo.genre
+            "http://35.239.85.230/recBooks?genre=" + result.volumeInfo.genre
           )
             .then(response => response.json())
             .then(data => {
               console.log("hi");
               console.log(data);
               var recommendations = [];
-              for (var i = 0; i < data.length; i++) {
-                console.log(data[i]);
+              for (var i = 0; i < data.list.length; i++) {
+                console.log(data.list[i].volumeInfo.authors);
                 recommendations.push({
-                  picture: data[i].volumeInfo.imageLinks.thumbnail,
-                  ISBN: data[i].volumeInfo.industryIdentifiers.identifier,
-                  author: data[i].volumeInfo.authors,
-                  title: data[i].volumeInfo.title
-                });
+                  picture: data.list[i].volumeInfo.imageLinks.thumbnail,
+                  ISBN: data.list[i].volumeInfo.industryIdentifiers.identifier,
+                  author: data.list[i].volumeInfo.authors,
+                  title: data.list[i].volumeInfo.title
+               });
               }
               this.setState({ bookRecommendations: recommendations });
             });

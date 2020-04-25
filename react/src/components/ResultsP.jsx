@@ -76,7 +76,7 @@ class ResultsP extends React.Component {
     console.log(ord);
     console.log("params end");
     if (page !== this.state.pager.currentPage || sort !== this.state.sort || ord !== this.state.order) {
-      fetch("http://localhost:8080/search?" + params, { method: "GET" })
+      fetch("http://35.239.85.230/search?" + params, { method: "GET" })
         .then(response => response.json())
         .then(data => {
           console.log(data);
@@ -262,6 +262,34 @@ class ResultsP extends React.Component {
 	  });
       this.loadResults();
     };
+    let content;
+    if(this.state.loaded === "true") {
+      content = (
+          <Grid container spacing={1}>
+            {gridSearchResults}
+            <Grid container direction="column" alignItems="center">
+              <Grid item>
+                <PaginationBar
+                  currentPage={
+                  !isNaN(this.state.pager.currentPage)
+                  ? Number(this.state.pager.currentPage)
+                  : 1
+                  }
+                  numPages={this.state.pager.totalPages}
+                  updatePage={this.nextPage}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+      );
+    }
+    if(this.state.loaded === "false") {
+      content = (
+         <Box display="flex" justifyContent="center">
+           <CircularProgress/>
+        </Box>
+      );
+    }
     return (
       <React.Fragment>
         <ScrollToTop />
@@ -299,29 +327,7 @@ class ResultsP extends React.Component {
             </Select>
         </Paper>
         <br/>
-        <Box display="flex" justifyContent="center">
-          <Box component="div" display={(this.state.loaded === "false")?"inline":"none"} >
-            <CircularProgress/>
-          </Box>
-        </Box>
-        <Box component="div" display={(this.state.loaded === "true")?"inline":"none"}>
-          <Grid container spacing={1} direction='column'>
-          {gridSearchResults}
-          </Grid>
-          <br/>
-          <PaginationBar
-            currentPage={
-            !isNaN(this.state.pager.currentPage)
-            ? Number(this.state.pager.currentPage)
-            : 1
-            }
-            numPages={this.state.pager.totalPages}
-            updatePage={this.nextPage}
-          />
-        </Box>
-        
-
-            
+        {content}
       </React.Fragment>
     );
 

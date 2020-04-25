@@ -12,6 +12,30 @@ class Result extends React.Component {
         height: "100%"
     };
     return (
+/*
+      <Card>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            image={this.props.image}
+            title={this.props.title}
+          />
+          <CardContent>
+            <Typography variant="h3">{this.props.title}</Typography>
+              {typeof this.props.author !== "undefined" && (
+                <Typography variant="h5" gutterBottom>
+                  {this.props.author}
+                </Typography>
+              )}
+              {typeof this.props.description!== "undefined" && (
+                <Typography variant="h5" gutterBottom>
+                  {this.props.description.substring(0, descriptionLength) + "..."}
+                </Typography>
+              )}               
+          </CardContent>
+        </CardActionArea>
+      </Card>
+*/
       <Card style={section}>
         <CardActionArea style={section}>
           <CardMedia
