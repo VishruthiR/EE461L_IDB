@@ -92,7 +92,7 @@ async function main(){
             console.log(`Total count: ${count}`);
             var pager;
             var pageOfItems;
-            if(str==""){
+            if(str=="" && type =="book"){
                 pager = paginate(31597, pageNum, pageSize);
                 pageOfItems = fresult;   
             }
