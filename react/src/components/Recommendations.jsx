@@ -54,7 +54,7 @@ class Recommendations extends React.Component {
                         ></CardMedia>
                       </Link>                   
                    </Box>
-                   <Box display="flex" justifyContent="center">
+                   <Box display="flex">
                       <Link
                         underline="none"
                         component={RouterLink}
@@ -65,7 +65,7 @@ class Recommendations extends React.Component {
                         </Typography>
                       </Link>
                     </Box>
-                   <Box display="flex" justifyContent="center">
+                   <Box display="flex">
                       <Link
                         underline="none"
                         component={RouterLink}
