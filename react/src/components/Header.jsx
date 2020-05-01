@@ -6,20 +6,24 @@ import Link from "@material-ui/core/Link";
 class Header extends React.Component {
   render() {
     return (
-      <Paper style={{ padding: 20, fontSize: 36 }}>
-        <div style={{ padding: 10 }}>
-          <h1>{this.props.title}</h1>
-          {typeof this.props.author !== "undefined" && (
-            <Link
-              underline="none"
-              component={RouterLink}
-              to={"/author?name=" + this.props.author.split(" ").join("+")}
-            >
-              <h3 style={{ lineHeight: 0 }}>{this.props.author}</h3>
-            </Link>
-          )}
-        </div>
-      </Paper>
+      <Grid container>
+        <Grid item sm={8}>
+          <Box display="flex" flexDirection="column">
+            <Box display="flex">
+              <Typography variant="h1">
+                {this.props.title}
+              </Typography>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid item sm={4}>
+          <CardMedia
+            component="img"
+            image={this.props.image}
+            alt={"No picture for this description"}
+          ></CardMedia>
+        </Grid>
+      </Grid>
     );
   }
 }

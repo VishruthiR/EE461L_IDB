@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Book from "./components/Book";
-import Author from "./components/Author";
-import Genre from "./components/Genre";
+import BookContainer from "./components/BookContainer";
+import AuthorContainer from "./components/AuthorContainer";
+import GenreContainer from "./components/GenreContainer";
 import Homepage from "./components/Homepage";
 import About from "./components/About";
 import Sidebar from "./components/Sidebar";
@@ -10,6 +10,7 @@ import ResultsP from "./components/ResultsP";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import CardMedia from "@material-ui/core/CardMedia";
+
 
 function App() {
   return (
@@ -33,9 +34,9 @@ function App() {
             <Switch>
               <Route path="/" exact component={Homepage} />
               <Route path="/about" exact component={About} />
-              <Route path="/book" component={Book} />
-              <Route path="/author" component={Author} />
-              <Route path="/genre" component={Genre} />
+              <Route path="/book" component={BookContainer} />
+              <Route path="/author" component={AuthorContainer} />
+              <Route path="/genre" component={GenreContainer} />
               <Route path="/results" component={ResultsP} />
             </Switch>
           </div>

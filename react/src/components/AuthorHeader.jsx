@@ -10,9 +10,7 @@ class AuthorHeader extends React.Component {
 
   fixGenreName(genre) {
     let newGenre = genre;
-    if (newGenre === "scienceFiction") {
-      newGenre = "Science Fiction";
-    } else if (newGenre === "HistoricalFiction") {
+    if (newGenre === "HistoricalFiction") {
       newGenre = "Historical Fiction";
     }
     return newGenre;
@@ -51,12 +49,7 @@ class AuthorHeader extends React.Component {
                   {"Publisher: " + this.props.publisher}
                 </Typography>
               </Box>
-              <Box display="flex">
-                <Typography variant="h5">
-                  {"Number of Books: " + this.props.numBooks}
-                </Typography>
-              </Box>
-            </Box>
+           </Box>
           </Grid>
           <Grid item sm={4}>
             <CardMedia
