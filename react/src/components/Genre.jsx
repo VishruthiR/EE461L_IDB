@@ -1,13 +1,15 @@
 import React from "react";
 import Description from "./Description";
-import GenreHeader from "./GenreHeader";
+import Header from "./Header";
 import RecommendationCarousel from "./RecommendationCarousel";
 
 class Genre extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <GenreHeader genre={this.props.genreName}
+        <Header 
+          type="genre"
+          genre={this.props.genreName}
           image={this.props.genrePicture}
           numBooks={this.props.numBooksGenre}
           numAuthors={this.props.numAuthorsGenre}

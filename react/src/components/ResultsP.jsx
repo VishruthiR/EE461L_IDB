@@ -1,5 +1,6 @@
 import React from "react";
 import Result from "./Result";
+import ResultsFilter from "./ResultsFilter";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
@@ -293,38 +294,15 @@ class ResultsP extends React.Component {
       <React.Fragment>
         <ScrollToTop />
         <br/>
-        <Paper>
-            <Typography> 
-                Searching through {this.state.typeOfSearch}s for "{this.state.resultsQuery}": 
-                <br/>
-                {this.state.pager.totalItems} results found.
-                <br/>
-            </Typography>
-            <InputLabel htmlFor="sort-select"> Sort by: </InputLabel>
-            <Box component="div" display={(this.state.typeOfSearch === "book")?"inline":"none"}>
-                <Select
-                    value = {this.state.sort}
-                    onChange={handleSort}
-                    inputProps={{
-                    id: 'sort-select',        
-			        }}
-                >
-                    <option value={"author"}>Author</option>
-                    <option value={"date"}>Date</option>
-                    <option value={"book"}>Book</option>
-                </Select>
-            </Box>
-            <Select
-            value = {this.state.order}
-            onChange={handleOrder}
-            inputProps={{
-                id: 'order-select',        
-		    }}
-            >
-              <option value={"1"}>Ascending</option>
-              <option value={"-1"}>Descending</option>
-            </Select>
-        </Paper>
+        <ResultsFilter 
+            typeOfSearch={this.state.typeOfSearch}
+            resultsQuery={this.state.resultsQuery}
+            totalItems={this.state.pager.totalItems}
+            defaultSort={this.state.sort}
+            handleSort={handleSort}
+            defaultOrder={this.state.order}
+            handleOrder={handleOrder}
+        />
         <br/>
         {content}
       </React.Fragment>

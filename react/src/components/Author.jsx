@@ -1,12 +1,14 @@
 import React from "react";
-import AuthorHeader from "./AuthorHeader";
+import Header from "./Header";
 import RecommendationCarousel from "./RecommendationCarousel";
 
 class Author extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <AuthorHeader image={this.props.authorPicture}
+        <Header
+          type="author"
+          image={this.props.authorPicture}
           author={this.props.authorName}
           genre={this.props.authorGenre}
           publisher={this.props.authorPublisher}
