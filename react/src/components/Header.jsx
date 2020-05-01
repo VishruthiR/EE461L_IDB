@@ -3,28 +3,23 @@ import Paper from "@material-ui/core/Paper";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 
+import GenreHeader from "./GenreHeader"
+import BookHeader from "./BookHeader"
+import AuthorHeader from "./AuthorHeader"
+
 class Header extends React.Component {
   render() {
-    return (
-      <Grid container>
-        <Grid item sm={8}>
-          <Box display="flex" flexDirection="column">
-            <Box display="flex">
-              <Typography variant="h1">
-                {this.props.title}
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid item sm={4}>
-          <CardMedia
-            component="img"
-            image={this.props.image}
-            alt={"No picture for this description"}
-          ></CardMedia>
-        </Grid>
-      </Grid>
-    );
+    switch(this.props.type){
+        case "genre":
+        return(<GenreHeader {...this.props}/>);
+        break;
+        case "book":
+        return(<BookHeader {...this.props}/>);
+        break;
+        case "author":
+        return(<AuthorHeader {...this.props}/>);
+        break;
+	}
   }
 }
 
