@@ -1,8 +1,7 @@
 import React from "react";
-import Recommendations from "./Recommendations";
-import AuthorRecommendation from "./AuthorRecommendations";
 import Description from "./Description";
 import GenreHeader from "./GenreHeader";
+import RecommendationCarousel from "./RecommendationCarousel";
 /*
 props passed in should describe what author this Author is
 not sure how to uniquely identify this
@@ -88,13 +87,15 @@ class Genre extends React.Component {
           typeOfDescription="Genre Description" 
           description={this.state.genreDescription}
         />
-        <AuthorRecommendation
+        <RecommendationCarousel
           recommendations={this.state.authorRecommendation}
           typeOfRecommendation={"Recommended Authors"}
+          type={"Author"}
         />
-       <Recommendations
+        <RecommendationCarousel
           recommendations={this.state.bookRecommendations}
-          typeOfRecommendation={"Recommended Books"}
+          typeOfRecommendation={"Books by this author"}
+          type={"Book"}
         />
       </React.Fragment>
     );

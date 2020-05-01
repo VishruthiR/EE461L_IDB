@@ -1,6 +1,7 @@
 import React from "react";
-import Recommendations from "./Recommendations";
 import AuthorHeader from "./AuthorHeader";
+import RecommendationCarousel from "./RecommendationCarousel";
+
 /*
 props passed in should describe what author this Author is
 currently we use author name because it is unique within our DB but might need to be changed
@@ -59,9 +60,10 @@ class Author extends React.Component {
       <React.Fragment>
         <AuthorHeader image={this.state.authorPicture} author={this.state.authorName} genre={this.state.authorGenre} publisher={this.state.authorPublisher} numBooks={this.state.authorNumBooks}/>
         <br />
-        <Recommendations
+        <RecommendationCarousel
           recommendations={this.state.bookRecommendations}
           typeOfRecommendation={"Books by this author"}
+          type = {"Book"}
         />
       </React.Fragment>
     );
