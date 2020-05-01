@@ -152,7 +152,7 @@ class ResultsP extends React.Component {
     let gridSearchResults;
     if (this.state.typeOfSearch === "book") {
         gridSearchResults = 
-            <Grid item>
+            <Grid item xs={12}>
                 {formattedSearchResults.map((resultRow, indexRow) => (
                     <Grid container spacing={1}>
                         {resultRow.map((resultCol, indexCol) => (
@@ -181,7 +181,7 @@ class ResultsP extends React.Component {
             </Grid>
     } else if (this.state.typeOfSearch === "author") {
       gridSearchResults = 
-        <Grid item>
+        <Grid item xs={12}>
             {formattedSearchResults.map((resultRow, indexRow) => (
                 <Grid container spacing={1}>
                     {resultRow.map((resultCol, indexCol) => (
@@ -209,7 +209,7 @@ class ResultsP extends React.Component {
         </Grid>
     } else if (this.state.typeOfSearch === "genre") {
       gridSearchResults = 
-        <Grid item>
+        <Grid item xs={12}>
             {formattedSearchResults.map((resultRow, indexRow) => (
                 <Grid container spacing={1}>
                     {resultRow.map((resultCol, indexCol) => (
