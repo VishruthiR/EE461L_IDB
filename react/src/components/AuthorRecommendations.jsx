@@ -23,9 +23,7 @@ class AuthorRecommendations extends React.Component {
 
   fixGenreName(genre) {
     let newGenre = genre;
-    if (newGenre === "scienceFiction") {
-      newGenre = "Science Fiction";
-    } else if (newGenre === "HistoricalFiction") {
+    if (newGenre === "HistoricalFiction") {
       newGenre = "Historical Fiction";
     }
     return newGenre;
