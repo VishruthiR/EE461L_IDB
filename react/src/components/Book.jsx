@@ -1,11 +1,8 @@
 import React from "react";
-import Recommendations from "./Recommendations";
 import Description from "./Description";
 import BookHeader from "./BookHeader";
-/*
-props passed in should describe what book this Book is
-maybe all we need to be passed into is ISBN number and we get all the other info based on this
-*/
+import RecommendationCarousel from "./RecommendationCarousel";
+
 class Book extends React.Component {
   render() {
     return (
@@ -20,9 +17,10 @@ class Book extends React.Component {
           typeOfDescription="Book Description"
           description={this.props.bookSummary}
         />
-        <Recommendations
+        <RecommendationCarousel
           recommendations={this.props.bookRecommendations}
           typeOfRecommendation={"Recommended Books"}
+          type={"Book"}
         />
       </React.Fragment>
     );

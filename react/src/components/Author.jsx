@@ -1,6 +1,6 @@
 import React from "react";
-import Recommendations from "./Recommendations";
 import AuthorHeader from "./AuthorHeader";
+import RecommendationCarousel from "./RecommendationCarousel";
 
 class Author extends React.Component {
   render() {
@@ -13,9 +13,10 @@ class Author extends React.Component {
           numBooks={this.props.authorNumBooks}
         />
         <br />
-        <Recommendations
+        <RecommendationCarousel
           recommendations={this.props.bookRecommendations}
           typeOfRecommendation={"Books by this author"}
+          type={"Book"}
         />
       </React.Fragment>
     );

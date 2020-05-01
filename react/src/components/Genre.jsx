@@ -1,8 +1,7 @@
 import React from "react";
-import Recommendations from "./Recommendations";
-import AuthorRecommendation from "./AuthorRecommendations";
 import Description from "./Description";
 import GenreHeader from "./GenreHeader";
+import RecommendationCarousel from "./RecommendationCarousel";
 
 class Genre extends React.Component {
   render() {
@@ -18,15 +17,17 @@ class Genre extends React.Component {
           typeOfDescription="Genre Description"
           description={this.props.genreDescription}
         />
-        <AuthorRecommendation
+        <RecommendationCarousel
           recommendations={this.props.authorRecommendation}
           typeOfRecommendation={"Recommended Authors"}
+          type={"Author"}
         />
-        <Recommendations
+        <RecommendationCarousel
           recommendations={this.props.bookRecommendations}
-          typeOfRecommendation={"Recommended Books"}
+          typeOfRecommendation={"Books by this author"}
+          type={"Book"}
         />
-      </React.Fragment>
+      </React.Fragment >
     );
   }
 }
