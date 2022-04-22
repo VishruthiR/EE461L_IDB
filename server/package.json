@@ -19,6 +19,6 @@
     "jw-paginate": "^1.0.4",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
-    "nconf": "^0.10.0"
+    "nconf": "^0.11.4"
   }
 }
